@@ -264,6 +264,7 @@ body.in .admin-home-tools{display:block}
   <span class="sp"></span>
   <nav class="nl"><button onclick="goHome()">Início</button><button class="k" onclick="go('congs')">Congregações</button></nav>
   <span class="who" id="who"></span>
+  <button class="btn sm g" id="bAdmin" style="display:none" onclick="voltarAdmin()">Admin</button>
   <button class="btn sm g" id="bSenhas" style="display:none" onclick="senhasForm()">Senhas</button>
   <button class="btn sm" id="bAuth" onclick="auth()">Entrar</button>
  </div>
@@ -303,7 +304,7 @@ body.in .admin-home-tools{display:block}
  <div class="ac" style="margin:0"><a class="btn" id="cRota" target="_blank" rel="noopener">Como chegar</a><button class="btn g" onclick="verObreiros()">Ver obreiros</button><button class="btn g adm-b" id="bInfo" style="display:none" onclick="infoForm()">Editar dados</button><button class="btn adm-b" id="bManage" style="display:none" onclick="$('#agenda').scrollIntoView({behavior:'smooth'});">Gerenciar cultos</button></div>
  <div class="mapbox"><div id="publicMap"><div class="vz">Localização no mapa ainda não definida.</div></div></div>
  <h2>Galeria de fotos</h2><div class="gallery" id="cGallery"></div>
- <section class="s rv" id="semana"><div class="sh"><div><h2>Esta semana na sede</h2><p>Confira os próximos dias de programação do Templo Sede.</p></div></div><div class="wk" id="wk"></div></section>
+ <section class="s rv" id="semana"><div class="sh"><div><h2 id="wkTitle">Esta semana na sede</h2><p id="wkSub">Confira os próximos dias de programação do Templo Sede.</p></div></div><div class="wk" id="wk"></div></section>
 </div></div>
 
 
@@ -434,7 +435,8 @@ function raw(d,c){
 const norm=x=>String(x||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 const ev=d=>{const q=norm(st.q).trim();return raw(d,st.fc).filter(e=>(st.ft=='all'||e.tipo==st.ft)&&(!q||norm(e.t+' '+e.tipo+' '+(e.obs||'')).includes(q)))};
 const customTypes=()=>savedTypes;
-const allTypes=()=>[...new Set([...(savedTypes.length?savedTypes:TIPOS),...custom.map(x=>x.tipo||''),...rules.map(x=>x.tipo||'')].filter(Boolean))];
+const alpha=(a,b)=>String(a).localeCompare(String(b),'pt-BR',{sensitivity:'base'});
+const allTypes=()=>[...new Set([...(savedTypes.length?savedTypes:TIPOS),...custom.map(x=>x.tipo||''),...rules.map(x=>x.tipo||'')].filter(Boolean))].sort(alpha);
 const typeColor=t=>typeColors[t]||TC[t]||('hsl('+([...norm(t)].reduce((a,c)=>a+c.charCodeAt(0),0)%360)+' 62% 52%)');
 const ecor=e=>typeColor(e.tipo);
 const etx=e=>e.tipo=='Evento especial'?'#2a1d03':'#fff';
@@ -482,13 +484,13 @@ function goTo(d){st.y=d.getFullYear();st.m=d.getMonth();st.sel=d;draw();$('#dia'
 function chips(){
  st.q='';const q=$('#q');if(q)q.value='';
  const u=new Set(allTypes());rules.forEach(r=>u.add(r.t));custom.forEach(e=>u.add(e.t));
- $('#sug').innerHTML=[...u].map(x=>'<option value="'+esc(x)+'">').join('');
+ $('#sug').innerHTML=[...u].sort(alpha).map(x=>'<option value="'+esc(x)+'">').join('');
 }
 function semana(){
  if(!$('#wk'))return;
  const now=new Date();
  $('#wk').innerHTML=Array.from({length:5},(_,i)=>{
-  const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+i),es=raw(d,0).filter(e=>!e.x);
+  const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+i),es=raw(d,st.fc).filter(e=>!e.x);
   return '<button class="wd'+(i==0?' h':'')+'" onclick="goTo(new Date('+d.getFullYear()+','+d.getMonth()+','+d.getDate()+'))"><small>'+(i==0?'Hoje':i==1?'Amanhã':DIA[d.getDay()])+'</small><h3>'+d.getDate()+' de '+MES[d.getMonth()].slice(0,3).toLowerCase()+'</h3>'+
    (es.length?es.map(e=>'<p><b>'+fh(e.h)+'</b> '+esc(e.t)+'</p>').join(''):'<p>Sem programação</p>')+'</button>';
  }).join('');
@@ -497,7 +499,7 @@ function semana(){
 /* congregações */
 function ordem(){
  const l=C.map((c,i)=>i).filter(i=>i>0);
- return l.sort((a,b)=>(Math.min(3,Math.max(1,Number(C[a].setor)||1))-Math.min(3,Math.max(1,Number(C[b].setor)||1)))||C[a].n.localeCompare(C[b].n,'pt'));
+ return l.sort((a,b)=>(Math.min(3,Math.max(1,Number(C[a].setor)||1))-Math.min(3,Math.max(1,Number(C[b].setor)||1)))||alpha(C[a].n,C[b].n));
 }
 const ccard=i=>{const c=C[i],photo=c.photos?.[c.cover||0];return '<button class="cc" style="--cc:'+c.cor+'" onclick="openC('+i+')"><div class="cf '+(photo?'photo':'')+'" '+(photo?'style="background-image:url('+photo+')"':'')+'><span class="ic" '+(photo?'style="display:none"':'')+'></span><small>'+(photo?'':'✦ '+(i===0?'Templo Sede':'Congregação'))+'</small></div><div class="cb"><h3>'+esc(c.n)+'</h3><p>Localidade: '+esc(c.b||'Caaporã')+'</p><span class="btn sm">'+(can(i)?'Gerenciar congregação':'Ver agenda')+'</span></div></button>'};
 function congs(){
@@ -506,17 +508,17 @@ function congs(){
  $('#cg').innerHTML=h;
  if(matchMedia('(hover:hover)').matches)$$('.cc').forEach(c=>{c.onpointermove=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='rotateY('+x*7+'deg) rotateX('+(-y*7)+'deg) translateY(-3px)'};c.onpointerleave=()=>c.style.transform=''});
 }
-function titulos(){const c=C[st.fc],cp=st.fc!==0;$('#aTit').textContent=cp?'Agenda da congregação':'Calendário da sede';$('#aSub').textContent=cp?c.n:'Programação do Templo Sede.';$('#cNome').textContent=c.n;$('#cLoc').textContent='Localidade: '+(c.b||'Caaporã')+(c.e?' · '+c.e:'')+' · Caaporã – PB';$('#cpage').style.setProperty('--cc',c.cor);$('#semana').style.display=st.fc===0?'block':'none';$('#cRota').href=rota(st.fc);const cover=(c.photos||[])[c.cover||0];$('#cFoto').style.backgroundImage=cover?'url("'+cover+'")':'';$('#cFoto').innerHTML=cover?'':'<span class="placeholder">'+LOGO+'<br>Foto da fachada em breve</span>';$('#bInfo').style.display=can(st.fc)?'':'none';$('#bManage').style.display=can(st.fc)?'':'none';$('#cGallery').innerHTML=(c.photos||[]).map((src,i)=>'<img src="'+src+'" alt="Foto '+(i+1)+' de '+esc(c.n)+'" onclick="openLightbox('+i+')">').join('');$('#cPessoas').innerHTML=(c.dirigente||c.vice)?'<div class="pess">'+(c.dirigente?'<div><small>Dirigente</small><b>'+esc(c.dirigente)+'</b></div>':'')+(c.vice?'<div><small>Vice-dirigente</small><b>'+esc(c.vice)+'</b></div>':'')+'</div>':'';renderPublicMap();}
-function openC(i){st.fc=i;st.ft='all';history.pushState({page:'cong',i},'', '#congregacao-'+i);document.body.classList.add('cp');chips();titulos();hoje();if(i===0)semana();scrollTo({top:0});}
+function titulos(){const c=C[st.fc],cp=st.fc!==0;$('#aTit').textContent=cp?'Agenda da congregação':'Calendário da sede';$('#aSub').textContent=cp?c.n:'Programação do Templo Sede.';$('#cNome').textContent=c.n;$('#cLoc').textContent='Localidade: '+(c.b||'Caaporã')+(c.e?' · '+c.e:'')+' · Caaporã – PB';$('#cpage').style.setProperty('--cc',c.cor);$('#semana').style.display='block';$('#wkTitle').textContent='Esta semana na '+c.n;$('#wkSub').textContent='Confira os próximos dias de programação de '+c.n+'.';$('#cRota').href=rota(st.fc);const cover=(c.photos||[])[c.cover||0];$('#cFoto').style.backgroundImage=cover?'url("'+cover+'")':'';$('#cFoto').innerHTML=cover?'':'<span class="placeholder">'+LOGO+'<br>Foto da fachada em breve</span>';$('#bInfo').style.display=can(st.fc)?'':'none';$('#bManage').style.display=can(st.fc)?'':'none';$('#cGallery').innerHTML=(c.photos||[]).map((src,i)=>'<img src="'+src+'" alt="Foto '+(i+1)+' de '+esc(c.n)+'" onclick="openLightbox('+i+')">').join('');$('#cPessoas').innerHTML=(c.dirigente||c.vice)?'<div class="pess">'+(c.dirigente?'<div><small>Dirigente</small><b>'+esc(c.dirigente)+'</b></div>':'')+(c.vice?'<div><small>Vice-dirigente</small><b>'+esc(c.vice)+'</b></div>':'')+'</div>':'';renderPublicMap();}
+function openC(i){st.fc=i;st.ft='all';history.pushState({page:'cong',i},'', '#congregacao-'+i);document.body.classList.add('cp');chips();titulos();hoje();semana();scrollTo({top:0});}
 function goHome(to){st.fc=0;st.ft='all';document.body.classList.remove('cp');chips();titulos();draw();if(location.hash.startsWith('#congregacao-'))history.pushState({page:'home'},'','#congregacoes');if(to)setTimeout(()=>$('#'+to).scrollIntoView({behavior:'smooth'}),30);else scrollTo({top:0});}
 function go(id){if(id==='inicio'){goHome();return;}if(document.body.classList.contains('cp')&&id!='agenda'){goHome(id)}else if($('#'+id))$('#'+id).scrollIntoView({behavior:'smooth'})}
 window.addEventListener('popstate',e=>{if(e.state?.page==='cong')openCNoHistory(e.state.i);else if(document.body.classList.contains('cp'))goHome();});
-function openCNoHistory(i){st.fc=i;document.body.classList.add('cp');chips();titulos();hoje();if(i===0)semana();scrollTo(0,0)}
+function openCNoHistory(i){st.fc=i;document.body.classList.add('cp');chips();titulos();hoje();semana();scrollTo(0,0)}
 /* login */
 const can=c=>st.admin&&(st.own<0||st.own==c);
 function auth(){
  if(st.admin){st.admin=false;st.own=-1;SENHA=null;MASTER='';C.forEach(c=>{c.senha=undefined});ui();toast('Você saiu');return}
- $('#dlg').innerHTML='<form class="dd" onsubmit="return entrar(event)"><h3>Entrar</h3><p style="color:var(--mut);margin:0">Acesso para editar a programação.</p><label for="lc">Acesso</label><select id="lc"><option value="-1">Administrador geral</option>'+C.map((c,i)=>'<option value="'+i+'">'+esc(c.n)+'</option>').join('')+'</select><label for="lp">Senha</label><input id="lp" type="password" autocomplete="current-password"><p class="er" id="le"></p><div class="ac"><button type="button" class="btn g" onclick="$(\'#dlg\').close()">Cancelar</button><button class="btn">Entrar</button></div></form>';
+ $('#dlg').innerHTML='<form class="dd" onsubmit="return entrar(event)"><h3>Entrar</h3><p style="color:var(--mut);margin:0">Acesso para editar a programação.</p><label for="lc">Acesso</label><select id="lc"><option value="-1">Administrador geral</option>'+ordemCadastros().map(i=>'<option value="'+i+'">'+esc(C[i].n)+'</option>').join('')+'</select><label for="lp">Senha</label><input id="lp" type="password" autocomplete="current-password"><p class="er" id="le"></p><div class="ac"><button type="button" class="btn g" onclick="$(\'#dlg\').close()">Cancelar</button><button class="btn">Entrar</button></div></form>';
  $('#dlg').showModal();
 }
 async function entrar(e){
@@ -531,13 +533,20 @@ async function entrar(e){
 function ui(){
  document.body.classList.toggle('in',st.admin);if(st.admin){document.body.classList.remove('cp');st.fc=0;history.pushState({page:'home'},'','#congregacoes');}
  $('#bAuth').textContent=st.admin?'Sair':'Entrar';
+ $('#bAdmin').style.display=st.admin?'':'none';
  $('#who').textContent=st.admin?(st.own<0?'Administrador':C[st.own].n):'';
  $('#bSenhas').style.display=st.admin&&st.own<0?'':'none';
  titulos();draw();congs();renderHomeContent();
 }
+function voltarAdmin(){
+ if(!st.admin)return;
+ if(st.own>=0){openC(st.own);return;}
+ goHome();
+ setTimeout(()=>$('#adminHomeTools')?.scrollIntoView({behavior:'smooth',block:'start'}),60);
+}
 function senhasForm(){
  if(!st.admin||st.own>=0)return;
- $('#dlg').innerHTML='<form class="dd" onsubmit="return salvarSenhas(event)"><h3>Senhas de acesso</h3><p style="color:var(--mut);margin:0">Só o administrador geral vê esta tela. Deixe em branco para bloquear o acesso de uma congregação.</p><label for="pm">Administrador geral</label><input id="pm" required value="'+esc(MASTER)+'">'+C.map((c,i)=>'<label for="pc'+i+'">'+esc(c.n)+'</label><input id="pc'+i+'" maxlength="40" placeholder="Sem senha" value="'+esc(c.senha||'')+'">').join('')+'<label for="pref">Início da “Semana A” (uma quarta-feira)</label><input id="pref" type="date" value="'+key(REF)+'"><div class="ac"><button type="button" class="btn g" onclick="$(\'#dlg\').close()">Cancelar</button><button class="btn">Salvar senhas</button></div></form>';
+ $('#dlg').innerHTML='<form class="dd" onsubmit="return salvarSenhas(event)"><h3>Senhas de acesso</h3><p style="color:var(--mut);margin:0">Só o administrador geral vê esta tela. Deixe em branco para bloquear o acesso de uma congregação.</p><label for="pm">Administrador geral</label><input id="pm" required value="'+esc(MASTER)+'">'+ordemCadastros().map(i=>'<label for="pc'+i+'">'+esc(C[i].n)+'</label><input id="pc'+i+'" maxlength="40" placeholder="Sem senha" value="'+esc(C[i].senha||'')+'">').join('')+'<label for="pref">Início da “Semana A” (uma quarta-feira)</label><input id="pref" type="date" value="'+key(REF)+'"><div class="ac"><button type="button" class="btn g" onclick="$(\'#dlg\').close()">Cancelar</button><button class="btn">Salvar senhas</button></div></form>';
  $('#dlg').showModal();
 }
 async function salvarSenhas(e){
@@ -551,7 +560,7 @@ async function salvarSenhas(e){
 }
 function filtra(t){st.ft=st.ft==t?'all':t;draw()}
 function legenda(){
- const ts=[...new Set([...rules.filter(r=>r.c==st.fc).map(r=>r.tipo),...custom.filter(x=>x.c==st.fc).map(x=>x.tipo)])].filter(Boolean);
+ const ts=[...new Set([...rules.filter(r=>r.c==st.fc).map(r=>r.tipo),...custom.filter(x=>x.c==st.fc).map(x=>x.tipo)])].filter(Boolean).sort(alpha);
  $('#leg').innerHTML=ts.length?['all',...ts].map(t=>'<button class="lgd'+(st.ft==t?' on':'')+'" data-t="'+esc(t)+'" onclick="filtra(this.dataset.t)">'+(t=='all'?'Todos':'<i style="background:'+typeColor(t)+'"></i>'+esc(t))+'</button>').join(''):'';
 }
 function zap(){
@@ -562,7 +571,8 @@ function zap(){
 
 /* formulários (admin) */
 function opts(l,sel,f){return l.map(x=>'<option value="'+x[0]+'"'+(x[0]==sel?' selected':'')+'>'+esc(x[1])+'</option>').join('')}
-const optC=sel=>opts(C.map((c,i)=>[i,c.n]).filter(x=>st.own<0||x[0]==st.own),sel);
+const ordemCadastros=()=>[0,...ordem()];
+const optC=sel=>opts(ordemCadastros().map(i=>[i,C[i].n]).filter(x=>st.own<0||x[0]==st.own),sel);
 const REPS=['once','wk','alt','md','nth'];
 function repTxt(ds){
  const d=new Date(ds+'T00:00');if(isNaN(d))return;
@@ -683,12 +693,12 @@ function openUpcoming(c,date){openC(c);const p=date.split('-');setTimeout(()=>go
 async function saveConfig(keyName,value){await rpc('salvar_config',{p_senha:SENHA,p_chave:keyName,p_valor:value});}
 function tiposForm(){
  if(!st.admin||st.own>=0)return;
- const names=allTypes();
+ const names=allTypes().sort(alpha);
  $('#dlg').innerHTML='<form class="dd" onsubmit="return salvarTipos(event)"><h3>Tipos de cultos e cores</h3><p style="color:var(--mut);margin:0">Cadastre cada tipo uma única vez. A mesma cor será usada em todas as congregações.</p><div id="typeRows">'+names.map(t=>'<div class="type-admin-row"><input class="type-name" maxlength="50" required value="'+esc(t)+'"><input class="type-color" type="color" value="'+(typeColors[t]||TC[t]||'#6575a8')+'" aria-label="Cor de '+esc(t)+'"><button type="button" class="btn sm r" onclick="this.parentNode.remove()" aria-label="Remover tipo">×</button></div>').join('')+'</div><button type="button" class="btn sm g" onclick="addTypeRow()">+ Adicionar tipo</button><div class="ac"><button type="button" class="btn g" onclick="$(\'#dlg\').close()">Cancelar</button><button class="btn">Salvar tipos e cores</button></div></form>';
  $('#dlg').showModal();
 }
 function addTypeRow(){const box=$('#typeRows');box.insertAdjacentHTML('beforeend','<div class="type-admin-row"><input class="type-name" maxlength="50" required placeholder="Nome do culto"><input class="type-color" type="color" value="#d9ac4f" aria-label="Cor do culto"><button type="button" class="btn sm r" onclick="this.parentNode.remove()" aria-label="Remover tipo">×</button></div>');}
-async function salvarTipos(e){e.preventDefault();if(!st.admin||st.own>=0)return false;const seen=new Set(),items=[];$$('#typeRows .type-admin-row').forEach(r=>{const nome=r.querySelector('.type-name').value.trim(),cor=r.querySelector('.type-color').value;if(nome&&!seen.has(norm(nome))){seen.add(norm(nome));items.push({nome,cor});}});if(!items.length){toast('Cadastre pelo menos um tipo de culto.');return false;}try{await saveConfig('tipos_culto',JSON.stringify(items));}catch(x){erro(x);return false;}savedTypes=items.map(x=>x.nome);typeColors={...TC};items.forEach(x=>typeColors[x.nome]=x.cor);$('#dlg').close();chips();draw();renderHomeContent();toast('Tipos e cores atualizados em todas as congregações.');return false;}
+async function salvarTipos(e){e.preventDefault();if(!st.admin||st.own>=0)return false;const seen=new Set(),items=[];$$('#typeRows .type-admin-row').forEach(r=>{const nome=r.querySelector('.type-name').value.trim(),cor=r.querySelector('.type-color').value;if(nome&&!seen.has(norm(nome))){seen.add(norm(nome));items.push({nome,cor});}});if(!items.length){toast('Cadastre pelo menos um tipo de culto.');return false;}try{await saveConfig('tipos_culto',JSON.stringify(items));}catch(x){erro(x);return false;}savedTypes=items.map(x=>x.nome).sort(alpha);typeColors={...TC};items.forEach(x=>typeColors[x.nome]=x.cor);$('#dlg').close();chips();draw();renderHomeContent();toast('Tipos e cores atualizados em todas as congregações.');return false;}
 function avisosForm(){
  if(!st.admin||st.own>=0)return;
  $('#dlg').innerHTML='<form class="dd" onsubmit="return salvarAvisos(event)"><h3>Avisos da igreja</h3><p style="color:var(--mut);margin:0">Publique comunicados que aparecerão na página inicial.</p><div id="noticeAdminList">'+(notices.length?notices.map((n,i)=>'<div class="notice-admin-row"><strong>'+esc(n.titulo)+'</strong><p>'+esc(n.texto)+'</p><small style="color:var(--mut)">'+(n.ate?'Visível até '+fmtDate(new Date(n.ate+'T00:00')):'Sem data de encerramento')+'</small><button type="button" class="btn sm r" onclick="removeNotice('+i+')">Excluir</button></div>').join(''):'<p style="color:var(--mut)">Nenhum aviso cadastrado.</p>')+'</div><label for="noticeTitle">Título</label><input id="noticeTitle" maxlength="80" placeholder="Ex.: Congresso de Jovens"><label for="noticeText">Descrição</label><textarea id="noticeText" rows="3" maxlength="500" placeholder="Escreva o comunicado…"></textarea><div class="row"><div><label for="noticeDate">Data de publicação</label><input id="noticeDate" type="date" value="'+key(new Date())+'"></div><div><label for="noticeEnd">Exibir até (opcional)</label><input id="noticeEnd" type="date"></div></div><div class="ac"><button type="button" class="btn g" onclick="$(\'#dlg\').close()">Fechar</button><button class="btn">Publicar aviso</button></div></form>';
