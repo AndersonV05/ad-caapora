@@ -294,7 +294,7 @@ dialog::backdrop{background:rgba(4,8,20,.75);backdrop-filter:blur(4px)}
  <div class="cg" id="cg"></div>
 </section>
 
-<footer><span class="lg" style="display:inline-block;width:34px;height:34px" id="fl"></span><br>Assembleia de Deus · Caaporã – PB<br>Protótipo: o que você editar fica salvo só neste navegador.</footer>
+<footer><span class="lg" style="display:inline-block;width:34px;height:34px" id="fl"></span><br>Assembleia de Deus · Caaporã – PB<br>Agenda conectada ao banco de dados da Assembleia de Deus.</footer>
 
 <dialog id="dlg"></dialog><dialog class="map-full" id="mapFull"><h2>Definir local no mapa</h2><p>Arraste o marcador ou toque no ponto exato. Também pode buscar um endereço.</p><div class="row"><input id="mapSearch" placeholder="Buscar endereço ou local"><button class="btn" onclick="searchMap()">Buscar</button></div><div id="pickMap"></div><input id="mapLink" placeholder="Ou cole um link do Google Maps"><div class="row"><button class="btn g" onclick="closeMapPicker()">Cancelar</button><button class="btn" onclick="confirmMapPicker()">Confirmar local</button></div></dialog><div class="lightbox" id="lightbox" onclick="closeLightbox()"><button class="btn">Fechar ✕</button><img id="lightImg" alt="Foto ampliada"></div>
 <div class="toast" id="toast"></div>
@@ -304,7 +304,7 @@ const MES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto
 const DIA=['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
 const TIPOS=['Culto','Escola Bíblica','Reunião','Santa Ceia','Vigília','Gincana','Evento especial','Ensaio','Consideração','Outro'];
 const TC={'Culto':'#3f62c9','Escola Bíblica':'#2f8f6b','Reunião':'#7a5ac8','Santa Ceia':'#a8335a','Vigília':'#c76a2b','Gincana':'#d1478f','Evento especial':'#d9ac4f','Ensaio':'#2a8fa8','Consideração':'#6d7aa5','Outro':'#5a6788'};
-const QS={all:'Toda semana',a0:'Semana A (alternada)',a1:'Semana B (alternada)',f1:'Só na 1ª semana do mês',nf:'Todas, menos a 1ª semana do mês',date:'Só uma data'};
+const QS={all:'Toda semana',a0:'Semana A (alternada)',a1:'Semana B (alternada)',f1:'Só na 1ª semana do mês',nf:'Todas, menos a 1ª semana do mês',n1:'1º domingo do mês',n2:'2º domingo do mês',n3:'3º domingo do mês',n4:'4º domingo do mês',n5:'5º domingo do mês',date:'Só uma data'};
 let REF=new Date(2026,10,25); // quarta da "Semana A" (culto na sede); a seguinte é a "Semana B"
 const NOMES=['Nova Vida','Fonte Viva','Nova Redenção','Fonte de Jacó','Esperança','Bem-Aventurada','Vitória','Manancial','Estrela da Manhã','Rosa de Saron','Central','Novo Alvorecer','Betel','Capim de Cheiro de Baixo','Capim de Cheiro de Cima','Divisa (Canaã)','Dois Rios','Brejo de Lima'];
 const C=[{n:'Templo Sede',b:'Caaporã',e:''}];
@@ -314,8 +314,9 @@ C.forEach((c,i)=>c.cor='hsl('+((i*47)%360)+' 55% 40%)');
 function defRules(){
  const r=[],a=(c,w,t,tipo,q)=>r.push({id:r.length+1,c,w,h:'19:00',f:'21:00',t,tipo,q:q||'all'});
  a(0,1,'Escola Bíblica','Escola Bíblica');a(0,3,'Culto de Quarta','Culto','a0');a(0,3,'Reunião dos Obreiros','Reunião','a1');
- a(0,5,'Culto de Doutrina','Culto','nf');a(0,5,'Santa Ceia','Santa Ceia','f1');a(0,0,'Culto de Domingo','Culto');
- for(let c=1;c<C.length;c++){a(c,2,'Culto de Doutrina','Culto');a(c,4,'Escola Bíblica','Escola Bíblica');a(c,0,'Culto de Domingo','Culto')}
+ a(0,5,'Culto de Doutrina','Culto','nf');a(0,5,'Santa Ceia','Santa Ceia','f1');
+ const dom=[['Círculo de Oração das Irmãs','Reunião'],['Culto de Missões','Culto'],['Culto Infantil','Culto'],['Culto de Jovens','Culto'],['Culto de Homens','Culto']];dom.forEach((x,i)=>a(0,0,x[0],x[1],'n'+(i+1)));
+ for(let c=1;c<C.length;c++){a(c,2,'Culto de Doutrina','Culto');a(c,4,'Escola Bíblica','Escola Bíblica');dom.forEach((x,i)=>a(c,0,x[0],x[1],'n'+(i+1)))}
  return r;
 }
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -337,7 +338,7 @@ const SB_URL='https://rjeznwrvvlnctrsqozip.supabase.co';
 const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJqZXpud3J2dmxuY3Ryc3FvemlwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU3Mzc1NDgsImV4cCI6MjExMTMxMzU0OH0.ZiBmit0feMak9Dkanv-h3h_urhNqonAvjKu1OckhX1M';
 let MASTER='',SENHA=null,ultimaCarga=0;
 let st={y:0,m:0,sel:new Date(),fc:0,ft:'all',admin:false,own:-1,q:''};
-let custom=[],cancels=[],rules=defRules(),rows=[],savedTypes=[];
+let custom=[],cancels=[],rules=defRules(),rows=[],savedTypes=[],substituicoes=[];
 const sbH={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json'};
 async function sbGet(t){const r=await fetch(SB_URL+'/rest/v1/'+t,{headers:sbH});if(!r.ok)throw new Error('Falha ao carregar');return r.json()}
 async function rpc(fn,args){const r=await fetch(SB_URL+'/rest/v1/rpc/'+fn,{method:'POST',headers:sbH,body:JSON.stringify(args)});const j=await r.json().catch(()=>null);if(!r.ok)throw new Error(j&&j.message==='sem permissão'?'Sem permissão. Entre novamente.':'Não foi possível salvar. Tente de novo.');return j}
@@ -345,12 +346,13 @@ const erro=e=>toast(e&&e.message?e.message:'Erro de conexão');
 const FUNCS=['Pastor','Presbítero','Evangelista','Diácono','Auxiliar'];
 async function carregar(){
  try{
-  const [cs,rg,ev,cn,ob,cf]=await Promise.all(['congregacoes?select=*&order=id','regras?select=*&order=id','eventos?select=*&order=data','cancelamentos?select=*','obreiros?select=*&order=id','config?select=*'].map(sbGet));
+  const [cs,rg,ev,cn,ob,cf,su]=await Promise.all(['congregacoes?select=*&order=id','regras?select=*&order=id','eventos?select=*&order=data','cancelamentos?select=*','obreiros?select=*&order=id','config?select=*','substituicoes?select=*&order=data'].map(sbGet));
   const sn=C.map(c=>c&&c.senha);
   cs.forEach(c=>{C[c.id]={n:c.nome,b:c.bairro,e:c.endereco||'',cor:c.cor,lat:c.lat,lng:c.lng,photos:c.fotos||[],cover:c.capa||0,dirigente:c.dirigente||'',vice:c.vice||'',setor:c.setor||0,obreiros:[],senha:sn[c.id]}});
   rules=rg.map(r=>({id:r.id,c:r.cong_id,w:r.dia_semana,h:r.hora||'',f:r.fim||'',t:r.titulo,tipo:r.tipo||'',q:r.padrao,date:r.data||''}));
   custom=ev.map(e=>({id:e.id,c:e.cong_id,t:e.titulo,tipo:e.tipo||'',data:e.data,fim:e.data_fim||'',h:e.hora||'',f:e.hora_fim||'',obs:e.obs||'',rep:e.repete,ate:e.ate||''}));
   cancels=cn.map(x=>x.cong_id+'|'+x.data+'|'+x.chave);
+  substituicoes=su.map(x=>({c:x.cong_id,data:x.data,t:x.titulo,tipo:x.tipo||'Culto',h:x.hora||'19:00',f:x.fim||'21:00'}));
   ob.forEach(o=>{if(C[o.cong_id])C[o.cong_id].obreiros.push({nome:o.nome,funcao:o.funcao})});
   const sa=cf.find(x=>x.chave==='semana_a');if(sa&&sa.valor)REF=new Date(sa.valor+'T00:00');
   ultimaCarga=Date.now();
@@ -366,7 +368,8 @@ function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');setT
 
 function qok(q,d,onlyDate){
  const p=((Math.round((d-REF)/6048e5)%2)+2)%2;
- return q=='all'||(q=='a0'&&p==0)||(q=='a1'&&p==1)||(q=='f1'&&d.getDate()<=7)||(q=='nf'&&d.getDate()>7)||(q=='date'&&key(d)==onlyDate);
+ const nth=Math.ceil(d.getDate()/7);
+ return q=='all'||(q=='a0'&&p==0)||(q=='a1'&&p==1)||(q=='f1'&&d.getDate()<=7)||(q=='nf'&&d.getDate()>7)||(q[0]=='n'&&+q.slice(1)===nth&&d.getDay()===0)||(q=='date'&&key(d)==onlyDate);
 }
 function occ(e,d){
  const s=new Date(e.data+'T00:00'),r=e.rep||'once';
@@ -383,6 +386,8 @@ function raw(d,c){
  const k=key(d),o=[];
  rules.forEach(r=>{if(r.c==c&&(r.q=='date'?qok(r.q,d,r.date):r.w==d.getDay()&&qok(r.q,d,r.date)))o.push({c,h:r.h,f:r.f,t:r.t,tipo:r.tipo,rid:r.id})});
  custom.forEach(e=>{if(e.c==c&&occ(e,d))o.push({c,h:e.h,f:e.f,t:e.t,tipo:e.tipo,obs:e.obs,id:e.id,rep:e.rep,data:e.data,fim:e.fim})});
+ const sub=substituicoes.find(x=>x.c==c&&x.data===k);
+ if(sub){for(let i=o.length-1;i>=0;i--)if(o[i].rid&&String(rules.find(r=>r.id==o[i].rid)?.q||'').startsWith('n'))o.splice(i,1);o.push({c,h:sub.h,f:sub.f,t:sub.t,tipo:sub.tipo,substituida:true});}
  o.forEach(e=>{e.k=c+'|'+k+'|'+(e.rid?'r'+e.rid:'e'+e.id);e.x=cancels.includes(e.k)});
  return o.sort((a,b)=>a.h.localeCompare(b.h));
 }
@@ -420,8 +425,8 @@ function day(){
  const cx=i=>'<button class="m" onclick="tgl('+i+')">'+(rows[i].x?'Restaurar este dia':'Cancelar este dia')+'</button>';
  $('#dl').innerHTML=es.length?'<ol class="tl">'+es.map(e=>{
   rows.push(e);const i=rows.length-1;
-  const b=!can(st.fc)?'':e.id?'<button class="m" onclick="eventoForm('+e.id+')">Editar</button><button class="m" onclick="del('+e.id+')">Excluir</button>'+(e.rep&&e.rep!='once'?cx(i):''):'<button class="m" onclick="ruleForm('+e.rid+')">Editar culto fixo</button>'+cx(i);
-  return '<li class="'+(e.x?'x':'')+'" style="--c:'+ecor(e)+'"><time>'+fh(e.h)+'<small>às '+fh(e.f||'21:00')+'</small></time><h4>'+esc(e.t)+'</h4><p class="sub"><span class="tag">'+e.tipo+'</span> '+(e.x?'<span class="tag cx">Cancelado</span> ':'')+(e.rep&&e.rep!='once'?'<span class="tag">Repete</span> ':'')+(e.fim?'<span class="tag">Dia '+(Math.round((d0(e.data,d)-0)/86400000)+1)+' de '+(Math.round((d0(e.data,new Date(e.fim+'T00:00'))-0)/86400000)+1)+'</span> ':'')+esc(e.obs||'')+'</p><div class="ac"><a target="_blank" rel="noopener" href="'+rota(e.c)+'">Como chegar</a>'+b+'</div></li>';
+  const b=!can(st.fc)?'':e.substituida?'<button class="m" onclick="subForm()">Alterar este dia</button><button class="m" onclick="voltarPadrao()">Voltar ao padrão</button>':e.rid&&String(rules.find(r=>r.id==e.rid)?.q||'').startsWith('n')?'<button class="m" onclick="ruleForm('+e.rid+')">Editar regra</button><button class="m" onclick="subForm()">Alterar só este dia</button>'+cx(i):e.id?'<button class="m" onclick="eventoForm('+e.id+')">Editar</button><button class="m" onclick="del('+e.id+')">Excluir</button>'+(e.rep&&e.rep!='once'?cx(i):''):'<button class="m" onclick="ruleForm('+e.rid+')">Editar culto fixo</button>'+cx(i);
+  return '<li class="'+(e.x?'x':'')+'" style="--c:'+ecor(e)+'"><time>'+fh(e.h)+'<small>às '+fh(e.f||'21:00')+'</small></time><h4>'+esc(e.t)+'</h4><p class="sub"><span class="tag">'+e.tipo+'</span> '+(e.x?'<span class="tag cx">Cancelado</span> ':'')+(e.substituida?'<span class="tag">Alterado</span> ':'')+(e.rep&&e.rep!='once'?'<span class="tag">Repete</span> ':'')+(e.fim?'<span class="tag">Dia '+(Math.round((d0(e.data,d)-0)/86400000)+1)+' de '+(Math.round((d0(e.data,new Date(e.fim+'T00:00'))-0)/86400000)+1)+'</span> ':'')+esc(e.obs||'')+'</p><div class="ac"><a target="_blank" rel="noopener" href="'+rota(e.c)+'">Como chegar</a>'+b+'</div></li>';
  }).join('')+'</ol>':'<div class="vz">Nenhuma programação neste dia.'+(can(st.fc)?'<br>Use “Adicionar neste dia” para criar.':'')+'</div>';
  const sd=$('#dia');if(sd.animate)sd.animate([{opacity:.4,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:260,easing:'ease-out'});
 }
@@ -554,6 +559,14 @@ async function tgl(i){
  if(!can(st.fc))return;const e=rows[i],p=e.k.split('|');
  try{const r=await rpc('alternar_cancelamento',{p_cong:+p[0],p_senha:SENHA,p_data:p[1],p_chave:p[2]});cancels=r?cancels.concat(e.k):cancels.filter(k=>k!=e.k);draw();semana();toast(r?'Culto cancelado neste dia':'Culto restaurado')}catch(x){erro(x)}
 }
+function subForm(){
+ if(!can(st.fc)||st.sel.getDay()!==0){toast('A substituição é disponível apenas para domingos.');return;}
+ const k=key(st.sel),old=substituicoes.find(x=>x.c==st.fc&&x.data===k),base=raw(st.sel,st.fc).find(x=>x.rid||x.substituida)||{};
+ $('#dlg').innerHTML='<form class="dd" onsubmit="return salvarSub(event)"><h3>Alterar programação deste domingo</h3><p class="sub">A alteração vale somente para '+st.sel.toLocaleDateString('pt-BR')+'. Os demais domingos continuam com a programação rotativa.</p><label for="stt">Título</label><input id="stt" required maxlength="60" value="'+esc(old?.t||base.t||'')+'"><label for="stp">Tipo</label><input id="stp" required maxlength="40" value="'+esc(old?.tipo||base.tipo||'Culto')+'"><div class="row"><div><label for="sth">Início</label><input id="sth" type="time" required value="'+esc(old?.h||base.h||'19:00')+'"></div><div><label for="stf">Fim</label><input id="stf" type="time" value="'+esc(old?.f||base.f||'21:00')+'"></div></div><div class="ac"><button type="button" class="btn g" onclick="$(\'#dlg\').close()">Cancelar</button><button class="btn">Salvar alteração</button></div></form>';
+ $('#dlg').showModal();
+}
+async function salvarSub(e){e.preventDefault();if(!can(st.fc))return false;const data=key(st.sel),o={c:st.fc,data,t:$('#stt').value.trim(),tipo:$('#stp').value.trim(),h:$('#sth').value,f:$('#stf').value||''};try{await rpc('salvar_substituicao',{p_senha:SENHA,p_cong:o.c,p_data:o.data,p_titulo:o.t,p_tipo:o.tipo,p_hora:o.h,p_fim:o.f})}catch(x){erro(x);return false}substituicoes=substituicoes.filter(x=>!(x.c==o.c&&x.data===o.data));substituicoes.push(o);$('#dlg').close();draw();semana();toast('Programação alterada somente neste dia');return false;}
+async function voltarPadrao(){if(!can(st.fc)||!confirm('Restaurar a programação rotativa deste domingo?'))return;const data=key(st.sel);try{await rpc('remover_substituicao',{p_senha:SENHA,p_cong:st.fc,p_data:data})}catch(x){return erro(x)}substituicoes=substituicoes.filter(x=>!(x.c==st.fc&&x.data===data));draw();semana();toast('Programação padrão restaurada')}
 function ruleForm(id){
  const r=rules.find(x=>x.id==id)||{c:st.fc,w:2,h:'19:00',f:'21:00',t:'',tipo:'Culto',q:'all',date:''};
  $('#dlg').innerHTML='<form class="dd" onsubmit="return salvarRule(event,'+(id||0)+')"><h3>'+(id?'Editar culto fixo':'Novo culto fixo')+'</h3>'+ 
