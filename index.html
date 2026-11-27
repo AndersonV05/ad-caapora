@@ -299,6 +299,68 @@ body.in .admin-home-tools{display:block}
  .up-arrow:disabled{opacity:.25;cursor:default}
  .up-arrow.off{display:none}
 }
+
+/* ===== FASE 2 · página da congregação ===== */
+#cpage section.s.cp-sec{max-width:none;padding:28px 0 0;margin:0}
+#cpage .fx{margin-top:0}
+#cpage .cp-sec .sh,#cMais .sh{margin-bottom:12px;align-items:center}
+#cpage .cp-sec .sh h2,#cMais .sh h2,#cGalWrap h2{font-size:clamp(1.5rem,4.6vw,2.1rem)}
+#cpage .cp-sec .sh p,#cMais .sh p{margin:2px 0 0}
+body:not(.cp) #cMais{display:none!important}
+body.cp #cMais{padding-top:30px;padding-bottom:110px}
+/* Esta semana: lista compacta só com dias que têm culto */
+#semana .wk{display:flex!important;flex-direction:column;gap:8px;overflow:visible;padding:0}
+#semana .wd{display:flex;align-items:center;gap:14px;width:100%;flex:none;min-height:64px;padding:10px 12px;border-radius:16px;text-align:left;color:var(--tx)}
+#semana .wd:hover{transform:none;border-color:var(--ouro)}
+.wdd{flex:none;width:56px;display:flex;flex-direction:column;align-items:center;line-height:1.1;padding:6px 0;border-radius:12px;background:rgba(217,172,79,.12)}
+.wdd small{font-size:.66rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ouro2);font-weight:800}
+.wdd b{font:700 1.4rem 'Outfit',sans-serif;color:var(--tx)}
+#semana .wd.h{border-color:var(--ouro);box-shadow:0 0 0 1px rgba(217,172,79,.35)}
+.wd.h .wdd{background:linear-gradient(135deg,var(--ouro2),var(--ouro))}
+.wd.h .wdd small,.wd.h .wdd b{color:#2a1d03}
+.wde{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;font-size:.95rem;color:var(--mut)}
+.wde span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wde b{color:var(--tx);margin-right:6px}
+.wdc{flex:none;color:var(--ouro);font-size:1.5rem;line-height:1}
+.wk-vazio{margin:0;padding:14px 16px;border:1.5px dashed var(--line);border-radius:16px;color:var(--mut);text-align:center}
+@media(min-width:701px){#semana .wk{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}}
+/* Cultos fixos agrupados por dia */
+.fxg{display:grid;gap:10px}
+@media(min-width:701px){.fxg{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));align-items:start}}
+.fxd{border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));padding:12px 14px}
+.fxd h3{margin:0 0 4px;font:800 .78rem 'Nunito Sans',sans-serif;text-transform:uppercase;letter-spacing:.1em;color:var(--ouro)}
+.fxd ul{list-style:none;margin:0;padding:0}
+.fxd li{display:flex;gap:12px;padding:8px 0;border-top:1px solid rgba(255,255,255,.07)}
+.fxd li:first-child{border-top:0}
+.fxd time{flex:none;min-width:56px;font:600 1rem 'Outfit',sans-serif;color:var(--tx);line-height:1.3}
+.fxd time small{display:block;font:400 .74rem 'Nunito Sans',sans-serif;color:var(--mut)}
+.fxi{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
+.fxi>span{display:flex;align-items:baseline;gap:6px;line-height:1.3}
+.fxi .ft{flex:1;min-width:0}
+.fxi em{flex:none;font-style:normal;font-weight:800;color:var(--ouro2);font-size:.82rem;min-width:22px}
+.fxi small{color:var(--mut);font-size:.78rem}
+.fxa{display:inline-flex;gap:4px;margin-left:auto;flex:none;align-self:center}
+#publicMap:has(> .vz){height:auto!important;min-height:0!important}#publicMap>.vz{margin:0;border:0}
+.fxa button{font-size:.75rem;font-weight:700;border:1px solid var(--line);background:var(--vidro);border-radius:999px;padding:4px 10px;min-height:32px;color:var(--tx)}
+.fxa button:hover{border-color:var(--ouro)}
+/* Calendário: filtros numa linha com rolagem e bolinha única */
+#agenda .leg{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:2px 24px 4px 0;margin-right:-4px;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
+#agenda .leg::-webkit-scrollbar{display:none}
+#agenda .lgd{flex:none;min-height:44px;padding:6px 14px;white-space:nowrap}
+.dots i{background:none}
+.dots i.on{background:var(--ouro);box-shadow:0 0 6px rgba(217,172,79,.6)}
+.dots i.cx{border:1.5px solid var(--mut)}
+.tag.tg{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);color:var(--tx)}
+.tag.tg i{width:8px;height:8px;border-radius:50%;background:var(--k);flex:none}
+/* Mapa: pino próprio e distância */
+.cong-pin{background:none!important;border:0!important}
+.cong-pin svg{display:block;width:42px;height:52px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.55))}
+#cMais .mapbox{margin:0 0 12px}
+.dist{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.dist p{margin:0;color:var(--ouro2);font-weight:700;flex:1;min-width:200px}
+.dist p:empty{display:none}
+#cGalWrap h2{margin:8px 0 0}
+#cGalWrap[hidden],.dist[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -348,9 +410,8 @@ body.in .admin-home-tools{display:block}
  <h1 id="cNome"></h1><p id="cLoc"></p><div id="cPessoas"></div>
  <div class="foto" id="cFoto">Foto da fachada em breve</div>
  <div class="ac" style="margin:0"><a class="btn" id="cRota" target="_blank" rel="noopener">Como chegar</a><button class="btn g" onclick="verObreiros()">Ver obreiros</button><button class="btn g adm-b" id="bInfo" style="display:none" onclick="infoForm()">Editar dados</button><button class="btn adm-b" id="bManage" style="display:none" onclick="$('#agenda').scrollIntoView({behavior:'smooth'});">Gerenciar cultos</button></div>
- <div class="mapbox"><div id="publicMap"><div class="vz">Localização no mapa ainda não definida.</div></div></div>
- <h2>Galeria de fotos</h2><div class="gallery" id="cGallery"></div>
- <section class="s rv" id="semana"><div class="sh"><div><h2 id="wkTitle">Esta semana na sede</h2><p id="wkSub">Confira os próximos dias de programação do Templo Sede.</p></div></div><div class="wk" id="wk"></div></section>
+ <section class="s cp-sec" id="semana"><div class="sh"><div><h2 id="wkTitle">Esta semana</h2><p id="wkSub">Próximos 7 dias.</p></div></div><div class="wk" id="wk"></div></section>
+ <section class="s cp-sec fx" id="fixos"><div class="sh"><div><h2>Cultos fixos</h2><p>Programação de toda semana.</p></div><button class="btn sm" id="bFixo" style="display:none;margin-left:auto" onclick="ruleForm()">+ Culto fixo</button></div><div class="fxg" id="fxl"></div></section>
 </div></div>
 
 
@@ -371,7 +432,13 @@ body.in .admin-home-tools{display:block}
    <button class="btn sm g" style="width:100%;margin-top:14px" onclick="zap()">Compartilhar no WhatsApp</button>
   </aside>
  </div>
- <div class="fx"><div class="sh" style="margin-bottom:6px"><h3>Cultos fixos da semana</h3><button class="btn sm" id="bFixo" style="display:none;margin-left:auto" onclick="ruleForm()">+ Culto fixo</button></div><div id="fxl"></div></div>
+</section>
+
+<section class="s" id="cMais">
+ <div class="sh"><div><h2>Localização</h2><p>Toque no ícone para ver o nome da congregação.</p></div></div>
+ <div class="mapbox"><div id="publicMap"><div class="vz">Localização no mapa ainda não definida.</div></div></div>
+ <div class="dist" id="distBox" hidden><button class="btn g" id="bDist" type="button" onclick="minhaDistancia()">Ver minha distância</button><p id="distTxt" role="status" aria-live="polite"></p></div>
+ <div id="cGalWrap" hidden><h2>Galeria de fotos</h2><div class="gallery" id="cGallery"></div></div>
 </section>
 
 <section class="s rv" id="congs">
@@ -498,11 +565,11 @@ function draw(dir){
   h+='<button class="d'+(same(d,now)?' hoje':'')+(same(d,st.sel)?' sel':'')+'" onclick="pick('+n+')" aria-label="Dia '+n+(es.length?', '+es.length+' eventos':'')+'"><span class="n">'+n+'</span>';
   es.slice(0,2).forEach(e=>h+='<span class="ln'+(e.x?' x':'')+'" style="--k:'+ecor(e)+'"><b>'+fh(e.h)+'</b> '+esc(e.t)+'</span>');
   if(es.length>2)h+='<span class="mais">+'+(es.length-2)+' mais</span>';
-  h+='<span class="dots">'+es.slice(0,4).map(e=>'<i style="background:'+ecor(e)+'"></i>').join('')+'</span></button>';
+  h+='<span class="dots">'+(es.length?'<i class="'+(es.some(e=>!e.x)?'on':'cx')+'"></i>':'')+'</span></button>';
  }
  const g=$('#grid');g.innerHTML=h;
  if(dir&&g.animate)g.animate([{opacity:0,transform:'translateX('+(dir*36)+'px)'},{opacity:1,transform:'none'}],{duration:320,easing:'ease-out'});
- day();fixos();
+ day();fixos();semana();
 }
 function day(){
  const d=st.sel,es=ev(d);rows=[];
@@ -514,14 +581,31 @@ function day(){
  $('#dl').innerHTML=es.length?'<ol class="tl">'+es.map(e=>{
   rows.push(e);const i=rows.length-1;
   const b=!can(st.fc)?'':e.substituida?'<button class="m" onclick="subForm()">Alterar este dia</button><button class="m" onclick="voltarPadrao()">Voltar ao padrão</button>':e.rid&&String(rules.find(r=>r.id==e.rid)?.q||'').startsWith('n')?'<button class="m" onclick="ruleForm('+e.rid+')">Editar regra</button><button class="m" onclick="subForm()">Alterar só este dia</button>'+cx(i):e.id?'<button class="m" onclick="eventoForm('+e.id+')">Editar</button><button class="m" onclick="del('+e.id+')">Excluir</button>'+(e.rep&&e.rep!='once'?cx(i):''):'<button class="m" onclick="ruleForm('+e.rid+')">Editar culto fixo</button>'+cx(i);
-  return '<li class="'+(e.x?'x':'')+'" style="--c:'+ecor(e)+'"><time>'+fh(e.h)+'<small>às '+fh(e.f||'21:00')+'</small></time><h4>'+esc(e.t)+'</h4><p class="sub"><span class="tag">'+e.tipo+'</span> '+(e.x?'<span class="tag cx">Cancelado</span> ':'')+(e.substituida?'<span class="tag">Alterado</span> ':'')+(e.rep&&e.rep!='once'?'<span class="tag">Repete</span> ':'')+(e.fim?'<span class="tag">Dia '+(Math.round((d0(e.data,d)-0)/86400000)+1)+' de '+(Math.round((d0(e.data,new Date(e.fim+'T00:00'))-0)/86400000)+1)+'</span> ':'')+esc(e.obs||'')+'</p><div class="ac">'+b+'</div></li>';
+  return '<li class="'+(e.x?'x':'')+'" style="--c:'+ecor(e)+'"><time>'+fh(e.h)+'<small>às '+fh(e.f||'21:00')+'</small></time><h4>'+esc(e.t)+'</h4><p class="sub">'+(e.tipo?'<span class="tag tg" style="--k:'+ecor(e)+'"><i></i>'+esc(e.tipo)+'</span> ':'')+(e.x?'<span class="tag cx">Cancelado</span> ':'')+(e.substituida?'<span class="tag">Alterado</span> ':'')+(e.rep&&e.rep!='once'?'<span class="tag">Repete</span> ':'')+(e.fim?'<span class="tag">Dia '+(Math.round((d0(e.data,d)-0)/86400000)+1)+' de '+(Math.round((d0(e.data,new Date(e.fim+'T00:00'))-0)/86400000)+1)+'</span> ':'')+esc(e.obs||'')+'</p><div class="ac">'+b+'</div></li>';
  }).join('')+'</ol>':'<div class="vz">Nenhuma programação neste dia.'+(can(st.fc)?'<br>Use “Adicionar neste dia” para criar.':'')+'</div>';
  const sd=$('#dia');if(sd.animate)sd.animate([{opacity:.4,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:260,easing:'ease-out'});
 }
 function fixos(){
- $('#bFixo').style.display=can(st.fc)?'':'none';
- const l=rules.filter(r=>r.c==st.fc).sort((a,b)=>a.w-b.w||a.h.localeCompare(b.h));
- $('#fxl').innerHTML=l.length?l.map(r=>'<div class="lr"><span><b>'+DIA[r.w]+'</b> · '+fh(r.h)+' às '+fh(r.f||'21:00')+' · '+esc(r.t)+'<small>'+freqLabel(r.q,r.w)+'</small></span>'+(can(st.fc)?'<button onclick="ruleForm('+r.id+')">Editar</button><button onclick="delRule('+r.id+')">Excluir</button>':'')+'</div>').join(''):'<div class="vz">Nenhum culto fixo cadastrado.</div>';
+ const ed=can(st.fc),hj=key(new Date());
+ $('#bFixo').style.display=ed?'':'none';
+ const wd=r=>r.q=='date'&&r.date?new Date(r.date+'T00:00').getDay():+r.w;
+ const l=rules.filter(r=>r.c==st.fc&&(r.q!='date'||ed||(r.date||'')>=hj));
+ if(!l.length){$('#fxl').innerHTML='<div class="vz">Nenhum culto fixo cadastrado.</div>';return}
+ const hr=r=>fh(r.h||'')+(r.f?'<small>até '+fh(r.f)+'</small>':'');
+ const btn=r=>ed?'<span class="fxa"><button type="button" onclick="ruleForm('+r.id+')">Editar</button><button type="button" onclick="delRule('+r.id+')">Excluir</button></span>':'';
+ const nota=r=>r.q=='date'?'Só em '+(r.date||'').split('-').reverse().slice(0,2).join('/'):r.q&&r.q!='all'?freqLabel(r.q,r.w):'';
+ let h='';
+ [0,1,2,3,4,5,6].forEach(w=>{
+  const d=l.filter(r=>wd(r)===w).sort((a,b)=>String(a.h).localeCompare(String(b.h))||String(a.q).localeCompare(String(b.q)));
+  if(!d.length)return;
+  const grupos=[];
+  d.forEach(r=>{const rot=String(r.q||'')[0]=='n',g=grupos[grupos.length-1];if(rot&&g&&g.rot&&g.h==r.h&&g.f==r.f)g.l.push(r);else grupos.push({rot,h:r.h,f:r.f,l:[r]})});
+  h+='<div class="fxd"><h3>'+DIA[w]+'</h3><ul>'+grupos.map(g=>'<li><time>'+hr(g.l[0])+'</time><div class="fxi">'+g.l.map(r=>{
+   const n=g.rot?'<em>'+String(r.q).slice(1)+'º</em>':'',z=g.rot?'':nota(r);
+   return '<span>'+n+'<span class="ft">'+esc(r.t)+(z?' <small>· '+esc(z)+'</small>':'')+'</span>'+btn(r)+'</span>';
+  }).join('')+(g.rot?'<small>'+(w===0?'Domingo':DIA[w])+' do mês (1º ao 5º)</small>':'')+'</div></li>').join('')+'</ul></div>';
+ });
+ $('#fxl').innerHTML=h;
 }
 function pick(n){st.sel=new Date(st.y,st.m,n);draw()}
 function mv(k){st.m+=k;if(st.m<0){st.m=11;st.y--}if(st.m>11){st.m=0;st.y++}st.sel=new Date(st.y,st.m,1);draw(k)}
@@ -533,13 +617,13 @@ function chips(){
  $('#sug').innerHTML=[...u].sort(alpha).map(x=>'<option value="'+esc(x)+'">').join('');
 }
 function semana(){
- if(!$('#wk'))return;
- const now=new Date();
- $('#wk').innerHTML=Array.from({length:5},(_,i)=>{
-  const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+i),es=raw(d,st.fc).filter(e=>!e.x);
-  return '<button class="wd'+(i==0?' h':'')+'" onclick="goTo(new Date('+d.getFullYear()+','+d.getMonth()+','+d.getDate()+'))"><small>'+(i==0?'Hoje':i==1?'Amanhã':DIA[d.getDay()])+'</small><h3>'+d.getDate()+' de '+MES[d.getMonth()].slice(0,3).toLowerCase()+'</h3>'+
-   (es.length?es.map(e=>'<p><b>'+fh(e.h)+'</b> '+esc(e.t)+'</p>').join(''):'<p>Sem programação</p>')+'</button>';
- }).join('');
+ const box=$('#wk');if(!box)return;
+ const now=new Date(),dias=[];
+ for(let i=0;i<7;i++){const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+i),es=raw(d,st.fc).filter(e=>!e.x);if(es.length)dias.push({d,i,es})}
+ box.innerHTML=dias.length?dias.map(({d,i,es})=>{
+  const rot=i==0?'Hoje':i==1?'Amanhã':DIA[d.getDay()].slice(0,3);
+  return '<button type="button" class="wd'+(i==0?' h':'')+'" onclick="goTo(new Date('+d.getFullYear()+','+d.getMonth()+','+d.getDate()+'))" aria-label="'+rot+', '+d.getDate()+' de '+MES[d.getMonth()]+': '+es.length+(es.length>1?' cultos':' culto')+'"><span class="wdd"><small>'+rot+'</small><b>'+d.getDate()+'</b><small>'+MES[d.getMonth()].slice(0,3).toLowerCase()+'</small></span><span class="wde">'+es.map(e=>'<span><b>'+fh(e.h)+'</b>'+esc(e.t)+'</span>').join('')+'</span><span class="wdc" aria-hidden="true">›</span></button>';
+ }).join(''):'<p class="wk-vazio">Sem cultos programados esta semana.</p>';
 }
 
 /* congregações */
@@ -554,7 +638,7 @@ function congs(){
  $('#cg').innerHTML=h;
  if(matchMedia('(hover:hover)').matches)$$('.cc').forEach(c=>{c.onpointermove=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='rotateY('+x*7+'deg) rotateX('+(-y*7)+'deg) translateY(-3px)'};c.onpointerleave=()=>c.style.transform=''});
 }
-function titulos(){const c=C[st.fc],cp=st.fc!==0;$('#aTit').textContent=cp?'Agenda da congregação':'Calendário da sede';$('#aSub').textContent=cp?c.n:'Programação do Templo Sede.';$('#cNome').textContent=c.n;$('#cLoc').textContent='Localidade: '+(c.b||'Caaporã')+(c.e?' · '+c.e:'')+' · Caaporã – PB';$('#cpage').style.setProperty('--cc',c.cor);$('#semana').style.display='block';$('#wkTitle').textContent='Esta semana na '+c.n;$('#wkSub').textContent='Confira os próximos dias de programação de '+c.n+'.';$('#cRota').href=rota(st.fc);const cover=(c.photos||[])[c.cover||0];$('#cFoto').style.backgroundImage=cover?'url("'+cover+'")':'';$('#cFoto').innerHTML=cover?'':'<span class="placeholder">'+LOGO+'<br>Foto da fachada em breve</span>';$('#bInfo').style.display=can(st.fc)?'':'none';$('#bManage').style.display=can(st.fc)?'':'none';$('#cGallery').innerHTML=(c.photos||[]).map((src,i)=>'<img src="'+src+'" alt="Foto '+(i+1)+' de '+esc(c.n)+'" onclick="openLightbox('+i+')">').join('');$('#cPessoas').innerHTML=(c.dirigente||c.vice)?'<div class="pess">'+(c.dirigente?'<div><small>Dirigente</small><b>'+esc(c.dirigente)+'</b></div>':'')+(c.vice?'<div><small>Vice-dirigente</small><b>'+esc(c.vice)+'</b></div>':'')+'</div>':'';renderPublicMap();}
+function titulos(){const c=C[st.fc],cp=st.fc!==0;$('#aTit').textContent=cp?'Agenda da congregação':'Calendário da sede';$('#aSub').textContent=cp?c.n:'Programação do Templo Sede.';$('#cNome').textContent=c.n;$('#cLoc').textContent='Localidade: '+(c.b||'Caaporã')+(c.e?' · '+c.e:'')+' · Caaporã – PB';$('#cpage').style.setProperty('--cc',c.cor);$('#semana').style.display='block';$('#wkTitle').textContent='Esta semana';$('#wkSub').textContent='Próximos 7 dias · toque para ver no calendário.';$('#cRota').href=rota(st.fc);const cover=(c.photos||[])[c.cover||0];$('#cFoto').style.backgroundImage=cover?'url("'+cover+'")':'';$('#cFoto').setAttribute('role','img');$('#cFoto').setAttribute('aria-label',cover?'Foto da fachada de '+c.n:'Foto da fachada em breve');$('#cFoto').innerHTML=cover?'':'<span class="placeholder">'+LOGO+'<br>Foto da fachada em breve</span>';$('#bInfo').style.display=can(st.fc)?'':'none';$('#bManage').style.display=can(st.fc)?'':'none';const ph=c.photos||[],cv=c.cover||0;$('#cGallery').innerHTML=ph.map((src,i)=>i===cv?'':'<img src="'+src+'" alt="Foto '+(i+1)+' de '+esc(c.n)+'" loading="lazy" decoding="async" onclick="openLightbox('+i+')">').join('');$('#cGalWrap').hidden=ph.length<2;$('#cPessoas').innerHTML=(c.dirigente||c.vice)?'<div class="pess">'+(c.dirigente?'<div><small>Dirigente</small><b>'+esc(c.dirigente)+'</b></div>':'')+(c.vice?'<div><small>Vice-dirigente</small><b>'+esc(c.vice)+'</b></div>':'')+'</div>':'';renderPublicMap();}
 function openC(i){st.fc=i;st.ft='all';history.pushState({page:'cong',i},'', '#congregacao-'+i);document.body.classList.add('cp');chips();titulos();hoje();semana();scrollTo({top:0});}
 function goHome(to){st.fc=0;st.ft='all';document.body.classList.remove('cp');chips();titulos();draw();if(location.hash.startsWith('#congregacao-'))history.pushState({page:'home'},'','#congregacoes');if(to)setTimeout(()=>$('#'+to).scrollIntoView({behavior:'smooth'}),30);else scrollTo({top:0});}
 function go(id){if(id==='inicio'){goHome();return;}if(document.body.classList.contains('cp')&&id!='agenda'){goHome(id)}else if($('#'+id))$('#'+id).scrollIntoView({behavior:'smooth'})}
@@ -714,18 +798,65 @@ function verObreiros(){
 }
 function coordsFromLink(url){const m=url.match(/@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/)||url.match(/[?&](?:q|query|destination)=(-?\d+(?:\.\d+)?)[,%2C]+(-?\d+(?:\.\d+)?)/)||url.match(/!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/);return m?[+m[1],+m[2]]:null;}
 function loadLeaflet(){return new Promise((resolve,reject)=>{if(window.L)return resolve();if(!document.getElementById('leaflet-css')){const l=document.createElement('link');l.id='leaflet-css';l.rel='stylesheet';l.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css';document.head.appendChild(l);}const sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js';sc.onload=resolve;sc.onerror=reject;document.head.appendChild(sc);});}
-function addBases(map){
+/* ===== Satélite Esri: descobre até que zoom há foto real e amplia a última imagem depois disso ===== */
+const ESRI_IMG='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer';
+const ESRI_REF='https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer';
+const SAT_PADRAO=17; // usado enquanto a consulta não responde (ou se falhar)
+const satCache={};
+function satMaxNative(lat,lng){
+ const k=(+lat).toFixed(3)+','+(+lng).toFixed(3);if(satCache[k])return satCache[k];
+ const tile=z=>{const n=2**z,r=lat*Math.PI/180;return [Math.floor((1-Math.log(Math.tan(r)+1/Math.cos(r))/Math.PI)/2*n),Math.floor((lng+180)/360*n)]};
+ const tem=async z=>{try{const [y,x]=tile(z),ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),5000);const r=await fetch(ESRI_IMG+'/tilemap/'+z+'/'+y+'/'+x+'/1/1',{signal:ctl.signal});clearTimeout(t);if(!r.ok)return null;const j=await r.json();return Array.isArray(j.data)?j.data[0]===1:null}catch(_){return null}};
+ const zs=[20,19,18,17,16,15];
+ return satCache[k]=Promise.all(zs.map(tem)).then(res=>{const i=res.indexOf(true);if(i<0){delete satCache[k];return SAT_PADRAO}return zs[i]});
+}
+function satLayers(n,maxZ){const o={maxNativeZoom:n,maxZoom:maxZ};return L.layerGroup([L.tileLayer(ESRI_IMG+'/tile/{z}/{y}/{x}',{...o,attribution:'Imagens © Esri, Maxar, Earthstar Geographics'}),L.tileLayer(ESRI_REF+'/tile/{z}/{y}/{x}',{...o,maxNativeZoom:Math.min(n,19),ref:true})]);}
+function ajustaSat(g,n,maxZ){g.eachLayer(l=>{l.options.maxNativeZoom=l.options.ref?Math.min(n,19):n;if(maxZ)l.options.maxZoom=maxZ;l.redraw()})}
+function addBases(map,lat,lng){
  const osm=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'});
- const sat=L.layerGroup([L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Imagens © Esri, Maxar, Earthstar Geographics'}),L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:19})]);
- const rel=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'© OpenTopoMap, © OpenStreetMap'});
+ const sat=satLayers(SAT_PADRAO,19);
+ satMaxNative(lat||-7.515,lng||-34.99).then(n=>ajustaSat(sat,n));
+ const rel=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{maxNativeZoom:17,maxZoom:19,attribution:'© OpenTopoMap, © OpenStreetMap'});
  osm.addTo(map);L.control.layers({'Ruas':osm,'Satélite':sat,'Relevo':rel},null,{position:'topright',collapsed:false}).addTo(map);
 }
-async function openMapPicker(){const c=C[st.fc];$('#mapFull').showModal();try{await loadLeaflet();setTimeout(()=>{if(!mapPicker){mapPicker=L.map('pickMap').setView([c.lat||-7.515,-34.99],c.lat?16:13);addBases(mapPicker);mapPicker.on('click',e=>setPick(e.latlng.lat,e.latlng.lng));}mapPicker.invalidateSize();const lat=c.lat||-7.515,lng=c.lng||-34.99;setPick(lat,lng);mapPicker.setView([lat,lng],c.lat?16:13);},150);}catch(_){toast('Não foi possível carregar o mapa. Verifique a conexão.');}}
+async function openMapPicker(){const c=C[st.fc];$('#mapFull').showModal();try{await loadLeaflet();setTimeout(()=>{if(!mapPicker){mapPicker=L.map('pickMap').setView([c.lat||-7.515,c.lng||-34.99],c.lat?16:13);addBases(mapPicker,c.lat,c.lng);mapPicker.on('click',e=>setPick(e.latlng.lat,e.latlng.lng));}mapPicker.invalidateSize();const lat=c.lat||-7.515,lng=c.lng||-34.99;setPick(lat,lng);mapPicker.setView([lat,lng],c.lat?16:13);},150);}catch(_){toast('Não foi possível carregar o mapa. Verifique a conexão.');}}
 function setPick(lat,lng){pickCoords=[lat,lng];if(!window.L||!mapPicker)return;if(!pickMarker)pickMarker=L.marker([lat,lng],{draggable:true}).addTo(mapPicker);else pickMarker.setLatLng([lat,lng]);pickMarker.off('dragend').on('dragend',e=>{const p=e.target.getLatLng();pickCoords=[p.lat,p.lng];});}
 async function searchMap(){const q=$('#mapSearch').value.trim();if(!q)return;try{const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&q='+encodeURIComponent(q+', Caaporã, PB'));const a=await r.json();if(a[0]){setPick(+a[0].lat,+a[0].lon);mapPicker.setView([+a[0].lat,+a[0].lon],17);}else toast('Endereço não encontrado.');}catch(_){toast('Busca indisponível.');}}
 function confirmMapPicker(){const link=$('#mapLink').value.trim();if(link){const xy=coordsFromLink(link);if(!xy){toast('Não consegui extrair coordenadas desse link.');return;}pickCoords=xy;}if(!pickCoords){toast('Escolha um ponto no mapa ou cole um link.');return;}const c=C[st.fc];c.lat=pickCoords[0];c.lng=pickCoords[1];if(!save())return;$('#mapFull').close();renderPublicMap();titulos();congs();toast('Localização salva');}
 function closeMapPicker(){$('#mapFull').close();}
-function renderPublicMap(){const el=$('#publicMap');if(!el)return;const c=C[st.fc];if(!c.lat||!c.lng){el.style.height='auto';el.innerHTML='<div class="vz">Localização no mapa ainda não definida.</div>';return;}el.style.height='';loadLeaflet().then(()=>{if(el._map){el._map.remove();}const map=L.map(el,{zoomControl:true,scrollWheelZoom:false}).setView([c.lat,c.lng],17);el._map=map;L.layerGroup([L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Imagens © Esri, Maxar, Earthstar Geographics'}),L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:19})]).addTo(map);L.marker([c.lat,c.lng]).addTo(map).bindPopup(esc(c.n)).openPopup();}).catch(()=>{el.style.height='auto';el.innerHTML='<div class="vz">Mapa indisponível no momento.</div>';});}
+const PIN_SVG='<svg viewBox="0 0 42 52" aria-hidden="true"><path d="M21 1.5C10.5 1.5 2.5 9.8 2.5 20.3 2.5 34 21 50.5 21 50.5S39.5 34 39.5 20.3C39.5 9.8 31.5 1.5 21 1.5z" fill="#d9ac4f" stroke="#f4dc9c" stroke-width="2"/><path d="M18.6 9h4.8v6.6h6.6v4.8h-6.6V33h-4.8V20.4H12v-4.8h6.6z" fill="#2a1d03"/></svg>';
+function renderPublicMap(){const el=$('#publicMap');if(!el)return;const c=C[st.fc],bd=$('#bDist');
+ $('#distTxt').textContent='';if(bd){bd.disabled=false;bd.textContent='Ver minha distância';}
+ if(!c.lat||!c.lng){if(el._map){el._map.remove();el._map=null;}$('#distBox').hidden=true;el.style.height='auto';el.innerHTML='<div class="vz">Localização no mapa ainda não definida.</div>';return;}
+ $('#distBox').hidden=!('geolocation' in navigator);el.style.height='';
+ const zp=satMaxNative(+c.lat,+c.lng);
+ loadLeaflet().then(()=>{if(el._map){el._map.remove();el._map=null;}el.innerHTML='';el._me=null;
+  const map=L.map(el,{zoomControl:true,scrollWheelZoom:false,maxZoom:19}).setView([c.lat,c.lng],17);el._map=map;
+  const sat=satLayers(SAT_PADRAO,19).addTo(map);
+  zp.then(n=>{if(el._map!==map)return;const mz=Math.min(n+2,21);ajustaSat(sat,n,mz);map.setMaxZoom(mz);});
+  const ic=L.divIcon({className:'cong-pin',html:PIN_SVG,iconSize:[42,52],iconAnchor:[21,51],popupAnchor:[0,-46]});
+  L.marker([c.lat,c.lng],{icon:ic,title:c.n,alt:'Congregação '+c.n,keyboard:true}).addTo(map).bindPopup('<b>'+esc(c.n)+'</b><br>Localidade: '+esc(c.b||'Caaporã'));
+ }).catch(()=>{el.style.height='auto';el.innerHTML='<div class="vz">Mapa indisponível no momento.</div>';$('#distBox').hidden=true;});}
+function haversine(a,b,c,d){const R=6371e3,r=x=>x*Math.PI/180,h=Math.sin(r(c-a)/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(r(d-b)/2)**2;return 2*R*Math.asin(Math.min(1,Math.sqrt(h)))}
+function fmtDist(m){if(m<1000)return Math.max(10,Math.round(m/10)*10)+' m';const k=m/1000;return k.toLocaleString('pt-BR',{maximumFractionDigits:k<100?1:0})+' km'}
+function minhaDistancia(){
+ const c=C[st.fc],el=$('#publicMap'),map=el&&el._map,out=$('#distTxt'),b=$('#bDist');
+ if(!('geolocation' in navigator)){out.textContent='Seu aparelho não permite localização.';return}
+ if(!map||!c.lat||!c.lng){out.textContent='O mapa ainda está carregando. Tente de novo.';return}
+ b.disabled=true;b.textContent='Localizando…';out.textContent='';
+ navigator.geolocation.getCurrentPosition(p=>{
+  b.disabled=false;b.textContent='Atualizar distância';
+  if(el._map!==map)return;
+  const me=[p.coords.latitude,p.coords.longitude],dst=[+c.lat,+c.lng];
+  if(el._me)el._me.remove();
+  el._me=L.layerGroup([L.circle(me,{radius:Math.min(p.coords.accuracy||0,300),color:'#4a8cff',weight:1,fillOpacity:.12,interactive:false}),L.circleMarker(me,{radius:8,color:'#fff',weight:3,fillColor:'#2f7bff',fillOpacity:1}).bindPopup('Você está aqui')]).addTo(map);
+  map.fitBounds(L.latLngBounds([me,dst]),{padding:[50,50],maxZoom:17});
+  out.textContent='Você está a '+fmtDist(haversine(me[0],me[1],dst[0],dst[1]))+' da congregação (em linha reta).';
+ },e=>{
+  b.disabled=false;b.textContent='Ver minha distância';
+  out.textContent=e.code===1?'Permissão de localização negada. Libere a localização deste site nas configurações do navegador.':e.code===3?'Demorou demais para achar sua localização. Tente de novo.':'Não foi possível obter sua localização. Verifique se o GPS está ligado.';
+ },{enableHighAccuracy:true,timeout:15000,maximumAge:60000});
+}
 function openLightbox(i){const c=C[st.fc];if(!c.photos?.[i])return;$('#lightImg').src=c.photos[i];$('#lightbox').classList.add('open');}function closeLightbox(){$('#lightbox').classList.remove('open');}
 /* Conteúdo administrável da página inicial */
 function fmtDate(d){return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}).replace('.','');}
