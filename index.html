@@ -229,6 +229,31 @@ dialog::backdrop{background:rgba(4,8,20,.75);backdrop-filter:blur(4px)}
 .leaflet-control-layers{font:700 .82rem 'Nunito Sans',sans-serif;border-radius:12px!important;border:0!important;box-shadow:0 4px 16px rgba(0,0,0,.35)!important}
 .leaflet-control-layers-list{padding:4px 6px}
 .ac a.btn.g{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);color:#edf0f8}
+
+/* Navegação simplificada e conteúdo da página inicial */
+body:not(.cp) #agenda,body:not(.cp) #semana{display:none!important}
+body.cp #homeContent{display:none!important}
+body.cp #cpage #semana{display:block!important}
+.admin-home-tools{display:none}
+body.in .admin-home-tools{display:block}
+.home-content{max-width:1180px;margin:0 auto;padding:4px 22px 46px}
+.home-block{padding:34px 0 12px}
+.notice-grid,.upcoming-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.notice-card,.upcoming-card{display:block;text-align:left;width:100%;padding:18px;border-radius:18px;border:1px solid rgba(217,172,79,.2);background:linear-gradient(145deg,rgba(21,34,70,.92),rgba(12,20,43,.95));color:var(--tx);box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.notice-card h3,.upcoming-card h3{margin:0 0 8px;font:700 1.08rem 'Outfit',sans-serif;color:var(--ouro2)}
+.notice-card p,.upcoming-card p{margin:0;color:var(--mut);line-height:1.55}
+.notice-card .notice-date,.upcoming-card .up-meta{display:block;margin-top:12px;font-size:.78rem;color:var(--ouro);font-weight:800}
+.upcoming-card{cursor:pointer;transition:transform .2s,border-color .2s}
+.upcoming-card:hover{transform:translateY(-3px);border-color:rgba(217,172,79,.65)}
+.upcoming-card .up-tag{display:inline-flex;padding:4px 9px;border-radius:999px;background:var(--event-color,rgba(217,172,79,.18));color:#fff;font-size:.72rem;font-weight:800;margin-bottom:10px}
+.admin-tool-actions{display:flex;gap:10px;flex-wrap:wrap}
+.type-admin-row{display:grid;grid-template-columns:minmax(0,1fr) 76px 42px;gap:8px;align-items:center;margin:8px 0}
+.type-admin-row input[type=color]{height:42px;width:76px;padding:4px}
+.notice-admin-row{padding:12px;border:1px solid var(--line);border-radius:14px;margin:10px 0}
+.notice-admin-row strong{display:block;color:var(--ouro2)}
+#publicMap{height:300px;min-height:260px;border-radius:18px;overflow:hidden}
+@media(max-width:700px){.home-content{padding:0 16px 28px}.home-block{padding:24px 0 8px}.notice-grid,.upcoming-grid{grid-template-columns:1fr}.admin-tool-actions>*{flex:1 1 100%}#publicMap{height:260px}}
+
 </style>
 </head>
 <body>
@@ -237,7 +262,7 @@ dialog::backdrop{background:rgba(4,8,20,.75);backdrop-filter:blur(4px)}
   <button class="vb" id="bVoltar" onclick="goHome()" aria-label="Voltar">‹</button>
   <button class="brand" onclick="goHome()"><span class="lg"></span><span>Assembleia de Deus<small>Agenda de Caaporã</small></span></button>
   <span class="sp"></span>
-  <nav class="nl"><button onclick="go('semana')">Semana</button><button class="k" onclick="go('agenda')">Calendário</button><button class="k" onclick="go('congs')">Congregações</button></nav>
+  <nav class="nl"><button onclick="goHome()">Início</button><button class="k" onclick="go('congs')">Congregações</button></nav>
   <span class="who" id="who"></span>
   <button class="btn sm g" id="bSenhas" style="display:none" onclick="senhasForm()">Senhas</button>
   <button class="btn sm" id="bAuth" onclick="auth()">Entrar</button>
@@ -251,24 +276,37 @@ dialog::backdrop{background:rgba(4,8,20,.75);backdrop-filter:blur(4px)}
   <p class="kick">Agenda de cultos · Caaporã – PB</p>
   <h1>Venha adorar conosco!</h1>
   <p class="lead">Veja os dias e horários de culto das congregações, e saiba como chegar em cada uma.</p>
-  <div class="cta"><button class="btn" onclick="go('agenda')">Ver o calendário</button><button class="btn g" onclick="go('congs')">Encontrar uma congregação</button></div>
+  <div class="cta"><button class="btn" onclick="go('congs')">Conhecer congregações</button></div>
  </div>
  <div class="sc-h"></div>
 </div>
+
+<section class="home-content" id="homeContent">
+ <section class="s home-block" id="homeAvisos">
+  <div class="sh"><div><h2>Avisos da igreja</h2><p>Comunicados e informações importantes.</p></div></div>
+  <div class="notice-grid" id="noticeList"><div class="vz">Nenhum aviso publicado no momento.</div></div>
+ </section>
+ <section class="s home-block" id="homeProximos">
+  <div class="sh"><div><h2>Próximos cultos</h2><p>Confira a programação das congregações.</p></div></div>
+  <div class="upcoming-grid" id="upcomingList"><div class="vz">Carregando programação…</div></div>
+ </section>
+ <section class="s home-block admin-home-tools" id="adminHomeTools">
+  <div class="sh"><div><h2>Gerenciamento do site</h2><p>Configurações gerais da programação.</p></div></div>
+  <div class="admin-tool-actions"><button class="btn" onclick="tiposForm()">Gerenciar cultos e cores</button><button class="btn g" onclick="avisosForm()">Gerenciar avisos</button></div>
+ </section>
+</section>
 
 <div id="cpage"><div class="cpi">
  <button class="btn sm g cback" onclick="goHome('congs')">‹ Todas as congregações</button>
  <h1 id="cNome"></h1><p id="cLoc"></p><div id="cPessoas"></div>
  <div class="foto" id="cFoto">Foto da fachada em breve</div>
- <div class="ac" style="margin:0"><a class="btn" id="cRota" target="_blank" rel="noopener">Como chegar</a><a class="btn g" id="cGoogle" target="_blank" rel="noopener">Abrir no Google Maps</a><button class="btn g" onclick="verObreiros()">Ver obreiros</button><button class="btn g adm-b" id="bInfo" style="display:none" onclick="infoForm()">Editar dados</button><button class="btn adm-b" id="bManage" style="display:none" onclick="$('#agenda').scrollIntoView({behavior:'smooth'});">Gerenciar cultos</button></div>
+ <div class="ac" style="margin:0"><a class="btn" id="cRota" target="_blank" rel="noopener">Como chegar</a><button class="btn g" onclick="verObreiros()">Ver obreiros</button><button class="btn g adm-b" id="bInfo" style="display:none" onclick="infoForm()">Editar dados</button><button class="btn adm-b" id="bManage" style="display:none" onclick="$('#agenda').scrollIntoView({behavior:'smooth'});">Gerenciar cultos</button></div>
  <div class="mapbox"><div id="publicMap"><div class="vz">Localização no mapa ainda não definida.</div></div></div>
  <h2>Galeria de fotos</h2><div class="gallery" id="cGallery"></div>
+ <section class="s rv" id="semana"><div class="sh"><div><h2>Esta semana na sede</h2><p>Confira os próximos dias de programação do Templo Sede.</p></div></div><div class="wk" id="wk"></div></section>
 </div></div>
 
-<section class="s rv" id="semana">
- <div class="sh"><div><h2>Esta semana na sede</h2><p>Toque em um dia para ver os detalhes.</p></div></div>
- <div class="wk" id="wk"></div>
-</section>
+
 
 <section class="s rv" id="agenda">
  <div class="sh"><div><h2 id="aTit">Calendário da sede</h2><p id="aSub">Programação do Templo Sede.</p></div></div>
@@ -338,7 +376,7 @@ const SB_URL='https://rjeznwrvvlnctrsqozip.supabase.co';
 const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJqZXpud3J2dmxuY3Ryc3FvemlwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU3Mzc1NDgsImV4cCI6MjExMTMxMzU0OH0.ZiBmit0feMak9Dkanv-h3h_urhNqonAvjKu1OckhX1M';
 let MASTER='',SENHA=null,ultimaCarga=0;
 let st={y:0,m:0,sel:new Date(),fc:0,ft:'all',admin:false,own:-1,q:''};
-let custom=[],cancels=[],rules=defRules(),rows=[],savedTypes=[],substituicoes=[];
+let custom=[],cancels=[],rules=defRules(),rows=[],savedTypes=[],typeColors={...TC},notices=[],substituicoes=[];
 const sbH={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json'};
 async function sbGet(t){const r=await fetch(SB_URL+'/rest/v1/'+t,{headers:sbH});if(!r.ok)throw new Error('Falha ao carregar');return r.json()}
 async function rpc(fn,args){const r=await fetch(SB_URL+'/rest/v1/rpc/'+fn,{method:'POST',headers:sbH,body:JSON.stringify(args)});const j=await r.json().catch(()=>null);if(!r.ok)throw new Error(j&&j.message==='sem permissão'?'Sem permissão. Entre novamente.':'Não foi possível salvar. Tente de novo.');return j}
@@ -348,20 +386,22 @@ async function carregar(){
  try{
   const [cs,rg,ev,cn,ob,cf,su]=await Promise.all(['congregacoes?select=*&order=id','regras?select=*&order=id','eventos?select=*&order=data','cancelamentos?select=*','obreiros?select=*&order=id','config?select=*','substituicoes?select=*&order=data'].map(sbGet));
   const sn=C.map(c=>c&&c.senha);
-  cs.forEach(c=>{C[c.id]={n:c.nome,b:c.bairro,e:c.endereco||'',cor:c.cor,lat:c.lat,lng:c.lng,photos:c.fotos||[],cover:c.capa||0,dirigente:c.dirigente||'',vice:c.vice||'',setor:c.setor||0,obreiros:[],senha:sn[c.id]}});
+  cs.forEach(c=>{C[c.id]={n:c.nome,b:c.bairro,e:c.endereco||'',cor:c.cor,lat:c.lat,lng:c.lng,photos:c.fotos||[],cover:c.capa||0,dirigente:c.dirigente||'',vice:c.vice||'',setor:Math.min(3,Math.max(1,Number(c.setor)||1)),obreiros:[],senha:sn[c.id]}});
   rules=rg.map(r=>({id:r.id,c:r.cong_id,w:r.dia_semana,h:r.hora||'',f:r.fim||'',t:r.titulo,tipo:r.tipo||'',q:r.padrao,date:r.data||''}));
   custom=ev.map(e=>({id:e.id,c:e.cong_id,t:e.titulo,tipo:e.tipo||'',data:e.data,fim:e.data_fim||'',h:e.hora||'',f:e.hora_fim||'',obs:e.obs||'',rep:e.repete,ate:e.ate||''}));
   cancels=cn.map(x=>x.cong_id+'|'+x.data+'|'+x.chave);
   substituicoes=su.map(x=>({c:x.cong_id,data:x.data,t:x.titulo,tipo:x.tipo||'Culto',h:x.hora||'19:00',f:x.fim||'21:00'}));
   ob.forEach(o=>{if(C[o.cong_id])C[o.cong_id].obreiros.push({nome:o.nome,funcao:o.funcao})});
   const sa=cf.find(x=>x.chave==='semana_a');if(sa&&sa.valor)REF=new Date(sa.valor+'T00:00');
+  const ct=cf.find(x=>x.chave==='tipos_culto');if(ct&&ct.valor){try{const z=JSON.parse(ct.valor);if(Array.isArray(z)){savedTypes=z.map(x=>x.nome).filter(Boolean);typeColors={...TC};z.forEach(x=>{if(x.nome&&x.cor)typeColors[x.nome]=x.cor;});}}catch(_){}}
+  const av=cf.find(x=>x.chave==='avisos');if(av&&av.valor){try{notices=JSON.parse(av.valor)||[];}catch(_){notices=[];}}
   ultimaCarga=Date.now();
   if(st.admin&&st.own<0)await carregarSenhas();
  }catch(e){toast('Sem conexão com o banco. Mostrando dados de exemplo.');return false}
  return true;
 }
 async function carregarSenhas(){const l=await rpc('listar_senhas',{p_senha:SENHA});l.forEach(x=>{if(x.cong_id<0)MASTER=x.senha;else if(C[x.cong_id])C[x.cong_id].senha=x.senha})}
-function atualizar(){chips();titulos();draw();semana();congs()}
+function atualizar(){chips();titulos();draw();congs();renderHomeContent()}
 async function salvarCong(i,extra){const c=C[i];await rpc('salvar_congregacao',{p_cong:i,p_senha:SENHA,p_d:{n:c.n,b:c.b,e:c.e,lat:c.lat==null?'':c.lat,lng:c.lng==null?'':c.lng,photos:c.photos||[],cover:c.cover||0,dirigente:c.dirigente||'',vice:c.vice||'',...(extra||{})}})}
 const save=()=>{if(can(st.fc))salvarCong(st.fc).catch(erro);return true};
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2300)}
@@ -369,7 +409,7 @@ function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');setT
 function qok(q,d,onlyDate){
  const p=((Math.round((d-REF)/6048e5)%2)+2)%2;
  const nth=Math.ceil(d.getDate()/7);
- return q=='all'||(q=='a0'&&p==0)||(q=='a1'&&p==1)||(q=='f1'&&d.getDate()<=7)||(q=='nf'&&d.getDate()>7)||(q[0]=='n'&&+q.slice(1)===nth&&d.getDay()===0)||(q=='date'&&key(d)==onlyDate);
+ return q=='all'||(q=='a0'&&p==0)||(q=='a1'&&p==1)||(q=='f1'&&d.getDate()<=7)||(q=='nf'&&d.getDate()>7)||(q[0]=='n'&&+q.slice(1)===nth)||(q=='date'&&key(d)==onlyDate);
 }
 function occ(e,d){
  const s=new Date(e.data+'T00:00'),r=e.rep||'once';
@@ -394,8 +434,8 @@ function raw(d,c){
 const norm=x=>String(x||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 const ev=d=>{const q=norm(st.q).trim();return raw(d,st.fc).filter(e=>(st.ft=='all'||e.tipo==st.ft)&&(!q||norm(e.t+' '+e.tipo+' '+(e.obs||'')).includes(q)))};
 const customTypes=()=>savedTypes;
-const allTypes=()=>[...new Set([...TIPOS,...customTypes(),...custom.map(x=>x.tipo||''),...rules.map(x=>x.tipo||'')].filter(Boolean))];
-const typeColor=t=>TC[t]||('hsl('+([...norm(t)].reduce((a,c)=>a+c.charCodeAt(0),0)%360)+' 62% 52%)');
+const allTypes=()=>[...new Set([...(savedTypes.length?savedTypes:TIPOS),...custom.map(x=>x.tipo||''),...rules.map(x=>x.tipo||'')].filter(Boolean))];
+const typeColor=t=>typeColors[t]||TC[t]||('hsl('+([...norm(t)].reduce((a,c)=>a+c.charCodeAt(0),0)%360)+' 62% 52%)');
 const ecor=e=>typeColor(e.tipo);
 const etx=e=>e.tipo=='Evento especial'?'#2a1d03':'#fff';
 
@@ -426,14 +466,14 @@ function day(){
  $('#dl').innerHTML=es.length?'<ol class="tl">'+es.map(e=>{
   rows.push(e);const i=rows.length-1;
   const b=!can(st.fc)?'':e.substituida?'<button class="m" onclick="subForm()">Alterar este dia</button><button class="m" onclick="voltarPadrao()">Voltar ao padrão</button>':e.rid&&String(rules.find(r=>r.id==e.rid)?.q||'').startsWith('n')?'<button class="m" onclick="ruleForm('+e.rid+')">Editar regra</button><button class="m" onclick="subForm()">Alterar só este dia</button>'+cx(i):e.id?'<button class="m" onclick="eventoForm('+e.id+')">Editar</button><button class="m" onclick="del('+e.id+')">Excluir</button>'+(e.rep&&e.rep!='once'?cx(i):''):'<button class="m" onclick="ruleForm('+e.rid+')">Editar culto fixo</button>'+cx(i);
-  return '<li class="'+(e.x?'x':'')+'" style="--c:'+ecor(e)+'"><time>'+fh(e.h)+'<small>às '+fh(e.f||'21:00')+'</small></time><h4>'+esc(e.t)+'</h4><p class="sub"><span class="tag">'+e.tipo+'</span> '+(e.x?'<span class="tag cx">Cancelado</span> ':'')+(e.substituida?'<span class="tag">Alterado</span> ':'')+(e.rep&&e.rep!='once'?'<span class="tag">Repete</span> ':'')+(e.fim?'<span class="tag">Dia '+(Math.round((d0(e.data,d)-0)/86400000)+1)+' de '+(Math.round((d0(e.data,new Date(e.fim+'T00:00'))-0)/86400000)+1)+'</span> ':'')+esc(e.obs||'')+'</p><div class="ac"><a target="_blank" rel="noopener" href="'+rota(e.c)+'">Como chegar</a>'+b+'</div></li>';
+  return '<li class="'+(e.x?'x':'')+'" style="--c:'+ecor(e)+'"><time>'+fh(e.h)+'<small>às '+fh(e.f||'21:00')+'</small></time><h4>'+esc(e.t)+'</h4><p class="sub"><span class="tag">'+e.tipo+'</span> '+(e.x?'<span class="tag cx">Cancelado</span> ':'')+(e.substituida?'<span class="tag">Alterado</span> ':'')+(e.rep&&e.rep!='once'?'<span class="tag">Repete</span> ':'')+(e.fim?'<span class="tag">Dia '+(Math.round((d0(e.data,d)-0)/86400000)+1)+' de '+(Math.round((d0(e.data,new Date(e.fim+'T00:00'))-0)/86400000)+1)+'</span> ':'')+esc(e.obs||'')+'</p><div class="ac">'+b+'</div></li>';
  }).join('')+'</ol>':'<div class="vz">Nenhuma programação neste dia.'+(can(st.fc)?'<br>Use “Adicionar neste dia” para criar.':'')+'</div>';
  const sd=$('#dia');if(sd.animate)sd.animate([{opacity:.4,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:260,easing:'ease-out'});
 }
 function fixos(){
  $('#bFixo').style.display=can(st.fc)?'':'none';
  const l=rules.filter(r=>r.c==st.fc).sort((a,b)=>a.w-b.w||a.h.localeCompare(b.h));
- $('#fxl').innerHTML=l.length?l.map(r=>'<div class="lr"><span><b>'+DIA[r.w]+'</b> · '+fh(r.h)+' às '+fh(r.f||'21:00')+' · '+esc(r.t)+'<small>'+QS[r.q]+'</small></span>'+(can(st.fc)?'<button onclick="ruleForm('+r.id+')">Editar</button><button onclick="delRule('+r.id+')">Excluir</button>':'')+'</div>').join(''):'<div class="vz">Nenhum culto fixo cadastrado.</div>';
+ $('#fxl').innerHTML=l.length?l.map(r=>'<div class="lr"><span><b>'+DIA[r.w]+'</b> · '+fh(r.h)+' às '+fh(r.f||'21:00')+' · '+esc(r.t)+'<small>'+freqLabel(r.q,r.w)+'</small></span>'+(can(st.fc)?'<button onclick="ruleForm('+r.id+')">Editar</button><button onclick="delRule('+r.id+')">Excluir</button>':'')+'</div>').join(''):'<div class="vz">Nenhum culto fixo cadastrado.</div>';
 }
 function pick(n){st.sel=new Date(st.y,st.m,n);draw()}
 function mv(k){st.m+=k;if(st.m<0){st.m=11;st.y--}if(st.m>11){st.m=0;st.y++}st.sel=new Date(st.y,st.m,1);draw(k)}
@@ -445,10 +485,11 @@ function chips(){
  $('#sug').innerHTML=[...u].map(x=>'<option value="'+esc(x)+'">').join('');
 }
 function semana(){
+ if(!$('#wk'))return;
  const now=new Date();
  $('#wk').innerHTML=Array.from({length:5},(_,i)=>{
   const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+i),es=raw(d,0).filter(e=>!e.x);
-  return '<button class="wd'+(i==0?' h':'')+'" onclick="goHome();goTo(new Date('+d.getFullYear()+','+d.getMonth()+','+d.getDate()+'))"><small>'+(i==0?'Hoje':i==1?'Amanhã':DIA[d.getDay()])+'</small><h3>'+d.getDate()+' de '+MES[d.getMonth()].slice(0,3).toLowerCase()+'</h3>'+
+  return '<button class="wd'+(i==0?' h':'')+'" onclick="goTo(new Date('+d.getFullYear()+','+d.getMonth()+','+d.getDate()+'))"><small>'+(i==0?'Hoje':i==1?'Amanhã':DIA[d.getDay()])+'</small><h3>'+d.getDate()+' de '+MES[d.getMonth()].slice(0,3).toLowerCase()+'</h3>'+
    (es.length?es.map(e=>'<p><b>'+fh(e.h)+'</b> '+esc(e.t)+'</p>').join(''):'<p>Sem programação</p>')+'</button>';
  }).join('');
 }
@@ -456,21 +497,21 @@ function semana(){
 /* congregações */
 function ordem(){
  const l=C.map((c,i)=>i).filter(i=>i>0);
- return l.sort((a,b)=>(C[a].p||0)-(C[b].p||0)||(C[a].p?a-b:C[a].n.localeCompare(C[b].n,'pt')));
+ return l.sort((a,b)=>(Math.min(3,Math.max(1,Number(C[a].setor)||1))-Math.min(3,Math.max(1,Number(C[b].setor)||1)))||C[a].n.localeCompare(C[b].n,'pt'));
 }
 const ccard=i=>{const c=C[i],photo=c.photos?.[c.cover||0];return '<button class="cc" style="--cc:'+c.cor+'" onclick="openC('+i+')"><div class="cf '+(photo?'photo':'')+'" '+(photo?'style="background-image:url('+photo+')"':'')+'><span class="ic" '+(photo?'style="display:none"':'')+'></span><small>'+(photo?'':'✦ '+(i===0?'Templo Sede':'Congregação'))+'</small></div><div class="cb"><h3>'+esc(c.n)+'</h3><p>Localidade: '+esc(c.b||'Caaporã')+'</p><span class="btn sm">'+(can(i)?'Gerenciar congregação':'Ver agenda')+'</span></div></button>'};
 function congs(){
  const li=ordem();let h='<div class="stl">Templo Sede</div>'+ccard(0);
- [1,2,3,4,0].forEach(n=>{const l=li.filter(i=>(C[i].setor||0)===n);if(l.length)h+='<div class="stl">'+(n?'Setor '+n:'Congregações')+'</div>'+l.map(ccard).join('')});
+ [1,2,3].forEach(n=>{const l=li.filter(i=>Math.min(3,Math.max(1,Number(C[i].setor)||1))===n);if(l.length)h+='<div class="stl">Setor '+n+'</div>'+l.map(ccard).join('')});
  $('#cg').innerHTML=h;
  if(matchMedia('(hover:hover)').matches)$$('.cc').forEach(c=>{c.onpointermove=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='rotateY('+x*7+'deg) rotateX('+(-y*7)+'deg) translateY(-3px)'};c.onpointerleave=()=>c.style.transform=''});
 }
-function titulos(){const c=C[st.fc],cp=st.fc!==0;$('#aTit').textContent=cp?'Agenda da congregação':'Calendário da sede';$('#aSub').textContent=cp?c.n:'Programação do Templo Sede.';$('#cNome').textContent=c.n;$('#cLoc').textContent='Localidade: '+(c.b||'Caaporã')+(c.e?' · '+c.e:'')+' · Caaporã – PB';$('#cpage').style.setProperty('--cc',c.cor);$('#cRota').href=rota(st.fc);$('#cGoogle').href='https://www.google.com/maps/search/?api=1&query='+(c.lat&&c.lng?c.lat+','+c.lng:encodeURIComponent(c.n+' Assembleia de Deus Caaporã PB'));const cover=(c.photos||[])[c.cover||0];$('#cFoto').style.backgroundImage=cover?'url("'+cover+'")':'';$('#cFoto').innerHTML=cover?'':'<span class="placeholder">'+LOGO+'<br>Foto da fachada em breve</span>';$('#bInfo').style.display=can(st.fc)?'':'none';$('#bManage').style.display=can(st.fc)?'':'none';$('#cGallery').innerHTML=(c.photos||[]).map((src,i)=>'<img src="'+src+'" alt="Foto '+(i+1)+' de '+esc(c.n)+'" onclick="openLightbox('+i+')">').join('');$('#cPessoas').innerHTML=(c.dirigente||c.vice)?'<div class="pess">'+(c.dirigente?'<div><small>Dirigente</small><b>'+esc(c.dirigente)+'</b></div>':'')+(c.vice?'<div><small>Vice-dirigente</small><b>'+esc(c.vice)+'</b></div>':'')+'</div>':'';renderPublicMap();}
-function openC(i){st.fc=i;st.ft='all';history.pushState({page:'cong',i},'', '#congregacao-'+i);document.body.classList.add('cp');chips();titulos();hoje();scrollTo({top:0});}
+function titulos(){const c=C[st.fc],cp=st.fc!==0;$('#aTit').textContent=cp?'Agenda da congregação':'Calendário da sede';$('#aSub').textContent=cp?c.n:'Programação do Templo Sede.';$('#cNome').textContent=c.n;$('#cLoc').textContent='Localidade: '+(c.b||'Caaporã')+(c.e?' · '+c.e:'')+' · Caaporã – PB';$('#cpage').style.setProperty('--cc',c.cor);$('#semana').style.display=st.fc===0?'block':'none';$('#cRota').href=rota(st.fc);const cover=(c.photos||[])[c.cover||0];$('#cFoto').style.backgroundImage=cover?'url("'+cover+'")':'';$('#cFoto').innerHTML=cover?'':'<span class="placeholder">'+LOGO+'<br>Foto da fachada em breve</span>';$('#bInfo').style.display=can(st.fc)?'':'none';$('#bManage').style.display=can(st.fc)?'':'none';$('#cGallery').innerHTML=(c.photos||[]).map((src,i)=>'<img src="'+src+'" alt="Foto '+(i+1)+' de '+esc(c.n)+'" onclick="openLightbox('+i+')">').join('');$('#cPessoas').innerHTML=(c.dirigente||c.vice)?'<div class="pess">'+(c.dirigente?'<div><small>Dirigente</small><b>'+esc(c.dirigente)+'</b></div>':'')+(c.vice?'<div><small>Vice-dirigente</small><b>'+esc(c.vice)+'</b></div>':'')+'</div>':'';renderPublicMap();}
+function openC(i){st.fc=i;st.ft='all';history.pushState({page:'cong',i},'', '#congregacao-'+i);document.body.classList.add('cp');chips();titulos();hoje();if(i===0)semana();scrollTo({top:0});}
 function goHome(to){st.fc=0;st.ft='all';document.body.classList.remove('cp');chips();titulos();draw();if(location.hash.startsWith('#congregacao-'))history.pushState({page:'home'},'','#congregacoes');if(to)setTimeout(()=>$('#'+to).scrollIntoView({behavior:'smooth'}),30);else scrollTo({top:0});}
-function go(id){if(document.body.classList.contains('cp')&&id!='agenda'){goHome(id)}else $('#'+id).scrollIntoView({behavior:'smooth'})}
+function go(id){if(id==='inicio'){goHome();return;}if(document.body.classList.contains('cp')&&id!='agenda'){goHome(id)}else if($('#'+id))$('#'+id).scrollIntoView({behavior:'smooth'})}
 window.addEventListener('popstate',e=>{if(e.state?.page==='cong')openCNoHistory(e.state.i);else if(document.body.classList.contains('cp'))goHome();});
-function openCNoHistory(i){st.fc=i;document.body.classList.add('cp');chips();titulos();hoje();scrollTo(0,0)}
+function openCNoHistory(i){st.fc=i;document.body.classList.add('cp');chips();titulos();hoje();if(i===0)semana();scrollTo(0,0)}
 /* login */
 const can=c=>st.admin&&(st.own<0||st.own==c);
 function auth(){
@@ -492,7 +533,7 @@ function ui(){
  $('#bAuth').textContent=st.admin?'Sair':'Entrar';
  $('#who').textContent=st.admin?(st.own<0?'Administrador':C[st.own].n):'';
  $('#bSenhas').style.display=st.admin&&st.own<0?'':'none';
- titulos();draw();congs();
+ titulos();draw();congs();renderHomeContent();
 }
 function senhasForm(){
  if(!st.admin||st.own>=0)return;
@@ -506,7 +547,7 @@ async function salvarSenhas(e){
   const r=$('#pref').value;if(r&&r!==key(REF)){await rpc('salvar_config',{p_senha:SENHA,p_chave:'semana_a',p_valor:r});REF=new Date(r+'T00:00')}
   const m=$('#pm').value.trim();if(m&&m!==MASTER){await rpc('definir_senha',{p_senha:SENHA,p_alvo:-1,p_nova:m});SENHA=m;MASTER=m}
  }catch(x){erro(x);return false}
- $('#dlg').close();draw();semana();toast('Senhas salvas');return false;
+ $('#dlg').close();draw();renderHomeContent();toast('Senhas salvas');return false;
 }
 function filtra(t){st.ft=st.ft==t?'all':t;draw()}
 function legenda(){
@@ -535,7 +576,7 @@ function eventoForm(id,dt){
  $('#dlg').innerHTML='<form class="dd" onsubmit="return salvar(event,'+(id||0)+')"><h3>'+(id?'Editar evento':'Novo evento')+'</h3><p style="color:var(--mut);margin:0">Eventos de um ou vários dias, com ou sem repetição.</p>'+ 
  '<label for="fcg">Congregação</label><select id="fcg">'+optC(e.c)+'</select>'+ 
  '<label for="ft1">Título</label><input id="ft1" required maxlength="60" value="'+esc(e.t)+'">'+
- '<label for="ftp">Tipo (escolha ou digite um novo)</label><input id="ftp" list="typeHints" required value="'+esc(e.tipo)+'"><datalist id="typeHints">'+typeList+'</datalist>'+ 
+ '<label for="ftp">Tipo de culto</label><select id="ftp">'+opts(allTypes().map(t=>[t,t]),e.tipo||allTypes()[0])+'</select>'+ 
  '<div class="row"><div><label for="fd">Data de início</label><input id="fd" type="date" required oninput="repTxt(this.value)" value="'+e.data+'"></div><div><label for="fend">Data de término (opcional)</label><input id="fend" type="date" min="'+e.data+'" value="'+(e.fim||'')+'"></div></div>'+ 
  '<div class="row"><div><label for="fh">Início</label><input id="fh" type="time" required value="'+e.h+'"></div><div><label for="ff">Fim</label><input id="ff" type="time" value="'+(e.f||'')+'"></div></div>'+ 
  '<label for="frp">Repetição</label><select id="frp">'+opts([['once','Não repete'],['wk','Toda semana'],['alt','Semanas alternadas'],['md','Todo mês no dia N'],['nth','Todo mês na mesma semana/dia']],e.rep||'once')+'</select>'+ 
@@ -552,12 +593,12 @@ async function salvar(e,id){
  const more=e.target.dataset.more;
  try{o.id=await rpc('salvar_evento',{p_senha:SENHA,p_ev:o})}catch(x){erro(x);return false}
  if(id)custom=custom.map(x=>x.id==id?o:x);else custom.push(o);
- $('#dlg').close();st.fc=o.c;const p=o.data.split('-');st.y=+p[0];st.m=+p[1]-1;st.sel=new Date(+p[0],+p[1]-1,+p[2]);chips();draw();semana();toast('Evento salvo');if(more)eventoForm(0,o.data);return false;
+ $('#dlg').close();st.fc=o.c;const p=o.data.split('-');st.y=+p[0];st.m=+p[1]-1;st.sel=new Date(+p[0],+p[1]-1,+p[2]);chips();draw();semana();renderHomeContent();toast('Evento salvo');if(more)eventoForm(0,o.data);return false;
 }
-async function del(id){if(!can(st.fc)||!confirm('Excluir este evento?'))return;try{await rpc('excluir_evento',{p_senha:SENHA,p_id:id})}catch(x){return erro(x)}custom=custom.filter(x=>x.id!=id);draw();semana();toast('Evento excluído')}
+async function del(id){if(!can(st.fc)||!confirm('Excluir este evento?'))return;try{await rpc('excluir_evento',{p_senha:SENHA,p_id:id})}catch(x){return erro(x)}custom=custom.filter(x=>x.id!=id);draw();semana();renderHomeContent();toast('Evento excluído')}
 async function tgl(i){
  if(!can(st.fc))return;const e=rows[i],p=e.k.split('|');
- try{const r=await rpc('alternar_cancelamento',{p_cong:+p[0],p_senha:SENHA,p_data:p[1],p_chave:p[2]});cancels=r?cancels.concat(e.k):cancels.filter(k=>k!=e.k);draw();semana();toast(r?'Culto cancelado neste dia':'Culto restaurado')}catch(x){erro(x)}
+ try{const r=await rpc('alternar_cancelamento',{p_cong:+p[0],p_senha:SENHA,p_data:p[1],p_chave:p[2]});cancels=r?cancels.concat(e.k):cancels.filter(k=>k!=e.k);draw();renderHomeContent();toast(r?'Culto cancelado neste dia':'Culto restaurado')}catch(x){erro(x)}
 }
 function subForm(){
  if(!can(st.fc)||st.sel.getDay()!==0){toast('A substituição é disponível apenas para domingos.');return;}
@@ -567,25 +608,28 @@ function subForm(){
 }
 async function salvarSub(e){e.preventDefault();if(!can(st.fc))return false;const data=key(st.sel),o={c:st.fc,data,t:$('#stt').value.trim(),tipo:$('#stp').value.trim(),h:$('#sth').value,f:$('#stf').value||''};try{await rpc('salvar_substituicao',{p_senha:SENHA,p_cong:o.c,p_data:o.data,p_titulo:o.t,p_tipo:o.tipo,p_hora:o.h,p_fim:o.f})}catch(x){erro(x);return false}substituicoes=substituicoes.filter(x=>!(x.c==o.c&&x.data===o.data));substituicoes.push(o);$('#dlg').close();draw();semana();toast('Programação alterada somente neste dia');return false;}
 async function voltarPadrao(){if(!can(st.fc)||!confirm('Restaurar a programação rotativa deste domingo?'))return;const data=key(st.sel);try{await rpc('remover_substituicao',{p_senha:SENHA,p_cong:st.fc,p_data:data})}catch(x){return erro(x)}substituicoes=substituicoes.filter(x=>!(x.c==st.fc&&x.data===data));draw();semana();toast('Programação padrão restaurada')}
+function freqLabel(q,w){const n=+String(q).slice(1),day=DIA[w]||'domingo',ord=(w===0?'º':'ª');return q&&q[0]==='n'?n+ord+' '+day.toLowerCase()+' do mês':(QS[q]||q);}
+function freqOptions(w,selected){const base=[['all','Toda semana'],['a0','Semana A (alternada)'],['a1','Semana B (alternada)'],['f1','Só na 1ª semana do mês'],['nf','Todas, menos a 1ª semana do mês'],...Array.from({length:5},(_,i)=>['n'+(i+1),freqLabel('n'+(i+1),w)]),['date','Só uma data']];return opts(base,selected);}
+function updateFreqLabels(){const q=$('#rq'),w=$('#rw');if(!q||!w)return;const v=q.value;q.innerHTML=freqOptions(+w.value,v);}
 function ruleForm(id){
  const r=rules.find(x=>x.id==id)||{c:st.fc,w:2,h:'19:00',f:'21:00',t:'',tipo:'Culto',q:'all',date:''};
  $('#dlg').innerHTML='<form class="dd" onsubmit="return salvarRule(event,'+(id||0)+')"><h3>'+(id?'Editar culto fixo':'Novo culto fixo')+'</h3>'+ 
  '<label for="rt">Título</label><input id="rt" required maxlength="60" value="'+esc(r.t)+'">'+
- '<label for="rtp">Tipo (escolha ou digite um novo)</label><input id="rtp" list="ruleTypes" required value="'+esc(r.tipo)+'"><datalist id="ruleTypes">'+allTypes().map(t=>'<option value="'+esc(t)+'">').join('')+'</datalist>'+ 
- '<label for="rw">Dia da semana</label><select id="rw">'+opts(DIA.map((d,i)=>[i,d]),r.w)+'</select>'+ 
+ '<label for="rtp">Tipo de culto</label><select id="rtp">'+opts(allTypes().map(t=>[t,t]),r.tipo||allTypes()[0])+'</select>'+ 
+ '<label for="rw">Dia da semana</label><select id="rw" onchange="updateFreqLabels()">'+opts(DIA.map((d,i)=>[i,d]),r.w)+'</select>'+ 
  '<div class="row"><div><label for="rh">Início</label><input id="rh" type="time" required value="'+r.h+'"></div><div><label for="rf">Fim</label><input id="rf" type="time" value="'+(r.f||'')+'"></div></div>'+ 
- '<label for="rq">Frequência</label><select id="rq" onchange="$(\'#ruleDateWrap\').style.display=this.value==\'date\'?\'block\':\'none\'">'+opts(Object.entries(QS),r.q)+'</select>'+ 
+ '<label for="rq">Frequência</label><select id="rq" onchange="$(\'#ruleDateWrap\').style.display=this.value==\'date\'?\'block\':\'none\'">'+freqOptions(r.w,r.q)+'</select>'+ 
  '<div id="ruleDateWrap" style="display:'+(r.q=='date'?'block':'none')+'"><label for="rdate">Data única</label><input id="rdate" type="date" value="'+(r.date||'')+'"></div>'+ 
  '<div class="ac"><button type="button" class="btn g" onclick="$(\'#dlg\').close()">Cancelar</button><button class="btn">Salvar</button></div></form>';
  $('#dlg').showModal();
 }
-async function salvarRule(e,id){e.preventDefault();if(!can(st.fc))return false;const old=rules.find(x=>x.id==id),q=$('#rq').value,date=$('#rdate').value;if(q=='date'&&!date){toast('Escolha a data única.');return false;}const o={id:id||null,c:old?old.c:st.fc,w:+$('#rw').value,h:$('#rh').value,f:$('#rf').value||'',t:$('#rt').value.trim(),tipo:$('#rtp').value.trim(),q,date:q=='date'?date:''};try{o.id=await rpc('salvar_regra',{p_senha:SENHA,p_r:o})}catch(x){erro(x);return false}if(id)rules=rules.map(x=>x.id==id?o:x);else rules.push(o);$('#dlg').close();chips();draw();semana();toast('Culto fixo salvo');return false;}
-async function delRule(id){if(!can(st.fc)||!confirm('Excluir este culto fixo de todas as semanas?'))return;try{await rpc('excluir_regra',{p_senha:SENHA,p_id:id})}catch(x){return erro(x)}rules=rules.filter(x=>x.id!=id);draw();semana();toast('Culto fixo excluído')}
+async function salvarRule(e,id){e.preventDefault();if(!can(st.fc))return false;const old=rules.find(x=>x.id==id),q=$('#rq').value,date=$('#rdate').value;if(q=='date'&&!date){toast('Escolha a data única.');return false;}const o={id:id||null,c:old?old.c:st.fc,w:+$('#rw').value,h:$('#rh').value,f:$('#rf').value||'',t:$('#rt').value.trim(),tipo:$('#rtp').value.trim(),q,date:q=='date'?date:''};try{o.id=await rpc('salvar_regra',{p_senha:SENHA,p_r:o})}catch(x){erro(x);return false}if(id)rules=rules.map(x=>x.id==id?o:x);else rules.push(o);$('#dlg').close();chips();draw();semana();renderHomeContent();toast('Culto fixo salvo');return false;}
+async function delRule(id){if(!can(st.fc)||!confirm('Excluir este culto fixo de todas as semanas?'))return;try{await rpc('excluir_regra',{p_senha:SENHA,p_id:id})}catch(x){return erro(x)}rules=rules.filter(x=>x.id!=id);draw();semana();renderHomeContent();toast('Culto fixo excluído')}
 let mapPicker=null,pickMarker=null,pickCoords=null;
 function infoForm(){const c=C[st.fc],photos=c.photos||[];$('#dlg').innerHTML='<form class="dd" onsubmit="return salvarInfo(event)"><h3>Editar dados '+(st.fc===0?'da sede':'da congregação')+'</h3>'+ 
  '<label for="in">Nome</label><input id="in" required maxlength="50" value="'+esc(c.n)+'"><label for="ib">Localidade / bairro</label><input id="ib" maxlength="50" value="'+esc(c.b||'Caaporã')+'"><label for="ie">Endereço</label><input id="ie" maxlength="160" value="'+esc(c.e||'')+'">'+
  '<button type="button" class="btn g" style="width:100%;margin-top:12px" onclick="openMapPicker()">Definir local no mapa</button><p class="sub">Usamos Leaflet + OpenStreetMap, sem chave de API paga. Também é possível colar um link do Google Maps.</p>'+ 
- '<label for="idir">Dirigente</label><input id="idir" maxlength="60" value="'+esc(c.dirigente||'')+'"><label for="ivice">Vice-dirigente</label><input id="ivice" maxlength="60" value="'+esc(c.vice||'')+'">'+(st.own<0&&st.fc>0?'<label for="iset">Setor</label><select id="iset">'+[['','Sem setor'],[1,'Setor 1'],[2,'Setor 2'],[3,'Setor 3'],[4,'Setor 4']].map(x=>'<option value="'+x[0]+'"'+((c.setor||'')==x[0]?' selected':'')+'>'+x[1]+'</option>').join('')+'</select>':'')+'<label>Obreiros</label><div id="obList">'+(c.obreiros||[]).map(o=>obRow(o.nome,o.funcao)).join('')+'</div><button type="button" class="btn sm g" onclick="$(\'#obList\').insertAdjacentHTML(\'beforeend\',obRow())">+ Adicionar obreiro</button>'+(can(st.fc)?'<label for="isn">Senha de acesso desta congregação</label><input id="isn" maxlength="40" value="'+esc(c.senha||'')+'">':'')+'<label for="photoFiles">Fotos (até 10; selecione da galeria ou câmera)</label><input id="photoFiles" type="file" accept="image/*" capture="environment" multiple onchange="processPhotos(this.files)"><div id="photoList">'+photos.map((x,i)=>photoRow(x,i,c.cover||0)).join('')+'</div><p class="sub">As imagens são reduzidas para até 1400 px e comprimidas antes de salvar.</p>'+ 
+ '<label for="idir">Dirigente</label><input id="idir" maxlength="60" value="'+esc(c.dirigente||'')+'"><label for="ivice">Vice-dirigente</label><input id="ivice" maxlength="60" value="'+esc(c.vice||'')+'">'+(st.own<0&&st.fc>0?'<label for="iset">Setor</label><select id="iset">'+[[1,'Setor 1'],[2,'Setor 2'],[3,'Setor 3']].map(x=>'<option value="'+x[0]+'"'+((c.setor||'')==x[0]?' selected':'')+'>'+x[1]+'</option>').join('')+'</select>':'')+'<label>Obreiros</label><div id="obList">'+(c.obreiros||[]).map(o=>obRow(o.nome,o.funcao)).join('')+'</div><button type="button" class="btn sm g" onclick="$(\'#obList\').insertAdjacentHTML(\'beforeend\',obRow())">+ Adicionar obreiro</button>'+(can(st.fc)?'<label for="isn">Senha de acesso desta congregação</label><input id="isn" maxlength="40" value="'+esc(c.senha||'')+'">':'')+'<label for="photoFiles">Fotos (até 10; selecione da galeria ou câmera)</label><input id="photoFiles" type="file" accept="image/*" capture="environment" multiple onchange="processPhotos(this.files)"><div id="photoList">'+photos.map((x,i)=>photoRow(x,i,c.cover||0)).join('')+'</div><p class="sub">As imagens são reduzidas para até 1400 px e comprimidas antes de salvar.</p>'+ 
  '<div class="ac"><button type="button" class="btn g" onclick="$(\'#dlg\').close()">Cancelar</button><button class="btn">Salvar dados</button></div></form>';
  $('#dlg').showModal();}
 function photoRow(src,i,cover){return '<div class="photo-item"><img src="'+src+'"><span>Foto '+(i+1)+(i===cover?' · Capa':'')+'</span><button type="button" class="btn sm g" onclick="setCover('+i+')">Capa</button><button type="button" class="btn sm g" onclick="movePhoto('+i+',-1)">↑</button><button type="button" class="btn sm g" onclick="movePhoto('+i+',1)">↓</button><button type="button" class="btn sm r" onclick="removePhoto('+i+')">Excluir</button></div>';}
@@ -601,11 +645,11 @@ async function salvarInfo(e){
  c.n=$('#in').value.trim()||c.n;c.b=$('#ib').value.trim()||'Caaporã';c.e=$('#ie').value.trim();c.dirigente=$('#idir').value.trim();c.vice=$('#ivice').value.trim();
  const ob=$$('#obList .obr').map(r=>({nome:r.querySelector('.obn').value.trim(),funcao:r.querySelector('.obf').value})).filter(x=>x.nome);
  try{
-  const ms=$('#iset');await salvarCong(st.fc,ms?{setor:ms.value}:{});if(ms)c.setor=+ms.value||0;
+  const ms=$('#iset');await salvarCong(st.fc,ms?{setor:ms.value}:{});if(ms)c.setor=Math.min(3,Math.max(1,+ms.value||1));
   await rpc('salvar_obreiros',{p_cong:st.fc,p_senha:SENHA,p_lista:ob});c.obreiros=ob;
   if(ns!==null&&ns!==(c.senha||'')){await rpc('definir_senha',{p_senha:SENHA,p_alvo:st.fc,p_nova:ns});c.senha=ns;if(st.own>=0)SENHA=ns}
  }catch(x){erro(x);return false}
- $('#dlg').close();titulos();congs();draw();toast('Dados salvos');return false;
+ $('#dlg').close();titulos();congs();draw();renderHomeContent();toast('Dados salvos');return false;
 }
 function verObreiros(){
  const c=C[st.fc],l=c.obreiros||[];
@@ -625,8 +669,34 @@ function setPick(lat,lng){pickCoords=[lat,lng];if(!window.L||!mapPicker)return;i
 async function searchMap(){const q=$('#mapSearch').value.trim();if(!q)return;try{const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&q='+encodeURIComponent(q+', Caaporã, PB'));const a=await r.json();if(a[0]){setPick(+a[0].lat,+a[0].lon);mapPicker.setView([+a[0].lat,+a[0].lon],17);}else toast('Endereço não encontrado.');}catch(_){toast('Busca indisponível.');}}
 function confirmMapPicker(){const link=$('#mapLink').value.trim();if(link){const xy=coordsFromLink(link);if(!xy){toast('Não consegui extrair coordenadas desse link.');return;}pickCoords=xy;}if(!pickCoords){toast('Escolha um ponto no mapa ou cole um link.');return;}const c=C[st.fc];c.lat=pickCoords[0];c.lng=pickCoords[1];if(!save())return;$('#mapFull').close();renderPublicMap();titulos();congs();toast('Localização salva');}
 function closeMapPicker(){$('#mapFull').close();}
-function renderPublicMap(){const el=$('#publicMap');if(!el)return;const c=C[st.fc];if(!c.lat||!c.lng){el.style.height='auto';el.innerHTML='<div class="vz">Localização no mapa ainda não definida.</div>';return;}el.style.height='';loadLeaflet().then(()=>{if(el._map){el._map.remove();}const map=L.map(el).setView([c.lat,c.lng],16);el._map=map;addBases(map);L.marker([c.lat,c.lng]).addTo(map).bindPopup(esc(c.n)).openPopup();}).catch(()=>{el.style.height='auto';el.innerHTML='<div class="vz">Mapa indisponível no momento.</div>';});}
+function renderPublicMap(){const el=$('#publicMap');if(!el)return;const c=C[st.fc];if(!c.lat||!c.lng){el.style.height='auto';el.innerHTML='<div class="vz">Localização no mapa ainda não definida.</div>';return;}el.style.height='';loadLeaflet().then(()=>{if(el._map){el._map.remove();}const map=L.map(el,{zoomControl:true,scrollWheelZoom:false}).setView([c.lat,c.lng],17);el._map=map;L.layerGroup([L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Imagens © Esri, Maxar, Earthstar Geographics'}),L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:19})]).addTo(map);L.marker([c.lat,c.lng]).addTo(map).bindPopup(esc(c.n)).openPopup();}).catch(()=>{el.style.height='auto';el.innerHTML='<div class="vz">Mapa indisponível no momento.</div>';});}
 function openLightbox(i){const c=C[st.fc];if(!c.photos?.[i])return;$('#lightImg').src=c.photos[i];$('#lightbox').classList.add('open');}function closeLightbox(){$('#lightbox').classList.remove('open');}
+/* Conteúdo administrável da página inicial */
+function fmtDate(d){return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}).replace('.','');}
+function renderHomeContent(){
+ const nl=$('#noticeList'),ul=$('#upcomingList');
+ if(nl){const now=key(new Date());const active=(notices||[]).filter(n=>!n.ate||n.ate>=now).sort((a,b)=>(b.data||'').localeCompare(a.data||''));nl.innerHTML=active.length?active.map(n=>'<article class="notice-card"><h3>'+esc(n.titulo)+'</h3><p>'+esc(n.texto).replace(/\n/g,'<br>')+'</p>'+(n.data?'<span class="notice-date">Publicado em '+fmtDate(new Date(n.data+'T00:00'))+'</span>':'')+'</article>').join(''):'<div class="vz">Nenhum aviso publicado no momento.</div>';}
+ if(ul){const base=new Date();base.setHours(0,0,0,0);const list=[];for(let k=0;k<35&&list.length<8;k++){const d=new Date(base);d.setDate(base.getDate()+k);C.forEach((c,i)=>raw(d,i).filter(e=>!e.x).forEach(e=>list.push({...e,date:new Date(d),cong:i})));}list.sort((a,b)=>a.date-b.date||a.h.localeCompare(b.h));const chosen=list.slice(0,6);ul.innerHTML=chosen.length?chosen.map(e=>'<button class="upcoming-card" onclick="openUpcoming('+e.cong+',\''+key(e.date)+'\')" style="--event-color:'+ecor(e)+'"><span class="up-tag">'+esc(e.tipo)+'</span><h3>'+esc(e.t)+'</h3><p>'+esc(C[e.cong].n)+'</p><span class="up-meta">'+DIA[e.date.getDay()]+' · '+fmtDate(e.date)+' · '+fh(e.h)+'</span></button>').join(''):'<div class="vz">Não há cultos futuros cadastrados.</div>';}
+ const tools=$('#adminHomeTools');if(tools)tools.style.display=st.admin&&st.own<0?'block':'none';
+}
+function openUpcoming(c,date){openC(c);const p=date.split('-');setTimeout(()=>goTo(new Date(+p[0],+p[1]-1,+p[2])),180);}
+async function saveConfig(keyName,value){await rpc('salvar_config',{p_senha:SENHA,p_chave:keyName,p_valor:value});}
+function tiposForm(){
+ if(!st.admin||st.own>=0)return;
+ const names=allTypes();
+ $('#dlg').innerHTML='<form class="dd" onsubmit="return salvarTipos(event)"><h3>Tipos de cultos e cores</h3><p style="color:var(--mut);margin:0">Cadastre cada tipo uma única vez. A mesma cor será usada em todas as congregações.</p><div id="typeRows">'+names.map(t=>'<div class="type-admin-row"><input class="type-name" maxlength="50" required value="'+esc(t)+'"><input class="type-color" type="color" value="'+(typeColors[t]||TC[t]||'#6575a8')+'" aria-label="Cor de '+esc(t)+'"><button type="button" class="btn sm r" onclick="this.parentNode.remove()" aria-label="Remover tipo">×</button></div>').join('')+'</div><button type="button" class="btn sm g" onclick="addTypeRow()">+ Adicionar tipo</button><div class="ac"><button type="button" class="btn g" onclick="$(\'#dlg\').close()">Cancelar</button><button class="btn">Salvar tipos e cores</button></div></form>';
+ $('#dlg').showModal();
+}
+function addTypeRow(){const box=$('#typeRows');box.insertAdjacentHTML('beforeend','<div class="type-admin-row"><input class="type-name" maxlength="50" required placeholder="Nome do culto"><input class="type-color" type="color" value="#d9ac4f" aria-label="Cor do culto"><button type="button" class="btn sm r" onclick="this.parentNode.remove()" aria-label="Remover tipo">×</button></div>');}
+async function salvarTipos(e){e.preventDefault();if(!st.admin||st.own>=0)return false;const seen=new Set(),items=[];$$('#typeRows .type-admin-row').forEach(r=>{const nome=r.querySelector('.type-name').value.trim(),cor=r.querySelector('.type-color').value;if(nome&&!seen.has(norm(nome))){seen.add(norm(nome));items.push({nome,cor});}});if(!items.length){toast('Cadastre pelo menos um tipo de culto.');return false;}try{await saveConfig('tipos_culto',JSON.stringify(items));}catch(x){erro(x);return false;}savedTypes=items.map(x=>x.nome);typeColors={...TC};items.forEach(x=>typeColors[x.nome]=x.cor);$('#dlg').close();chips();draw();renderHomeContent();toast('Tipos e cores atualizados em todas as congregações.');return false;}
+function avisosForm(){
+ if(!st.admin||st.own>=0)return;
+ $('#dlg').innerHTML='<form class="dd" onsubmit="return salvarAvisos(event)"><h3>Avisos da igreja</h3><p style="color:var(--mut);margin:0">Publique comunicados que aparecerão na página inicial.</p><div id="noticeAdminList">'+(notices.length?notices.map((n,i)=>'<div class="notice-admin-row"><strong>'+esc(n.titulo)+'</strong><p>'+esc(n.texto)+'</p><small style="color:var(--mut)">'+(n.ate?'Visível até '+fmtDate(new Date(n.ate+'T00:00')):'Sem data de encerramento')+'</small><button type="button" class="btn sm r" onclick="removeNotice('+i+')">Excluir</button></div>').join(''):'<p style="color:var(--mut)">Nenhum aviso cadastrado.</p>')+'</div><label for="noticeTitle">Título</label><input id="noticeTitle" maxlength="80" placeholder="Ex.: Congresso de Jovens"><label for="noticeText">Descrição</label><textarea id="noticeText" rows="3" maxlength="500" placeholder="Escreva o comunicado…"></textarea><div class="row"><div><label for="noticeDate">Data de publicação</label><input id="noticeDate" type="date" value="'+key(new Date())+'"></div><div><label for="noticeEnd">Exibir até (opcional)</label><input id="noticeEnd" type="date"></div></div><div class="ac"><button type="button" class="btn g" onclick="$(\'#dlg\').close()">Fechar</button><button class="btn">Publicar aviso</button></div></form>';
+ $('#dlg').showModal();
+}
+function removeNotice(i){notices.splice(i,1);avisosForm();}
+async function salvarAvisos(e){e.preventDefault();if(!st.admin||st.own>=0)return false;const titulo=$('#noticeTitle').value.trim(),texto=$('#noticeText').value.trim(),data=$('#noticeDate').value,ate=$('#noticeEnd').value;if(!titulo||!texto){toast('Preencha o título e a descrição do aviso.');return false;}if(ate&&data&&ate<data){toast('A data final não pode ser anterior à publicação.');return false;}notices.unshift({id:Date.now(),titulo,texto,data,ate});try{await saveConfig('avisos',JSON.stringify(notices));}catch(x){notices.shift();erro(x);return false;}$('#dlg').close();renderHomeContent();toast('Aviso publicado.');return false;}
+
 /* efeitos */
 (function fx(){
  const hero=$('#inicio'),emb=$('#emb'),cv=$('#cv'),x=cv.getContext('2d'),red=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -659,11 +729,11 @@ function openLightbox(i){const c=C[st.fc];if(!c.photos?.[i])return;$('#lightImg'
 
 (function init(){
  const n=new Date();st.y=n.getFullYear();st.m=n.getMonth();
- chips();titulos();draw();semana();congs();
+ chips();titulos();draw();congs();renderHomeContent();
  carregar().then(ok=>{if(ok)atualizar()});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-ultimaCarga>30000)carregar().then(ok=>{if(ok)atualizar()})});
 })();
 </script>
-<nav class="tabs" aria-label="Menu"><button onclick="go('semana')">Semana</button><button onclick="go('agenda')">Calendário</button><button onclick="go('congs')">Congregações</button></nav>
+<nav class="tabs" aria-label="Menu"><button onclick="goHome()">Início</button><button onclick="go('congs')">Congregações</button></nav>
 </body>
 </html>
