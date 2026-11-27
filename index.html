@@ -254,6 +254,51 @@ body.in .admin-home-tools{display:block}
 #publicMap{height:300px;min-height:260px;border-radius:18px;overflow:hidden}
 @media(max-width:700px){.home-content{padding:0 16px 28px}.home-block{padding:24px 0 8px}.notice-grid,.upcoming-grid{grid-template-columns:1fr}.admin-tool-actions>*{flex:1 1 100%}#publicMap{height:260px}}
 
+
+/* ===== FASE 1 · lista de congregações compacta + carrossel de próximos cultos ===== */
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;perspective:none}
+.cc{display:flex;flex-direction:row;align-items:center;gap:14px;padding:18px 16px;min-height:140px;border-radius:22px;transform-style:flat}
+.cc .cf{flex:none;width:104px;height:104px;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.cc .cf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cc .cf.photo:after{display:none}
+.cc .cf .ic{width:60px;height:60px}
+.cc .cb{flex:1;min-width:0;padding:0;display:flex;flex-direction:column;align-items:flex-start}
+.cc .cb h3{font-size:1.15rem;line-height:1.2;overflow-wrap:anywhere}
+.cc .cb p{margin:4px 0 12px;font-size:.9rem}
+.cc .cb .btn,.cc .cb .btn.sm{width:auto;min-height:44px;padding:8px 18px;color:#2a1d03}
+@media(hover:hover) and (min-width:701px){.cg{perspective:900px}.cc{transform-style:preserve-3d}}
+@media(max-width:700px){
+ .cg{grid-template-columns:minmax(0,1fr)}
+ #congs{padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))}
+ .tabs{background:#080d20;transform:translateZ(0)}
+ .tabs button{min-height:48px}
+}
+/* aviso (toast): não encolher para metade da tela */
+.toast{width:max-content;max-width:calc(100vw - 32px);text-align:center;border-radius:18px;line-height:1.3}
+/* próximos cultos: carrossel com scroll-snap */
+.up-wrap{position:relative}
+.upcoming-grid{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding:0 2px;padding:6px 2px 14px;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.upcoming-grid::-webkit-scrollbar{display:none}
+.upcoming-grid .vz{flex:1;margin-top:0}
+.upcoming-card{flex:0 0 calc((100% - 24px)/2.35);min-width:0;scroll-snap-align:start;padding:14px 12px;display:flex;flex-direction:column;align-items:flex-start}
+.upcoming-card h3{font-size:.98rem;line-height:1.25;overflow-wrap:anywhere}
+.upcoming-card p{font-size:.84rem;line-height:1.35}
+.upcoming-card .up-tag{font-size:.68rem;padding:3px 8px;margin-bottom:8px}
+.upcoming-card .up-meta{margin-top:auto;padding-top:10px;font-size:.72rem;line-height:1.3}
+@media(max-width:700px){.up-wrap{margin:0 -34px}.upcoming-grid{padding:6px 34px 14px;scroll-padding:0 34px}.upcoming-card{flex-basis:calc((100vw - 68px - 12px)/2.3)}}
+.up-arrow{display:none}
+.up-dots{display:flex;justify-content:center;gap:6px;min-height:8px}
+.up-dots i{width:6px;height:6px;border-radius:6px;background:rgba(255,255,255,.22);transition:width .2s,background .2s}
+.up-dots i.on{width:18px;background:var(--ouro)}
+@media(min-width:701px){.upcoming-card{flex-basis:calc((100% - 24px)/3);padding:18px}.upcoming-card h3{font-size:1.08rem}.upcoming-card p{font-size:.92rem}.upcoming-card .up-meta{font-size:.78rem}}
+@media(min-width:901px){.upcoming-card{flex-basis:calc((100% - 36px)/4)}}
+@media(min-width:701px) and (hover:hover){
+ .up-arrow{display:grid;place-items:center;position:absolute;top:calc(50% - 7px);transform:translateY(-50%);z-index:2;width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(217,172,79,.5);background:rgba(8,14,32,.92);color:var(--ouro2);font-size:1.5rem;line-height:1;padding:0 0 3px;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+ .up-arrow.prev{left:-12px}.up-arrow.next{right:-12px}
+ .up-arrow:hover:not(:disabled){background:var(--ouro);color:#2a1d03}
+ .up-arrow:disabled{opacity:.25;cursor:default}
+ .up-arrow.off{display:none}
+}
 </style>
 </head>
 <body>
@@ -289,7 +334,8 @@ body.in .admin-home-tools{display:block}
  </section>
  <section class="s home-block" id="homeProximos">
   <div class="sh"><div><h2>Próximos cultos</h2><p>Confira a programação das congregações.</p></div></div>
-  <div class="upcoming-grid" id="upcomingList"><div class="vz">Carregando programação…</div></div>
+  <div class="up-wrap"><button class="up-arrow prev" id="upPrev" type="button" aria-label="Cultos anteriores" onclick="upScroll(-1)">‹</button><div class="upcoming-grid" id="upcomingList" role="list"><div class="vz">Carregando programação…</div></div><button class="up-arrow next" id="upNext" type="button" aria-label="Próximos cultos" onclick="upScroll(1)">›</button></div>
+   <div class="up-dots" id="upDots" aria-hidden="true"></div>
  </section>
  <section class="s home-block admin-home-tools" id="adminHomeTools">
   <div class="sh"><div><h2>Gerenciamento do site</h2><p>Configurações gerais da programação.</p></div></div>
@@ -501,7 +547,7 @@ function ordem(){
  const l=C.map((c,i)=>i).filter(i=>i>0);
  return l.sort((a,b)=>(Math.min(3,Math.max(1,Number(C[a].setor)||1))-Math.min(3,Math.max(1,Number(C[b].setor)||1)))||alpha(C[a].n,C[b].n));
 }
-const ccard=i=>{const c=C[i],photo=c.photos?.[c.cover||0];return '<button class="cc" style="--cc:'+c.cor+'" onclick="openC('+i+')"><div class="cf '+(photo?'photo':'')+'" '+(photo?'style="background-image:url('+photo+')"':'')+'><span class="ic" '+(photo?'style="display:none"':'')+'></span><small>'+(photo?'':'✦ '+(i===0?'Templo Sede':'Congregação'))+'</small></div><div class="cb"><h3>'+esc(c.n)+'</h3><p>Localidade: '+esc(c.b||'Caaporã')+'</p><span class="btn sm">'+(can(i)?'Gerenciar congregação':'Ver agenda')+'</span></div></button>'};
+const ccard=i=>{const c=C[i],photo=c.photos?.[c.cover||0];return '<button class="cc" style="--cc:'+c.cor+'" onclick="openC('+i+')"><div class="cf'+(photo?' photo':'')+'">'+(photo?'<img src="'+photo+'" alt="Fachada da congregação '+esc(c.n)+'" loading="lazy" decoding="async">':'<span class="ic" aria-hidden="true"></span>')+'</div><div class="cb"><h3>'+esc(c.n)+'</h3><p>Localidade: '+esc(c.b||'Caaporã')+'</p><span class="btn sm">'+(can(i)?'Gerenciar congregação':'Ver agenda')+'</span></div></button>'};
 function congs(){
  const li=ordem();let h='<div class="stl">Templo Sede</div>'+ccard(0);
  [1,2,3].forEach(n=>{const l=li.filter(i=>Math.min(3,Math.max(1,Number(C[i].setor)||1))===n);if(l.length)h+='<div class="stl">Setor '+n+'</div>'+l.map(ccard).join('')});
@@ -686,8 +732,19 @@ function fmtDate(d){return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'sh
 function renderHomeContent(){
  const nl=$('#noticeList'),ul=$('#upcomingList');
  if(nl){const now=key(new Date());const active=(notices||[]).filter(n=>!n.ate||n.ate>=now).sort((a,b)=>(b.data||'').localeCompare(a.data||''));nl.innerHTML=active.length?active.map(n=>'<article class="notice-card"><h3>'+esc(n.titulo)+'</h3><p>'+esc(n.texto).replace(/\n/g,'<br>')+'</p>'+(n.data?'<span class="notice-date">Publicado em '+fmtDate(new Date(n.data+'T00:00'))+'</span>':'')+'</article>').join(''):'<div class="vz">Nenhum aviso publicado no momento.</div>';}
- if(ul){const base=new Date();base.setHours(0,0,0,0);const list=[];for(let k=0;k<35&&list.length<8;k++){const d=new Date(base);d.setDate(base.getDate()+k);C.forEach((c,i)=>raw(d,i).filter(e=>!e.x).forEach(e=>list.push({...e,date:new Date(d),cong:i})));}list.sort((a,b)=>a.date-b.date||a.h.localeCompare(b.h));const chosen=list.slice(0,6);ul.innerHTML=chosen.length?chosen.map(e=>'<button class="upcoming-card" onclick="openUpcoming('+e.cong+',\''+key(e.date)+'\')" style="--event-color:'+ecor(e)+'"><span class="up-tag">'+esc(e.tipo)+'</span><h3>'+esc(e.t)+'</h3><p>'+esc(C[e.cong].n)+'</p><span class="up-meta">'+DIA[e.date.getDay()]+' · '+fmtDate(e.date)+' · '+fh(e.h)+'</span></button>').join(''):'<div class="vz">Não há cultos futuros cadastrados.</div>';}
+ if(ul){const base=new Date(),hm=pad(base.getHours())+':'+pad(base.getMinutes());base.setHours(0,0,0,0);const list=[];for(let k=0;k<35&&list.length<8;k++){const d=new Date(base);d.setDate(base.getDate()+k);C.forEach((c,i)=>raw(d,i).filter(e=>!e.x&&(k>0||(e.f||'21:00')>=hm)).forEach(e=>list.push({...e,date:new Date(d),cong:i})));}list.sort((a,b)=>a.date-b.date||a.h.localeCompare(b.h));const chosen=list.slice(0,6);ul.innerHTML=chosen.length?chosen.map(e=>'<button class="upcoming-card" role="listitem" onclick="openUpcoming('+e.cong+',\''+key(e.date)+'\')" style="--event-color:'+ecor(e)+'"><span class="up-tag">'+esc(e.tipo)+'</span><h3>'+esc(e.t)+'</h3><p>'+esc(C[e.cong].n)+'</p><span class="up-meta">'+DIA[e.date.getDay()]+' · '+fmtDate(e.date)+' · '+fh(e.h)+'</span></button>').join(''):'<div class="vz">Não há cultos futuros cadastrados.</div>';upUpdate();}
  const tools=$('#adminHomeTools');if(tools)tools.style.display=st.admin&&st.own<0?'block':'none';
+}
+function upScroll(dir){const g=$('#upcomingList');if(g)g.scrollBy({left:dir*g.clientWidth*.8,behavior:'smooth'})}
+function upUpdate(){
+ const g=$('#upcomingList'),dt=$('#upDots');if(!g||!dt)return;
+ const cs=[...g.querySelectorAll('.upcoming-card')],ov=g.scrollWidth-g.clientWidth>4;
+ if(dt.children.length!==(ov?cs.length:0))dt.innerHTML=ov?cs.map(()=>'<i></i>').join(''):'';
+ let a=0;
+ if(ov&&cs.length>1){const step=cs[1].offsetLeft-cs[0].offsetLeft||1;a=g.scrollLeft>=g.scrollWidth-g.clientWidth-4?cs.length-1:Math.round(g.scrollLeft/step)}
+ [...dt.children].forEach((d,i)=>d.classList.toggle('on',i===a));
+ const pv=$('#upPrev'),nx=$('#upNext');
+ if(pv&&nx){pv.classList.toggle('off',!ov);nx.classList.toggle('off',!ov);pv.disabled=g.scrollLeft<=4;nx.disabled=g.scrollLeft>=g.scrollWidth-g.clientWidth-4}
 }
 function openUpcoming(c,date){openC(c);const p=date.split('-');setTimeout(()=>goTo(new Date(+p[0],+p[1]-1,+p[2])),180);}
 async function saveConfig(keyName,value){await rpc('salvar_config',{p_senha:SENHA,p_chave:keyName,p_valor:value});}
@@ -740,6 +797,7 @@ async function salvarAvisos(e){e.preventDefault();if(!st.admin||st.own>=0)return
 (function init(){
  const n=new Date();st.y=n.getFullYear();st.m=n.getMonth();
  chips();titulos();draw();congs();renderHomeContent();
+ const up=$('#upcomingList');if(up){up.addEventListener('scroll',upUpdate,{passive:true});addEventListener('resize',upUpdate)}
  carregar().then(ok=>{if(ok)atualizar()});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-ultimaCarga>30000)carregar().then(ok=>{if(ok)atualizar()})});
 })();
