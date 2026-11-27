@@ -200,11 +200,41 @@ dialog::backdrop{background:rgba(4,8,20,.75);backdrop-filter:blur(4px)}
 .pess div{flex:1;min-width:150px;padding:14px 16px;border-radius:16px;background:rgba(217,172,79,.1);border:1px solid rgba(217,172,79,.35)}
 .pess small{display:block;color:var(--ouro);font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
 .pess b{font-size:1.15rem}
+
+/* celular */
+.vb,.tabs{display:none}
+.ac a.btn{background:linear-gradient(135deg,#f4dc9c,#d9ac4f);border-color:transparent;color:#2a1d03}
+.bar .btn:not(.g){color:#2a1d03}
+@media(max-width:700px){
+ html,body{overflow-x:hidden;max-width:100%}
+ body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+ .bar{padding:10px 12px;gap:8px}
+ .brand{font-size:1rem;gap:8px;min-width:0}
+ .who{display:none}
+ .bar .btn.sm{padding:8px 12px;font-size:.8rem;flex:none}
+ .nl{display:none}
+ .tabs{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;gap:0;padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));background:rgba(8,13,32,.97);border-top:1px solid var(--line)}
+ .tabs button{flex:1;border:0;background:none;color:var(--mut);padding:10px 4px;font:700 .8rem 'Nunito Sans',sans-serif;border-radius:12px}
+ .tabs button:active{background:var(--vidro);color:#fff}
+ .ch{flex-wrap:wrap}.ch h3{font-size:1.5rem}.nav button{width:38px;height:38px}
+ body.cp .vb{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:var(--vidro);border:1px solid var(--line);color:#fff;font-size:1.7rem;line-height:1;padding:0 0 3px}
+ .board{grid-template-columns:minmax(0,1fr)!important}
+ .board>*,.cal,.side{min-width:0;max-width:100%;box-sizing:border-box}
+ .grid{grid-template-columns:repeat(7,minmax(0,1fr))}
+ .d{min-width:0}
+ .cback{display:none}
+ #toast,.toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))!important}
+}
+
+.leaflet-control-layers{font:700 .82rem 'Nunito Sans',sans-serif;border-radius:12px!important;border:0!important;box-shadow:0 4px 16px rgba(0,0,0,.35)!important}
+.leaflet-control-layers-list{padding:4px 6px}
+.ac a.btn.g{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);color:#edf0f8}
 </style>
 </head>
 <body>
 <header class="top" id="top">
  <div class="bar">
+  <button class="vb" id="bVoltar" onclick="goHome()" aria-label="Voltar">‹</button>
   <button class="brand" onclick="goHome()"><span class="lg"></span><span>Assembleia de Deus<small>Agenda de Caaporã</small></span></button>
   <span class="sp"></span>
   <nav class="nl"><button onclick="go('semana')">Semana</button><button class="k" onclick="go('agenda')">Calendário</button><button class="k" onclick="go('congs')">Congregações</button></nav>
@@ -227,10 +257,10 @@ dialog::backdrop{background:rgba(4,8,20,.75);backdrop-filter:blur(4px)}
 </div>
 
 <div id="cpage"><div class="cpi">
- <button class="btn sm g" onclick="goHome('congs')">‹ Todas as congregações</button>
+ <button class="btn sm g cback" onclick="goHome('congs')">‹ Todas as congregações</button>
  <h1 id="cNome"></h1><p id="cLoc"></p><div id="cPessoas"></div>
  <div class="foto" id="cFoto">Foto da fachada em breve</div>
- <div class="ac" style="margin:0"><a class="btn" id="cRota" target="_blank" rel="noopener">Como chegar</a><button class="btn g" onclick="verObreiros()">Ver obreiros</button><button class="btn g adm-b" id="bInfo" style="display:none" onclick="infoForm()">Editar dados</button><button class="btn adm-b" id="bManage" style="display:none" onclick="$('#agenda').scrollIntoView({behavior:'smooth'});">Gerenciar cultos</button></div>
+ <div class="ac" style="margin:0"><a class="btn" id="cRota" target="_blank" rel="noopener">Como chegar</a><a class="btn g" id="cGoogle" target="_blank" rel="noopener">Abrir no Google Maps</a><button class="btn g" onclick="verObreiros()">Ver obreiros</button><button class="btn g adm-b" id="bInfo" style="display:none" onclick="infoForm()">Editar dados</button><button class="btn adm-b" id="bManage" style="display:none" onclick="$('#agenda').scrollIntoView({behavior:'smooth'});">Gerenciar cultos</button></div>
  <div class="mapbox"><div id="publicMap"><div class="vz">Localização no mapa ainda não definida.</div></div></div>
  <h2>Galeria de fotos</h2><div class="gallery" id="cGallery"></div>
 </div></div>
@@ -430,7 +460,7 @@ function congs(){
  $('#cg').innerHTML=h;
  if(matchMedia('(hover:hover)').matches)$$('.cc').forEach(c=>{c.onpointermove=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='rotateY('+x*7+'deg) rotateX('+(-y*7)+'deg) translateY(-3px)'};c.onpointerleave=()=>c.style.transform=''});
 }
-function titulos(){const c=C[st.fc],cp=st.fc!==0;$('#aTit').textContent=cp?'Agenda da congregação':'Calendário da sede';$('#aSub').textContent=cp?c.n:'Programação do Templo Sede.';$('#cNome').textContent=c.n;$('#cLoc').textContent='Localidade: '+(c.b||'Caaporã')+(c.e?' · '+c.e:'')+' · Caaporã – PB';$('#cpage').style.setProperty('--cc',c.cor);$('#cRota').href=rota(st.fc);const cover=(c.photos||[])[c.cover||0];$('#cFoto').style.backgroundImage=cover?'url("'+cover+'")':'';$('#cFoto').innerHTML=cover?'':'<span class="placeholder">'+LOGO+'<br>Foto da fachada em breve</span>';$('#bInfo').style.display=can(st.fc)?'':'none';$('#bManage').style.display=can(st.fc)?'':'none';$('#cGallery').innerHTML=(c.photos||[]).map((src,i)=>'<img src="'+src+'" alt="Foto '+(i+1)+' de '+esc(c.n)+'" onclick="openLightbox('+i+')">').join('');$('#cPessoas').innerHTML=(c.dirigente||c.vice)?'<div class="pess">'+(c.dirigente?'<div><small>Dirigente</small><b>'+esc(c.dirigente)+'</b></div>':'')+(c.vice?'<div><small>Vice-dirigente</small><b>'+esc(c.vice)+'</b></div>':'')+'</div>':'';renderPublicMap();}
+function titulos(){const c=C[st.fc],cp=st.fc!==0;$('#aTit').textContent=cp?'Agenda da congregação':'Calendário da sede';$('#aSub').textContent=cp?c.n:'Programação do Templo Sede.';$('#cNome').textContent=c.n;$('#cLoc').textContent='Localidade: '+(c.b||'Caaporã')+(c.e?' · '+c.e:'')+' · Caaporã – PB';$('#cpage').style.setProperty('--cc',c.cor);$('#cRota').href=rota(st.fc);$('#cGoogle').href='https://www.google.com/maps/search/?api=1&query='+(c.lat&&c.lng?c.lat+','+c.lng:encodeURIComponent(c.n+' Assembleia de Deus Caaporã PB'));const cover=(c.photos||[])[c.cover||0];$('#cFoto').style.backgroundImage=cover?'url("'+cover+'")':'';$('#cFoto').innerHTML=cover?'':'<span class="placeholder">'+LOGO+'<br>Foto da fachada em breve</span>';$('#bInfo').style.display=can(st.fc)?'':'none';$('#bManage').style.display=can(st.fc)?'':'none';$('#cGallery').innerHTML=(c.photos||[]).map((src,i)=>'<img src="'+src+'" alt="Foto '+(i+1)+' de '+esc(c.n)+'" onclick="openLightbox('+i+')">').join('');$('#cPessoas').innerHTML=(c.dirigente||c.vice)?'<div class="pess">'+(c.dirigente?'<div><small>Dirigente</small><b>'+esc(c.dirigente)+'</b></div>':'')+(c.vice?'<div><small>Vice-dirigente</small><b>'+esc(c.vice)+'</b></div>':'')+'</div>':'';renderPublicMap();}
 function openC(i){st.fc=i;st.ft='all';history.pushState({page:'cong',i},'', '#congregacao-'+i);document.body.classList.add('cp');chips();titulos();hoje();scrollTo({top:0});}
 function goHome(to){st.fc=0;st.ft='all';document.body.classList.remove('cp');chips();titulos();draw();if(location.hash.startsWith('#congregacao-'))history.pushState({page:'home'},'','#congregacoes');if(to)setTimeout(()=>$('#'+to).scrollIntoView({behavior:'smooth'}),30);else scrollTo({top:0});}
 function go(id){if(document.body.classList.contains('cp')&&id!='agenda'){goHome(id)}else $('#'+id).scrollIntoView({behavior:'smooth'})}
@@ -571,12 +601,18 @@ function verObreiros(){
 }
 function coordsFromLink(url){const m=url.match(/@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/)||url.match(/[?&](?:q|query|destination)=(-?\d+(?:\.\d+)?)[,%2C]+(-?\d+(?:\.\d+)?)/)||url.match(/!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/);return m?[+m[1],+m[2]]:null;}
 function loadLeaflet(){return new Promise((resolve,reject)=>{if(window.L)return resolve();if(!document.getElementById('leaflet-css')){const l=document.createElement('link');l.id='leaflet-css';l.rel='stylesheet';l.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css';document.head.appendChild(l);}const sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js';sc.onload=resolve;sc.onerror=reject;document.head.appendChild(sc);});}
-async function openMapPicker(){const c=C[st.fc];$('#mapFull').showModal();try{await loadLeaflet();setTimeout(()=>{if(!mapPicker){mapPicker=L.map('pickMap').setView([c.lat||-7.515,-34.99],c.lat?16:13);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(mapPicker);mapPicker.on('click',e=>setPick(e.latlng.lat,e.latlng.lng));}mapPicker.invalidateSize();const lat=c.lat||-7.515,lng=c.lng||-34.99;setPick(lat,lng);mapPicker.setView([lat,lng],c.lat?16:13);},150);}catch(_){toast('Não foi possível carregar o mapa. Verifique a conexão.');}}
+function addBases(map){
+ const osm=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'});
+ const sat=L.layerGroup([L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Imagens © Esri, Maxar, Earthstar Geographics'}),L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:19})]);
+ const rel=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'© OpenTopoMap, © OpenStreetMap'});
+ osm.addTo(map);L.control.layers({'Ruas':osm,'Satélite':sat,'Relevo':rel},null,{position:'topright',collapsed:false}).addTo(map);
+}
+async function openMapPicker(){const c=C[st.fc];$('#mapFull').showModal();try{await loadLeaflet();setTimeout(()=>{if(!mapPicker){mapPicker=L.map('pickMap').setView([c.lat||-7.515,-34.99],c.lat?16:13);addBases(mapPicker);mapPicker.on('click',e=>setPick(e.latlng.lat,e.latlng.lng));}mapPicker.invalidateSize();const lat=c.lat||-7.515,lng=c.lng||-34.99;setPick(lat,lng);mapPicker.setView([lat,lng],c.lat?16:13);},150);}catch(_){toast('Não foi possível carregar o mapa. Verifique a conexão.');}}
 function setPick(lat,lng){pickCoords=[lat,lng];if(!window.L||!mapPicker)return;if(!pickMarker)pickMarker=L.marker([lat,lng],{draggable:true}).addTo(mapPicker);else pickMarker.setLatLng([lat,lng]);pickMarker.off('dragend').on('dragend',e=>{const p=e.target.getLatLng();pickCoords=[p.lat,p.lng];});}
 async function searchMap(){const q=$('#mapSearch').value.trim();if(!q)return;try{const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&q='+encodeURIComponent(q+', Caaporã, PB'));const a=await r.json();if(a[0]){setPick(+a[0].lat,+a[0].lon);mapPicker.setView([+a[0].lat,+a[0].lon],17);}else toast('Endereço não encontrado.');}catch(_){toast('Busca indisponível.');}}
 function confirmMapPicker(){const link=$('#mapLink').value.trim();if(link){const xy=coordsFromLink(link);if(!xy){toast('Não consegui extrair coordenadas desse link.');return;}pickCoords=xy;}if(!pickCoords){toast('Escolha um ponto no mapa ou cole um link.');return;}const c=C[st.fc];c.lat=pickCoords[0];c.lng=pickCoords[1];if(!save())return;$('#mapFull').close();renderPublicMap();titulos();congs();toast('Localização salva');}
 function closeMapPicker(){$('#mapFull').close();}
-function renderPublicMap(){const el=$('#publicMap');if(!el)return;const c=C[st.fc];if(!c.lat||!c.lng){el.innerHTML='<div class="vz">Localização no mapa ainda não definida.</div>';return;}loadLeaflet().then(()=>{if(el._map){el._map.remove();}const map=L.map(el).setView([c.lat,c.lng],16);el._map=map;L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);L.marker([c.lat,c.lng]).addTo(map).bindPopup(esc(c.n)).openPopup();}).catch(()=>{el.innerHTML='<div class="vz">Mapa indisponível no momento.</div>';});}
+function renderPublicMap(){const el=$('#publicMap');if(!el)return;const c=C[st.fc];if(!c.lat||!c.lng){el.style.height='auto';el.innerHTML='<div class="vz">Localização no mapa ainda não definida.</div>';return;}el.style.height='';loadLeaflet().then(()=>{if(el._map){el._map.remove();}const map=L.map(el).setView([c.lat,c.lng],16);el._map=map;addBases(map);L.marker([c.lat,c.lng]).addTo(map).bindPopup(esc(c.n)).openPopup();}).catch(()=>{el.style.height='auto';el.innerHTML='<div class="vz">Mapa indisponível no momento.</div>';});}
 function openLightbox(i){const c=C[st.fc];if(!c.photos?.[i])return;$('#lightImg').src=c.photos[i];$('#lightbox').classList.add('open');}function closeLightbox(){$('#lightbox').classList.remove('open');}
 /* efeitos */
 (function fx(){
@@ -615,5 +651,6 @@ function openLightbox(i){const c=C[st.fc];if(!c.photos?.[i])return;$('#lightImg'
  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-ultimaCarga>30000)carregar().then(ok=>{if(ok)atualizar()})});
 })();
 </script>
+<nav class="tabs" aria-label="Menu"><button onclick="go('semana')">Semana</button><button onclick="go('agenda')">Calendário</button><button onclick="go('congs')">Congregações</button></nav>
 </body>
 </html>
