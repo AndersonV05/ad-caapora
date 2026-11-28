@@ -442,6 +442,40 @@ dialog .dd .ac{position:sticky;bottom:0;background:var(--azul);padding:12px 0 4p
  .notice-admin-edit{grid-column:2;grid-row:1}.notice-switch{grid-column:1/3;grid-row:2;padding-left:2px}
  .notice-order{grid-column:3;grid-row:1/3;flex-direction:column}.notice-admin-edit .ar{display:none}
 }
+
+/* ===== REVISÃO · barras compactas, admin, senhas, galeria, rota ===== */
+.bar{padding:5px 14px;gap:10px}.bar .lg,.ah .lg{width:28px;height:28px}
+.brand{font-size:1.3rem;gap:8px;line-height:1}.brand small{font-size:.66rem;margin-top:2px}
+.top .btn.sm,.ah .btn.sm{min-height:34px;padding:4px 14px;font-size:.84rem;white-space:nowrap}
+.nl button{padding:5px 11px}html{scroll-padding-top:56px}#cpage{padding-top:76px}body.in #congs{padding-top:76px}
+@media(max-width:700px){.bar{padding:5px 10px;flex-wrap:nowrap}.brand{font-size:1.15rem}body.in .brand{flex:1 1 0}body.in .bar .btn.sm{flex:none}body.in .home-content{padding-top:0}body.in #congs,body.in.cp #cpage{padding-top:76px}}
+.ah{padding:calc(6px + env(safe-area-inset-top,0px)) 12px 6px;gap:8px}.ah b{font-size:1.02rem;line-height:1.15}.ah small{font-size:.7rem;display:block;line-height:1.2}
+#adMain label{display:block;font-weight:700;font-size:.85rem;margin:12px 0 4px;color:var(--mut)}#adMain .sv{background:var(--noite)}
+.ph{margin:0 0 14px}.ph h2{margin:0!important}.ph p{margin:2px 0 0;color:var(--mut);font-size:.9rem}
+.cth{flex:none;width:72px;height:56px;border-radius:12px;object-fit:cover;border:1px solid var(--line);display:grid;place-items:center;background:radial-gradient(circle at 75% 15%,rgba(255,255,255,.25),transparent 45%),linear-gradient(140deg,var(--cc,#1a2750),#0a1022)}
+.cth.n::after{content:"";width:30px;height:30px;background:var(--li) center/contain no-repeat}
+.chip{font:700 .7rem 'Nunito Sans',sans-serif;padding:3px 10px;border-radius:999px;white-space:nowrap}.chip.ok{background:rgba(47,143,107,.25);color:#7fe0b6}.chip.off{background:rgba(255,255,255,.1);color:var(--mut)}
+.ag{display:grid;grid-template-columns:1fr;gap:10px}@media(min-width:700px){.ag{grid-template-columns:1fr 1fr}}
+.bx{padding:14px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));display:flex;flex-direction:column;gap:6px}
+.bx h3{margin:0;font-size:1.05rem}.bx p{margin:0;color:var(--mut);font-size:.88rem;flex:1;overflow-wrap:anywhere}.bx .btn{margin-top:6px;align-self:flex-start}.bx .strip{display:flex;gap:5px;flex:1}.bx .strip img{width:44px;height:36px;object-fit:cover;border-radius:6px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}.fit{border-radius:12px;overflow:hidden;border:1px solid var(--line)}.fit.cv{border-color:var(--ouro)}
+.fit img{display:block;width:100%;height:92px;object-fit:cover}.fit .fb{display:flex;gap:4px;padding:5px;background:rgba(0,0,0,.35)}.fit .fb button{flex:1;min-height:36px;border:0;border-radius:8px;background:var(--vidro)}
+.fadd{width:100%;padding:26px;border:1.5px dashed var(--ouro);border-radius:18px;background:rgba(217,172,79,.08);color:var(--ouro2);font-weight:700;font-size:1rem}
+.pwg{display:grid;gap:10px}@media(min-width:700px){.pwg{grid-template-columns:1fr 1fr}}
+.pw{padding:14px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.02))}
+.pw .pt{display:flex;gap:8px;justify-content:space-between;align-items:flex-start}.pw h3{font-size:1.1rem;margin:0!important;overflow-wrap:anywhere}.pw .am0{margin:2px 0 0}
+.pw small{display:block;color:var(--mut);font:700 .7rem 'Nunito Sans',sans-serif;letter-spacing:.08em;margin:12px 0 4px}
+.pw code{display:block;position:relative;overflow:hidden;font:700 1.15rem ui-monospace,monospace;color:var(--ouro2);letter-spacing:.1em;padding:9px 10px;border-radius:10px;background:rgba(0,0,0,.25);word-break:break-all}
+.pw code i{position:absolute;left:0;bottom:0;height:2px;background:var(--ouro);animation:pwb 8s linear forwards}@keyframes pwb{from{width:100%}to{width:0}}
+.pw .arow{margin:10px 0 0}.pw .arow .btn{flex:1}
+.galx{position:relative}.gallery{margin:10px 0;gap:10px;scrollbar-width:none}.gallery::-webkit-scrollbar{display:none}
+.gallery img{flex:0 0 min(86%,520px);width:min(86%,520px);height:auto;aspect-ratio:16/10}
+.gar{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:0;background:rgba(8,14,32,.55);color:#fff;font-size:1.4rem;line-height:1;padding:0 0 3px;opacity:.75;z-index:2;backdrop-filter:blur(6px)}.gar:hover{opacity:1}.gar.p{left:6px}.gar.n{right:6px}
+.lightbox .gar{top:50%;right:auto}.lightbox .gar.p{left:12px}.lightbox .gar.n{left:auto;right:12px}
+.btn[hidden]{display:none!important}.cong-pin.out svg{width:22px;height:27px;opacity:.85}
+.rota{display:flex;flex-direction:column;gap:10px;margin:0 0 26px;padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.04)}.rota[hidden]{display:none!important}
+.rota label{font-weight:700;font-size:.85rem;color:var(--mut)}.rota .ra{display:flex;gap:8px;flex-wrap:wrap}.rota .ra .btn{flex:1 1 180px}
+.rota .rr{display:flex;gap:8px;flex-wrap:wrap;color:var(--mut)}.rota .rs{padding:6px 12px;border-radius:999px;background:rgba(47,123,255,.16)}.rota .rs b{color:#fff;font-size:1.05rem;margin-right:4px}
 </style>
 </head>
 <body>
@@ -486,7 +520,7 @@ dialog .dd .ac{position:sticky;bottom:0;background:var(--azul);padding:12px 0 4p
  <button class="btn sm g cback" onclick="goHome('congs')">‹ Todas as congregações</button>
  <h1 id="cNome"></h1><p id="cLoc"></p><div id="cPessoas"></div>
  <div class="foto" id="cFoto">Foto da fachada em breve</div>
- <div class="ac" style="margin:0"><a class="btn" id="cRota" target="_blank" rel="noopener">Como chegar</a><button class="btn g" onclick="verObreiros()">Ver obreiros</button><button class="btn g adm-b" id="bInfo" style="display:none" onclick="infoForm()">Editar dados</button><button class="btn adm-b" id="bManage" style="display:none" onclick="$('#agenda').scrollIntoView({behavior:'smooth'});">Gerenciar cultos</button></div>
+ <div class="ac" style="margin:0"><a class="btn" id="cRota" target="_blank" rel="noopener">Como chegar</a><button class="btn g" onclick="verObreiros()">Ver obreiros</button><button class="btn g adm-b" id="bInfo" style="display:none" onclick="abrirAdm('geral')">Editar dados</button><button class="btn adm-b" id="bManage" style="display:none" onclick="$('#agenda').scrollIntoView({behavior:'smooth'});">Gerenciar cultos</button></div>
  <section class="s cp-sec" id="semana"><div class="sh"><div><h2 id="wkTitle">Esta semana</h2><p id="wkSub">Próximos 7 dias.</p></div></div><div class="wk" id="wk"></div></section>
 </div></div>
 
@@ -513,8 +547,8 @@ dialog .dd .ac{position:sticky;bottom:0;background:var(--azul);padding:12px 0 4p
 <section class="s" id="cMais">
  <div class="sh"><div><h2>Localização</h2><p>Toque no ícone para ver o nome da congregação.</p></div></div>
  <div class="mapbox"><div id="publicMap"><div class="vz">Localização no mapa ainda não definida.</div></div></div>
- <div class="dist" id="distBox" hidden><button class="btn g" id="bDist" type="button" onclick="minhaDistancia()">Ver minha distância</button><p id="distTxt" role="status" aria-live="polite"></p></div>
- <div id="cGalWrap" hidden><h2>Galeria de fotos</h2><div class="gallery" id="cGallery"></div></div>
+ <div class="rota" id="distBox" hidden><label for="rotaDest">Rota até a congregação</label><select id="rotaDest" onchange="rotaDestino(this.value)"></select><div class="ra"><button class="btn" id="bDist" type="button" onclick="minhaDistancia()">Traçar rota até aqui</button><button class="btn g" id="bLimpa" type="button" hidden onclick="limparRota()">Limpar rota</button></div><div class="rr" id="distTxt" role="status" aria-live="polite"></div></div>
+ <div id="cGalWrap" hidden><h2>Galeria de fotos</h2><div class="galx"><button class="gar p" type="button" aria-label="Foto anterior" onclick="galMove(-1)">‹</button><div class="gallery" id="cGallery"></div><button class="gar n" type="button" aria-label="Próxima foto" onclick="galMove(1)">›</button></div><button class="fadd" id="cGalAdd" type="button" hidden onclick="abrirAdm('fotos')">+ Adicionar fotos</button></div>
  <section class="s cp-sec fx" id="fixos"><div class="sh"><div><h2>Cultos fixos</h2><p>Programação de toda semana.</p></div><button class="btn sm" id="bFixo" style="display:none;margin-left:auto" onclick="ruleForm()">+ Culto fixo</button></div><div class="fxg" id="fxl"></div></section>
 </section>
 
@@ -525,8 +559,8 @@ dialog .dd .ac{position:sticky;bottom:0;background:var(--azul);padding:12px 0 4p
 
 <footer><span class="lg" style="display:inline-block;width:34px;height:34px" id="fl"></span><br>Assembleia de Deus · Caaporã – PB<br>Agenda conectada ao banco de dados da Assembleia de Deus.</footer>
 
-<dialog id="dlg"></dialog><dialog class="map-full" id="mapFull"><h2>Definir local no mapa</h2><p>Arraste o marcador ou toque no ponto exato. Também pode buscar um endereço.</p><div class="row"><input id="mapSearch" placeholder="Buscar endereço ou local"><button class="btn" onclick="searchMap()">Buscar</button></div><div id="pickMap"></div><input id="mapLink" placeholder="Ou cole um link do Google Maps"><div class="row"><button class="btn g" onclick="closeMapPicker()">Cancelar</button><button class="btn" onclick="confirmMapPicker()">Confirmar local</button></div></dialog><div class="lightbox" id="lightbox" onclick="closeLightbox()"><button class="btn">Fechar ✕</button><img id="lightImg" alt="Foto ampliada"></div>
-<div id="adm"><header class="ah"><div class="at"><b id="adWho"></b><small>Painel do administrador</small></div><button class="btn sm g" onclick="admShow(false);goHome()">Ver site</button><button class="btn sm" onclick="auth()">Sair</button></header><div class="ab"><main id="adMain"></main><nav id="adNav" aria-label="Seções do painel"></nav></div><button class="afab" id="adFab" hidden aria-label="Adicionar">+</button><div id="adSheet"></div></div>
+<dialog id="dlg"></dialog><dialog class="map-full" id="mapFull"><h2>Definir local no mapa</h2><p>Arraste o marcador ou toque no ponto exato. Também pode buscar um endereço.</p><div class="row"><input id="mapSearch" placeholder="Buscar endereço ou local"><button class="btn" onclick="searchMap()">Buscar</button></div><div id="pickMap"></div><input id="mapLink" placeholder="Ou cole um link do Google Maps"><div class="row"><button class="btn g" onclick="closeMapPicker()">Cancelar</button><button class="btn" onclick="confirmMapPicker()">Confirmar local</button></div></dialog><div class="lightbox" id="lightbox" onclick="closeLightbox()"><button class="btn">Fechar ✕</button><button class="gar p" type="button" aria-label="Anterior" onclick="event.stopPropagation();lbMove(-1)">‹</button><button class="gar n" type="button" aria-label="Próxima" onclick="event.stopPropagation();lbMove(1)">›</button><img id="lightImg" alt="Foto ampliada"></div>
+<div id="adm"><header class="ah"><span class="lg"></span><div class="at"><b>Assembleia de Deus</b><small id="adWho"></small></div><button class="btn sm g" onclick="admShow(false);goHome()">Ver site</button><button class="btn sm" onclick="auth()">Sair</button></header><div class="ab"><main id="adMain"></main><nav id="adNav" aria-label="Seções do painel"></nav></div><button class="afab" id="adFab" hidden aria-label="Adicionar">+</button><div id="adSheet"></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -587,6 +621,7 @@ async function carregar(){
   const sa=cf.find(x=>x.chave==='semana_a');if(sa&&sa.valor)REF=new Date(sa.valor+'T00:00');
   const ct=cf.find(x=>x.chave==='tipos_culto');if(ct&&ct.valor){try{const z=JSON.parse(ct.valor);if(Array.isArray(z)){savedTypes=z.map(x=>x.nome).filter(Boolean);typeColors={...TC};z.forEach(x=>{if(x.nome&&x.cor)typeColors[x.nome]=x.cor;});}}catch(_){}}
   const av=cf.find(x=>x.chave==='avisos');if(av&&av.valor){try{notices=JSON.parse(av.valor)||[];}catch(_){notices=[];}}
+  unificarSede();
   ultimaCarga=Date.now();
   if(st.admin&&st.own<0)await carregarSenhas();
  }catch(e){toast('Sem conexão com o banco. Mostrando dados de exemplo.');return false}
@@ -706,7 +741,7 @@ function semana(){
 
 /* congregações */
 function ordem(){
- const l=C.map((c,i)=>i).filter(i=>i>0);
+ const l=C.map((c,i)=>i).filter(i=>i>0&&!C[i].oculta);
  return l.sort((a,b)=>(Math.min(3,Math.max(1,Number(C[a].setor)||1))-Math.min(3,Math.max(1,Number(C[b].setor)||1)))||alpha(C[a].n,C[b].n));
 }
 const ccard=i=>{const c=C[i],photo=c.photos?.[c.cover||0];return '<button class="cc" style="--cc:'+c.cor+'" onclick="openC('+i+')"><div class="cf'+(photo?' photo':'')+'">'+(photo?'<img src="'+photo+'" alt="Fachada da congregação '+esc(c.n)+'" loading="lazy" decoding="async">':'<span class="ic" aria-hidden="true"></span>')+'</div><div class="cb"><h3>'+esc(c.n)+'</h3><p>Localidade: '+esc(c.b||'Caaporã')+'</p><span class="btn sm">'+(can(i)?'Gerenciar congregação':'Ver agenda')+'</span></div></button>'};
@@ -716,8 +751,8 @@ function congs(){
  $('#cg').innerHTML=h;
  if(matchMedia('(hover:hover)').matches)$$('.cc').forEach(c=>{c.onpointermove=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='rotateY('+x*7+'deg) rotateX('+(-y*7)+'deg) translateY(-3px)'};c.onpointerleave=()=>c.style.transform=''});
 }
-function titulos(){const c=C[st.fc],cp=st.fc!==0;$('#aTit').textContent=cp?'Agenda da congregação':'Calendário da sede';$('#aSub').textContent=cp?c.n:'Programação do Templo Sede.';$('#cNome').textContent=c.n;$('#cLoc').textContent='Localidade: '+(c.b||'Caaporã')+(c.e?' · '+c.e:'')+' · Caaporã – PB';$('#cpage').style.setProperty('--cc',c.cor);$('#semana').style.display='block';$('#wkTitle').textContent='Esta semana';$('#wkSub').textContent='Próximos 7 dias · toque para ver no calendário.';$('#cRota').href=rota(st.fc);const cover=(c.photos||[])[c.cover||0];$('#cFoto').style.backgroundImage=cover?'url("'+cover+'")':'';$('#cFoto').setAttribute('role','img');$('#cFoto').setAttribute('aria-label',cover?'Foto da fachada de '+c.n:'Foto da fachada em breve');$('#cFoto').innerHTML=cover?'':'<span class="placeholder">'+LOGO+'<br>Foto da fachada em breve</span>';$('#bInfo').style.display=can(st.fc)?'':'none';$('#bManage').style.display=can(st.fc)?'':'none';const ph=c.photos||[],cv=c.cover||0;$('#cGallery').innerHTML=ph.map((src,i)=>i===cv?'':'<img src="'+src+'" alt="Foto '+(i+1)+' de '+esc(c.n)+'" loading="lazy" decoding="async" onclick="openLightbox('+i+')">').join('');$('#cGalWrap').hidden=ph.length<2;$('#cPessoas').innerHTML=(c.dirigente||c.vice)?'<div class="pess">'+(c.dirigente?'<div><small>Dirigente</small><b>'+esc(c.dirigente)+'</b></div>':'')+(c.vice?'<div><small>Vice-dirigente</small><b>'+esc(c.vice)+'</b></div>':'')+'</div>':'';renderPublicMap();}
-function openC(i){st.fc=i;st.ft='all';history.pushState({page:'cong',i},'', '#congregacao-'+i);document.body.classList.add('cp');chips();titulos();hoje();semana();scrollTo({top:0});}
+function titulos(){const c=C[st.fc],cp=st.fc!==0;$('#aTit').textContent=cp?'Agenda da congregação':'Calendário da sede';$('#aSub').textContent=cp?c.n:'Programação do Templo Sede.';$('#cNome').textContent=c.n;$('#cLoc').textContent='Localidade: '+(c.b||'Caaporã')+(c.e?' · '+c.e:'')+' · Caaporã – PB';$('#cpage').style.setProperty('--cc',c.cor);$('#semana').style.display='block';$('#wkTitle').textContent='Esta semana';$('#wkSub').textContent='Próximos 7 dias · toque para ver no calendário.';$('#cRota').href=rota(st.fc);const cover=(c.photos||[])[c.cover||0];$('#cFoto').style.backgroundImage=cover?'url("'+cover+'")':'';$('#cFoto').setAttribute('role','img');$('#cFoto').setAttribute('aria-label',cover?'Foto da fachada de '+c.n:'Foto da fachada em breve');$('#cFoto').innerHTML=cover?'':'<span class="placeholder">'+LOGO+'<br>Foto da fachada em breve</span>';$('#bInfo').style.display=can(st.fc)?'':'none';$('#bManage').style.display=can(st.fc)?'':'none';galRender(c);$('#cPessoas').innerHTML=(c.dirigente||c.vice)?'<div class="pess">'+(c.dirigente?'<div><small>Dirigente</small><b>'+esc(c.dirigente)+'</b></div>':'')+(c.vice?'<div><small>Vice-dirigente</small><b>'+esc(c.vice)+'</b></div>':'')+'</div>':'';renderPublicMap();}
+function openC(i){i=C[i]&&C[i].oculta?0:i;st.fc=i;st.ft='all';history.pushState({page:'cong',i},'', '#congregacao-'+i);document.body.classList.add('cp');chips();titulos();hoje();semana();scrollTo({top:0});}
 function goHome(to){st.fc=0;st.ft='all';document.body.classList.remove('cp');chips();titulos();draw();if(location.hash.startsWith('#congregacao-'))history.pushState({page:'home'},'','#congregacoes');if(to)setTimeout(()=>$('#'+to).scrollIntoView({behavior:'smooth'}),30);else scrollTo({top:0});}
 function go(id){if(id==='inicio'){goHome();return;}if(document.body.classList.contains('cp')&&id!='agenda'){goHome(id)}else if($('#'+id))$('#'+id).scrollIntoView({behavior:'smooth'})}
 window.addEventListener('popstate',e=>{if(e.state?.page==='cong')openCNoHistory(e.state.i);else if(document.body.classList.contains('cp'))goHome();});
@@ -831,11 +866,11 @@ function infoForm(){const c=C[st.fc],photos=c.photos||[];$('#dlg').innerHTML='<f
  '<div class="ac"><button type="button" class="btn g" onclick="$(\'#dlg\').close()">Cancelar</button><button class="btn">Salvar dados</button></div></form>';
  $('#dlg').showModal();}
 function photoRow(src,i,cover){return '<div class="photo-item"><img src="'+src+'"><span>Foto '+(i+1)+(i===cover?' · Capa':'')+'</span><button type="button" class="btn sm g" onclick="setCover('+i+')">Capa</button><button type="button" class="btn sm g" onclick="movePhoto('+i+',-1)">↑</button><button type="button" class="btn sm g" onclick="movePhoto('+i+',1)">↓</button><button type="button" class="btn sm r" onclick="removePhoto('+i+')">Excluir</button></div>';}
-function refreshPhotoList(){const c=C[st.fc];$('#photoList').innerHTML=(c.photos||[]).map((x,i)=>photoRow(x,i,c.cover||0)).join('');}
-async function processPhotos(files){const c=C[st.fc];for(const file of [...files]){if(c.photos.length>=10){toast('Limite de 10 fotos atingido.');break;}try{const data=await new Promise((res,rej)=>{const im=new Image(),url=URL.createObjectURL(file);im.onload=()=>{let w=im.width,h=im.height,scale=Math.min(1,1400/Math.max(w,h));w=Math.round(w*scale);h=Math.round(h*scale);const cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(im,0,0,w,h);URL.revokeObjectURL(url);res(cv.toDataURL('image/webp',.8));};im.onerror=rej;im.src=url;});c.photos.push(data);if(c.photos.length===1)c.cover=0;}catch(_){toast('Não foi possível processar uma das fotos.');}}if(save()){refreshPhotoList();titulos();congs();toast('Fotos salvas.');}}
+function refreshPhotoList(){if(document.body.classList.contains('ap'))admRender()}
+async function processPhotos(files){const c=C[st.fc];c.photos=c.photos||[];for(const file of [...files]){if(c.photos.length>=10){toast('Limite de 10 fotos atingido.');break;}try{const data=await new Promise((res,rej)=>{const im=new Image(),url=URL.createObjectURL(file);im.onload=()=>{let w=im.width,h=im.height,scale=Math.min(1,1400/Math.max(w,h));w=Math.round(w*scale);h=Math.round(h*scale);const cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(im,0,0,w,h);URL.revokeObjectURL(url);res(cv.toDataURL('image/webp',.8));};im.onerror=rej;im.src=url;});c.photos.push(data);if(c.photos.length===1)c.cover=0;}catch(_){toast('Não foi possível processar uma das fotos.');}}if(save()){refreshPhotoList();titulos();congs();toast('Fotos salvas.');}}
 function setCover(i){C[st.fc].cover=i;if(save()){refreshPhotoList();titulos();congs();toast('Foto de capa atualizada.');}}
 function movePhoto(i,d){const c=C[st.fc],j=i+d;if(j<0||j>=c.photos.length)return;[c.photos[i],c.photos[j]]=[c.photos[j],c.photos[i]];if(c.cover===i)c.cover=j;else if(c.cover===j)c.cover=i;if(save()){refreshPhotoList();titulos();congs();}}
-function removePhoto(i){const c=C[st.fc];c.photos.splice(i,1);if(c.cover>=c.photos.length)c.cover=Math.max(0,c.photos.length-1);if(save()){refreshPhotoList();titulos();congs();toast('Foto removida.');}}
+function removePhoto(i){if(!confirm('Excluir esta foto?'))return;const c=C[st.fc];c.photos.splice(i,1);if(c.cover>=c.photos.length)c.cover=Math.max(0,c.photos.length-1);if(save()){refreshPhotoList();titulos();congs();toast('Foto removida.');}}
 function obRow(n,f){return '<div class="obr" style="display:flex;gap:6px;margin:6px 0"><input class="obn" maxlength="60" placeholder="Nome" value="'+esc(n||'')+'" style="flex:1;min-width:0"><select class="obf">'+FUNCS.map(x=>'<option'+(x===f?' selected':'')+'>'+x+'</option>').join('')+'</select><button type="button" class="btn sm r" onclick="this.parentNode.remove()">×</button></div>'}
 async function salvarInfo(e){
  e.preventDefault();if(!can(st.fc))return false;const c=C[st.fc];
@@ -881,56 +916,84 @@ function addBases(map,lat,lng){
  const sat=satLayers(SAT_PADRAO,19);
  satMaxNative(lat||-7.515,lng||-34.99).then(n=>ajustaSat(sat,n));
  const rel=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{maxNativeZoom:17,maxZoom:19,attribution:'© OpenTopoMap, © OpenStreetMap'});
- osm.addTo(map);L.control.layers({'Ruas':osm,'Satélite':sat,'Relevo':rel},null,{position:'topright',collapsed:false}).addTo(map);
+ sat.addTo(map);L.control.layers({'Satélite':sat,'Ruas':osm,'Relevo':rel},null,{position:'topright',collapsed:false}).addTo(map);
 }
 async function openMapPicker(){const c=C[st.fc];$('#mapFull').showModal();try{await loadLeaflet();setTimeout(()=>{if(!mapPicker){mapPicker=L.map('pickMap').setView([c.lat||-7.515,c.lng||-34.99],c.lat?16:13);addBases(mapPicker,c.lat,c.lng);mapPicker.on('click',e=>setPick(e.latlng.lat,e.latlng.lng));}mapPicker.invalidateSize();const lat=c.lat||-7.515,lng=c.lng||-34.99;setPick(lat,lng);mapPicker.setView([lat,lng],c.lat?16:13);},150);}catch(_){toast('Não foi possível carregar o mapa. Verifique a conexão.');}}
 function setPick(lat,lng){pickCoords=[lat,lng];if(!window.L||!mapPicker)return;if(!pickMarker)pickMarker=L.marker([lat,lng],{draggable:true}).addTo(mapPicker);else pickMarker.setLatLng([lat,lng]);pickMarker.off('dragend').on('dragend',e=>{const p=e.target.getLatLng();pickCoords=[p.lat,p.lng];});}
 async function searchMap(){const q=$('#mapSearch').value.trim();if(!q)return;try{const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&q='+encodeURIComponent(q+', Caaporã, PB'));const a=await r.json();if(a[0]){setPick(+a[0].lat,+a[0].lon);mapPicker.setView([+a[0].lat,+a[0].lon],17);}else toast('Endereço não encontrado.');}catch(_){toast('Busca indisponível.');}}
-function confirmMapPicker(){const link=$('#mapLink').value.trim();if(link){const xy=coordsFromLink(link);if(!xy){toast('Não consegui extrair coordenadas desse link.');return;}pickCoords=xy;}if(!pickCoords){toast('Escolha um ponto no mapa ou cole um link.');return;}const c=C[st.fc];c.lat=pickCoords[0];c.lng=pickCoords[1];if(!save())return;$('#mapFull').close();renderPublicMap();titulos();congs();toast('Localização salva');}
+function confirmMapPicker(){const link=$('#mapLink').value.trim();if(link){const xy=coordsFromLink(link);if(!xy){toast('Não consegui extrair coordenadas desse link.');return;}pickCoords=xy;}if(!pickCoords){toast('Escolha um ponto no mapa ou cole um link.');return;}const c=C[st.fc];c.lat=pickCoords[0];c.lng=pickCoords[1];if(!save())return;$('#mapFull').close();if($('#glat')){$('#glat').value=c.lat;$('#glng').value=c.lng}renderPublicMap();titulos();congs();toast('Localização salva');}
 function closeMapPicker(){$('#mapFull').close();}
 const PIN_SVG='<svg viewBox="0 0 42 52" aria-hidden="true"><path d="M21 1.5C10.5 1.5 2.5 9.8 2.5 20.3 2.5 34 21 50.5 21 50.5S39.5 34 39.5 20.3C39.5 9.8 31.5 1.5 21 1.5z" fill="#d9ac4f" stroke="#f4dc9c" stroke-width="2"/><path d="M18.6 9h4.8v6.6h6.6v4.8h-6.6V33h-4.8V20.4H12v-4.8h6.6z" fill="#2a1d03"/></svg>';
 function renderPublicMap(){const el=$('#publicMap');if(!el)return;const c=C[st.fc],bd=$('#bDist');
- $('#distTxt').textContent='';if(bd){bd.disabled=false;bd.textContent='Ver minha distância';}
+ $('#distTxt').textContent='';if(bd){bd.disabled=false;bd.textContent='Traçar rota até aqui';}
  if(!c.lat||!c.lng){if(el._map){el._map.remove();el._map=null;}$('#distBox').hidden=true;el.style.height='auto';el.innerHTML='<div class="vz">Localização no mapa ainda não definida.</div>';return;}
  $('#distBox').hidden=!('geolocation' in navigator);el.style.height='';
  const zp=satMaxNative(+c.lat,+c.lng);
- loadLeaflet().then(()=>{if(el._map){el._map.remove();el._map=null;}el.innerHTML='';el._me=null;
+ loadLeaflet().then(()=>{if(el._map){el._map.remove();el._map=null;}el.innerHTML='';el._me=null;el._rt=null;$('#bLimpa').hidden=true;
   const map=L.map(el,{zoomControl:true,scrollWheelZoom:false,maxZoom:19}).setView([c.lat,c.lng],17);el._map=map;
   const sat=satLayers(SAT_PADRAO,19).addTo(map);
   zp.then(n=>{if(el._map!==map)return;const mz=Math.min(n+2,20);ajustaSat(sat,n,mz);map.setMaxZoom(mz);});
   const autoDist=()=>{try{if(navigator.permissions&&navigator.permissions.query)navigator.permissions.query({name:'geolocation'}).then(r=>{if(r.state==='granted'&&el._map===map)minhaDistancia(true)}).catch(()=>{})}catch(_){}};
   map.whenReady(autoDist);
   const ic=L.divIcon({className:'cong-pin',html:PIN_SVG,iconSize:[28,35],iconAnchor:[14,34],popupAnchor:[0,-31]});
-  L.marker([c.lat,c.lng],{icon:ic,title:c.n,alt:'Congregação '+c.n,keyboard:true}).addTo(map).bindPopup('<b>'+esc(c.n)+'</b><br>Localidade: '+esc(c.b||'Caaporã'));
+  rotaPins(map,ic);
  }).catch(()=>{el.style.height='auto';el.innerHTML='<div class="vz">Mapa indisponível no momento.</div>';$('#distBox').hidden=true;});}
 function haversine(a,b,c,d){const R=6371e3,r=x=>x*Math.PI/180,h=Math.sin(r(c-a)/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(r(d-b)/2)**2;return 2*R*Math.asin(Math.min(1,Math.sqrt(h)))}
 function fmtDist(m){if(m<1000)return Math.max(10,Math.round(m/10)*10)+' m';const k=m/1000;return k.toLocaleString('pt-BR',{maximumFractionDigits:k<100?1:0})+' km'}
-function minhaDistancia(auto){
- const c=C[st.fc],el=$('#publicMap'),map=el&&el._map,out=$('#distTxt'),b=$('#bDist');
- if(!('geolocation' in navigator)){out.textContent='Seu aparelho não permite localização.';return}
- if(!map||!c.lat||!c.lng){if(!auto)out.textContent='O mapa ainda está carregando. Tente de novo.';return}
- b.disabled=true;b.textContent='Localizando…';out.textContent='';
- navigator.geolocation.getCurrentPosition(p=>{
-  b.disabled=false;b.textContent='Atualizar distância';
-  if(el._map!==map)return;
-  const me=[p.coords.latitude,p.coords.longitude],dst=[+c.lat,+c.lng];
-  if(el._me)el._me.remove();
-  el._me=L.layerGroup([L.circle(me,{radius:Math.min(p.coords.accuracy||0,300),color:'#4a8cff',weight:1,fillOpacity:.12,interactive:false}),L.circleMarker(me,{radius:8,color:'#fff',weight:3,fillColor:'#2f7bff',fillOpacity:1}).bindPopup('Você está aqui')]).addTo(map);
-  map.fitBounds(L.latLngBounds([me,dst]),{padding:[50,50],maxZoom:17});
-  out.textContent='Você está a '+fmtDist(haversine(me[0],me[1],dst[0],dst[1]))+' da congregação (em linha reta).';
- },e=>{
-  b.disabled=false;b.textContent='Ver minha distância';
-  if(auto&&e.code===1){out.textContent='';return}
-  out.textContent=e.code===1?'Permissão de localização negada. Libere a localização deste site nas configurações do navegador.':e.code===3?'Demorou demais para achar sua localização. Tente de novo.':'Não foi possível obter sua localização. Verifique se o GPS está ligado.';
- },{enableHighAccuracy:true,timeout:15000,maximumAge:60000});
+const RT={dest:null};
+function rotaPins(map,ic){
+ const out=L.divIcon({className:'cong-pin out',html:PIN_SVG,iconSize:[22,27],iconAnchor:[11,26],popupAnchor:[0,-24]});
+ C.forEach((x,i)=>{if(!x||x.oculta||!x.lat||!x.lng)return;const cur=i===st.fc;
+  L.marker([x.lat,x.lng],{icon:cur?ic:out,title:x.n,alt:'Congregação '+x.n,keyboard:true,zIndexOffset:cur?500:0}).addTo(map).bindPopup('<b>'+esc(x.n)+'</b><br>Localidade: '+esc(x.b||'Caaporã')+(cur?'':'<br><a href="#" onclick="rotaPara('+i+');return false">Traçar rota até aqui</a>'))});
+ $('#rotaDest').innerHTML=ordemCadastros().filter(i=>C[i].lat&&C[i].lng).map(i=>'<option value="'+i+'"'+(i===st.fc?' selected':'')+'>'+esc(C[i].n)+'</option>').join('');RT.dest=st.fc;
 }
-function openLightbox(i){const c=C[st.fc];if(!c.photos?.[i])return;$('#lightImg').src=c.photos[i];$('#lightbox').classList.add('open');}function closeLightbox(){$('#lightbox').classList.remove('open');}
+function rotaPara(i){$('#rotaDest').value=i;RT.dest=i;minhaDistancia()}
+function rotaDestino(v){RT.dest=+v;limparRota();const x=C[+v],m=$('#publicMap')._map;if(m&&x)m.flyTo([x.lat,x.lng],16)}
+function limparRota(){const el=$('#publicMap');if(el&&el._rt){el._rt.remove();el._rt=null}$('#distTxt').innerHTML='';$('#bLimpa').hidden=true}
+const fmtMin=s=>{const m=Math.max(1,Math.round(s/60));return m<60?m+' min':Math.floor(m/60)+' h '+pad(m%60)+' min'};
+function minhaDistancia(auto){
+ const el=$('#publicMap'),map=el&&el._map,out=$('#distTxt'),b=$('#bDist'),dst=C[RT.dest==null?st.fc:RT.dest];
+ if(!('geolocation' in navigator)){out.textContent='Seu aparelho não permite localização.';return}
+ if(!map||!dst||!dst.lat||!dst.lng){if(!auto)out.textContent='O mapa ainda está carregando. Tente de novo.';return}
+ b.disabled=true;b.textContent='Localizando…';out.textContent='';
+ navigator.geolocation.getCurrentPosition(async p=>{
+  if(el._map!==map)return;
+  const me=[p.coords.latitude,p.coords.longitude],to=[+dst.lat,+dst.lng];
+  limparRota();if(el._me)el._me.remove();
+  el._me=L.layerGroup([L.circle(me,{radius:Math.min(p.coords.accuracy||0,300),color:'#4a8cff',weight:1,fillOpacity:.12,interactive:false}),L.circleMarker(me,{radius:8,color:'#fff',weight:3,fillColor:'#2f7bff',fillOpacity:1}).bindPopup('Você está aqui')]).addTo(map);
+  b.textContent='Calculando rota…';let r=null;
+  try{const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),12000),j=await (await fetch('https://router.project-osrm.org/route/v1/driving/'+me[1]+','+me[0]+';'+to[1]+','+to[0]+'?overview=full&geometries=geojson',{signal:ctl.signal})).json();clearTimeout(t);r=j.routes&&j.routes[0]}catch(_){}
+  if(el._map!==map)return;
+  b.disabled=false;b.textContent='Atualizar rota';let pts;
+  if(r){pts=r.geometry.coordinates.map(c=>[c[1],c[0]]);
+   el._rt=L.layerGroup([L.polyline(pts,{color:'#fff',weight:9,opacity:.9}),L.polyline(pts,{color:'#2f7bff',weight:5})]).addTo(map);
+   out.innerHTML='<span class="rs"><b>'+fmtDist(r.distance)+'</b>pelas ruas</span><span class="rs"><b>'+fmtMin(r.duration)+'</b>de carro</span>'}
+  else{pts=[me,to];el._rt=L.polyline(pts,{color:'#2f7bff',weight:4,dashArray:'6 8'}).addTo(map);
+   out.innerHTML='<span class="rs"><b>'+fmtDist(haversine(me[0],me[1],to[0],to[1]))+'</b>em linha reta</span><span class="rs">Não foi possível traçar pelas ruas agora.</span>'}
+  $('#bLimpa').hidden=false;map.fitBounds(L.latLngBounds(pts),{padding:[40,40],maxZoom:17});
+ },e=>{b.disabled=false;b.textContent='Traçar rota até aqui';if(auto&&e.code===1){out.textContent='';return}
+  out.textContent=e.code===1?'Permissão de localização negada. Libere a localização deste site nas configurações do navegador.':e.code===3?'Demorou demais para achar sua localização. Tente de novo.':'Não foi possível obter sua localização. Verifique se o GPS está ligado.'},{enableHighAccuracy:true,timeout:15000,maximumAge:60000});
+}
+function galRender(c){const ph=c.photos||[],cv=c.cover||0,add=can(st.fc)&&!ph.length;
+ $('#cGallery').innerHTML=ph.map((s,i)=>i===cv?'':'<img src="'+s+'" alt="Foto '+(i+1)+' de '+esc(c.n)+'" loading="lazy" decoding="async" onclick="openLightbox('+i+')">').join('');
+ $('#cGalWrap').hidden=!(ph.length>1||add);$('#cGalAdd').hidden=!add;$('.galx').hidden=ph.length<2}
+function galMove(d){const g=$('#cGallery');g.scrollBy({left:d*g.clientWidth*.8,behavior:'smooth'})}
+let LB=0;function lbMove(d){const p=C[st.fc].photos||[];if(!p.length)return;LB=(LB+d+p.length)%p.length;$('#lightImg').src=p[LB]}
+addEventListener('keydown',e=>{if(!$('#lightbox').classList.contains('open'))return;if(e.key==='ArrowRight')lbMove(1);else if(e.key==='ArrowLeft')lbMove(-1);else if(e.key==='Escape')closeLightbox()});
+/* Central = Templo Sede: unifica só na exibição (nada é alterado no banco) */
+function unificarSede(){C.forEach(c=>{if(c)delete c.oculta});const d=C.findIndex((c,k)=>k>0&&c&&norm(c.n)==='central'),s=C[0];if(d<1||!s)return;const x=C[d];
+ if(!(s.photos||[]).length&&(x.photos||[]).length){s.photos=x.photos.slice();s.cover=x.cover||0}
+ ['e','dirigente','vice'].forEach(k=>{if(!s[k]&&x[k])s[k]=x[k]});
+ if((s.lat==null||s.lat==='')&&x.lat!=null&&x.lat!==''){s.lat=x.lat;s.lng=x.lng}
+ if(!(s.obreiros||[]).length&&(x.obreiros||[]).length)s.obreiros=x.obreiros.slice();
+ x.oculta=true}
+function openLightbox(i){const c=C[st.fc];if(!c.photos?.[i])return;LB=i;$('#lightImg').src=c.photos[i];$('#lightbox').classList.add('open');}function closeLightbox(){$('#lightbox').classList.remove('open');}
 /* Conteúdo administrável da página inicial */
 function fmtDate(d){return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}).replace('.','');}
 function renderHomeContent(){
  const nl=$('#noticeList'),ul=$('#upcomingList');
  if(nl){const now=key(new Date());const active=(notices||[]).filter(n=>n.ativo!==false&&(!n.data||n.data<=now)&&(!n.ate||n.ate>=now));nl.innerHTML=active.length?active.map(noticeHtml).join(''):'<div class="vz">Nenhum aviso publicado no momento.</div>';}
- if(ul){const base=new Date(),hm=pad(base.getHours())+':'+pad(base.getMinutes());base.setHours(0,0,0,0);const list=[];for(let k=0;k<35&&list.length<8;k++){const d=new Date(base);d.setDate(base.getDate()+k);C.forEach((c,i)=>raw(d,i).filter(e=>!e.x&&(k>0||(e.f||'21:00')>=hm)).forEach(e=>list.push({...e,date:new Date(d),cong:i})));}list.sort((a,b)=>a.date-b.date||a.h.localeCompare(b.h));const chosen=list.slice(0,6);ul.innerHTML=chosen.length?chosen.map(e=>'<button class="upcoming-card" role="listitem" onclick="openUpcoming('+e.cong+',\''+key(e.date)+'\')" style="--event-color:'+ecor(e)+'"><span class="up-tag">'+esc(e.tipo)+'</span><h3>'+esc(e.t)+'</h3><p>'+esc(C[e.cong].n)+'</p><span class="up-meta">'+DIA[e.date.getDay()]+' · '+fmtDate(e.date)+' · '+fh(e.h)+'</span></button>').join(''):'<div class="vz">Não há cultos futuros cadastrados.</div>';upUpdate();}
+ if(ul){const base=new Date(),hm=pad(base.getHours())+':'+pad(base.getMinutes());base.setHours(0,0,0,0);const list=[];for(let k=0;k<35&&list.length<8;k++){const d=new Date(base);d.setDate(base.getDate()+k);C.forEach((c,i)=>c.oculta||raw(d,i).filter(e=>!e.x&&(k>0||(e.f||'21:00')>=hm)).forEach(e=>list.push({...e,date:new Date(d),cong:i})));}list.sort((a,b)=>a.date-b.date||a.h.localeCompare(b.h));const chosen=list.slice(0,6);ul.innerHTML=chosen.length?chosen.map(e=>'<button class="upcoming-card" role="listitem" onclick="openUpcoming('+e.cong+',\''+key(e.date)+'\')" style="--event-color:'+ecor(e)+'"><span class="up-tag">'+esc(e.tipo)+'</span><h3>'+esc(e.t)+'</h3><p>'+esc(C[e.cong].n)+'</p><span class="up-meta">'+DIA[e.date.getDay()]+' · '+fmtDate(e.date)+' · '+fh(e.h)+'</span></button>').join(''):'<div class="vz">Não há cultos futuros cadastrados.</div>';upUpdate();}
 }
 function upScroll(dir){const g=$('#upcomingList');if(g)g.scrollBy({left:dir*g.clientWidth*.8,behavior:'smooth'})}
 function upUpdate(){
@@ -949,14 +1012,14 @@ async function saveConfig(keyName,value){await rpc('salvar_config',{p_senha:SENH
 const ADM={tab:'cong',q:'',fc:'all',cg:null,tipos:null,pk:-1,sh:{},hideTimers:{},L:[],av:null,ai:-1};
 const PAL=['#3f62c9','#2f8f6b','#7a5ac8','#a8335a','#c76a2b','#d1478f','#d9ac4f','#2a8fa8','#6d7aa5','#c0392b','#27ae60','#8e44ad','#16a085','#e67e22','#5a6788','#e84393'];
 function admShow(on){document.body.classList.toggle('ap',!!on);if(on)admRender();else admSheetClose()}
-function admTab(t){ADM.tab=t;ADM.cg=null;ADM.q='';ADM.sh={};ADM.pk=-1;ADM.tipos=null;admRender()}
+function admTab(t){ADM.tab=t;ADM.cg=null;ADM.sub=null;ADM.cs='ev';ADM.q='';ADM.sh={};ADM.pk=-1;ADM.tipos=null;admRender()}
 function admRender(){
  if(!document.body.classList.contains('ap')||!st.admin)return;
  const own=st.own>=0,T=[['cong','Congregações','⛪'],['cult','Cultos','📅']].concat(own?[]:[['avis','Avisos','📣'],['senh','Senhas','🔑']]);
  if(!T.some(t=>t[0]===ADM.tab))ADM.tab='cong';
  $('#adNav').innerHTML=T.map(t=>'<button class="'+(t[0]===ADM.tab?'on':'')+'" onclick="admTab(\''+t[0]+'\')"><span aria-hidden="true">'+t[2]+'</span>'+t[1]+'</button>').join('');
  $('#adWho').textContent=own?C[st.own].n:'Administrador geral';
- const fab=$('#adFab');fab.hidden=!(ADM.tab==='cult'||ADM.tab==='avis');fab.onclick=ADM.tab==='avis'?()=>admAviso(-1):admNovoCulto;
+ const fab=$('#adFab');fab.hidden=!((ADM.tab==='cult'&&ADM.cs!=='fix')||ADM.tab==='avis');fab.onclick=ADM.tab==='avis'?()=>admAviso(-1):admNovoCulto;
  const m=$('#adMain'),y=m.scrollTop;
  m.innerHTML=ADM.tab==='cong'?admC():ADM.tab==='cult'?admCult():ADM.tab==='avis'?admAvis():admSenh();m.scrollTop=y;
 }
@@ -964,43 +1027,83 @@ function admList(){$('#adList').innerHTML=ADM.tab==='cong'?admCL():admCuL()}
 function admSheet(h){const e=$('#adSheet');e.innerHTML='<div class="scr" onclick="admSheetClose()"></div><div class="shx" role="dialog" aria-modal="true">'+h+'</div>';e.classList.add('on')}
 function admSheetClose(){const e=$('#adSheet');e.classList.remove('on');e.innerHTML=''}
 /* Congregações */
+const adSub=s=>{ADM.sub=s;admRender();$('#adMain').scrollTop=0};
+function abrirAdm(s){ADM.tab='cong';ADM.cg=st.fc;ADM.sub=s||null;admShow(true)}
+async function busy(b,fn){const t=b.textContent;b.disabled=true;b.textContent='Salvando…';try{await fn()}finally{b.disabled=false;b.textContent=t}}
+const after=m=>{titulos();congs();draw();renderHomeContent();toast(m);adSub(null)};
+const nPh=c=>(c.photos||[]).length;
+const cthumb=c=>{const p=(c.photos||[])[c.cover||0];return p?'<img class="cth" src="'+p+'" alt="" loading="lazy">':'<span class="cth n" style="--cc:'+c.cor+'"></span>'};
 function admC(){
  if(st.own>=0&&ADM.cg==null)ADM.cg=st.own;
  if(ADM.cg!=null)return admEditC(ADM.cg);
- return '<h2>Congregações</h2><input id="aq" type="search" placeholder="Buscar congregação…" aria-label="Buscar congregação" value="'+esc(ADM.q)+'" oninput="ADM.q=this.value;admList()"><div id="adList">'+admCL()+'</div>';
+ return '<div class="ph"><h2>Congregações</h2><p>Dados, dirigentes e fotos.</p></div><input id="aq" type="search" placeholder="Buscar congregação…" aria-label="Buscar congregação" value="'+esc(ADM.q)+'" oninput="ADM.q=this.value;admList()"><div id="adList">'+admCL()+'</div>';
 }
 function admCL(){const q=norm(ADM.q).trim(),l=ordemCadastros().filter(i=>!q||norm(C[i].n+' '+(C[i].b||'')).includes(q));
- return l.length?l.map(i=>'<button class="ai" onclick="ADM.cg='+i+';st.fc='+i+';admRender()"><span class="ad" style="background:'+(C[i].cor||'#d9ac4f')+'"></span><span class="at"><b>'+esc(C[i].n)+'</b><small>Localidade: '+esc(C[i].b||'Caaporã')+'</small></span><span class="ar">›</span></button>').join(''):'<p class="am0">Nenhuma congregação encontrada.</p>'}
+ return l.length?l.map(i=>{const c=C[i];return '<button class="ai" onclick="ADM.cg='+i+';ADM.sub=null;st.fc='+i+';admRender()">'+cthumb(c)+'<span class="at"><b>'+esc(c.n)+'</b><small>Localidade: '+esc(c.b||'Caaporã')+' · '+nPh(c)+' foto'+(nPh(c)==1?'':'s')+'</small></span><span class="ar">›</span></button>'}).join(''):'<p class="am0">Nenhuma congregação encontrada.</p>'}
 function admEditC(i){
- const c=C[i];st.fc=i;
- const rl=rules.filter(r=>r.c===i).sort((a,b)=>a.w-b.w||String(a.h).localeCompare(String(b.h)));
- return (st.own>=0?'':'<button class="btn sm g" onclick="ADM.cg=null;admRender()">‹ Congregações</button>')+'<h2 style="margin-top:12px">'+esc(c.n)+'</h2>'
- +'<details open><summary>Dados gerais</summary><div class="ak"><p><b>Nome</b>'+esc(c.n)+'</p><p><b>Localidade</b>'+esc(c.b||'Caaporã')+'</p><p><b>Endereço</b>'+esc(c.e||'não informado')+'</p><p><b>Coordenadas</b>'+(c.lat!=null&&c.lng!=null?(+c.lat).toFixed(5)+', '+(+c.lng).toFixed(5):'não definidas')+'</p><button class="btn sm" onclick="st.fc='+i+';infoForm()">Editar dados gerais</button></div></details>'
- +'<details><summary>Dirigentes</summary><div class="ak"><p><b>Dirigente</b>'+esc(c.dirigente||'não informado')+'</p><p><b>Vice-dirigente</b>'+esc(c.vice||'não informado')+'</p><button class="btn sm" onclick="st.fc='+i+';infoForm()">Editar dirigentes</button></div></details>'
- +'<details><summary>Fotos ('+(c.photos||[]).length+')</summary><div class="ak">'+((c.photos||[]).length?'<div class="ph2">'+c.photos.slice(0,8).map(x=>'<img src="'+x+'" alt="Foto de '+esc(c.n)+'" loading="lazy">').join('')+'</div>':'<p>Nenhuma foto cadastrada.</p>')+'<button class="btn sm" onclick="st.fc='+i+';infoForm()">Gerenciar fotos</button></div></details>'
- +'<details><summary>Cultos fixos ('+rl.length+')</summary><div class="ak">'+(rl.map(r=>{const w=r.q=='date'&&r.date?new Date(r.date+'T00:00').getDay():+r.w;return '<div class="ai" style="min-height:0"><span class="at"><b>'+esc(r.t)+'</b><small>'+DIA[w]+' · '+fh(r.h||'')+(r.q&&r.q!='all'?' · '+esc(freqLabel(r.q,r.w)):'')+'</small></span><button class="btn sm g" onclick="st.fc='+i+';ruleForm('+r.id+')">Editar</button><button class="btn sm r" onclick="st.fc='+i+';delRule('+r.id+').then(admRender)">Excluir</button></div>'}).join('')||'<p>Nenhum culto fixo.</p>')+'<button class="btn sm" onclick="st.fc='+i+';ruleForm()">+ Culto fixo</button></div></details>'
- +'<button class="btn g" style="margin-top:8px" onclick="admShow(false);openC('+i+')">Ver página pública</button>';
+ const c=C[i];st.fc=i;const s=ADM.sub,rl=rules.filter(r=>r.c===i);
+ const back=s?'<button class="btn sm g" onclick="adSub(null)">‹ '+esc(c.n)+'</button>':(st.own>=0?'':'<button class="btn sm g" onclick="ADM.cg=null;admRender()">‹ Congregações</button>');
+ const top=back+'<div class="ai" style="margin:10px 0 14px;cursor:default">'+cthumb(c)+'<span class="at"><b>'+esc(c.n)+'</b><small>Localidade: '+esc(c.b||'Caaporã')+'</small></span></div>';
+ if(s==='geral')return top+fGeral(c);
+ if(s==='dir')return top+fDir(c);
+ if(s==='fotos')return top+fFotos(c);
+ if(s==='fixos')return top+fFixos(rl);
+ if(s==='senha')return top+fSenhaProp(c);
+ const ob=(c.obreiros||[]).length,ph=c.photos||[];let aviso='';
+ if(i===0&&st.own<0){const d=C.findIndex(x=>x&&x.oculta);if(d>0){const nr=rules.filter(r=>r.c===d).length,ne=custom.filter(e=>e.c===d).length;aviso='<p class="am0">“Central” aparece unificada ao Templo Sede.'+(nr+ne?' Há '+nr+' culto(s) fixo(s) e '+ne+' evento(s) no registro antigo que não aparecem no site. Revise antes de qualquer limpeza no banco.':'')+'</p>'}}
+ return top+aviso+'<div class="ag">'
+ +'<div class="bx"><h3>Dados gerais</h3><p>'+esc(c.e||'Endereço não informado')+'<br>'+(c.lat?'Coordenadas definidas':'Sem coordenadas')+'</p><button class="btn sm" onclick="adSub(\'geral\')">Editar dados gerais</button></div>'
+ +'<div class="bx"><h3>Dirigente</h3><p>'+esc(c.dirigente||'Dirigente não informado')+' · '+ob+' obreiro'+(ob==1?'':'s')+'</p><button class="btn sm" onclick="adSub(\'dir\')">Editar dirigente e obreiros</button></div>'
+ +'<div class="bx"><h3>Gerenciar fotos</h3>'+(ph.length?'<div class="strip">'+ph.slice(0,5).map(x=>'<img src="'+x+'" alt="">').join('')+'</div>':'<p>Nenhuma foto ainda.</p>')+'<button class="btn sm" onclick="adSub(\'fotos\')">'+(ph.length?'Gerenciar fotos':'+ Adicionar fotos')+'</button></div>'
+ +'<div class="bx"><h3>Cultos fixos</h3><p>'+rl.length+' cadastrado'+(rl.length==1?'':'s')+'</p><button class="btn sm" onclick="adSub(\'fixos\')">Gerenciar cultos fixos</button></div></div>'
+ +(st.own>=0?'<div class="arow"><button class="btn sm g" onclick="adSub(\'senha\')">Alterar minha senha</button></div>':'')
+ +'<button class="btn g" style="margin-top:10px" onclick="admShow(false);openC('+i+')">Ver página pública</button>';
 }
+function fGeral(c){return '<div class="ph"><h2>Dados gerais</h2><p>Nome, localidade, endereço e coordenadas.</p></div>'
+ +'<label for="gn">Nome</label><input id="gn" maxlength="50" value="'+esc(c.n)+'"><label for="gb">Localidade / bairro</label><input id="gb" maxlength="50" value="'+esc(c.b||'Caaporã')+'"><label for="ge">Endereço</label><input id="ge" maxlength="160" value="'+esc(c.e||'')+'">'
+ +(st.own<0&&st.fc>0?'<label for="gs">Setor</label><select id="gs">'+[1,2,3].map(n=>'<option value="'+n+'"'+((c.setor||1)==n?' selected':'')+'>Setor '+n+'</option>').join('')+'</select>':'')
+ +'<div class="row"><div><label for="glat">Latitude</label><input id="glat" inputmode="decimal" value="'+(c.lat!=null?c.lat:'')+'"></div><div><label for="glng">Longitude</label><input id="glng" inputmode="decimal" value="'+(c.lng!=null?c.lng:'')+'"></div></div>'
+ +'<button type="button" class="btn g" style="width:100%;margin-top:10px" onclick="openMapPicker()">Definir local no mapa</button><div class="sv"><button class="btn" style="flex:1" onclick="salvarGeral(this)">Salvar dados gerais</button></div>'}
+async function salvarGeral(b){const c=C[st.fc],lat=$('#glat').value.trim().replace(',','.'),lng=$('#glng').value.trim().replace(',','.');
+ if((lat!==''&&!(Math.abs(+lat)<=90))||(lng!==''&&!(Math.abs(+lng)<=180))||((lat==='')!==(lng===''))){toast('Confira latitude e longitude.');return}
+ const o={n:c.n,b:c.b,e:c.e,lat:c.lat,lng:c.lng,setor:c.setor},ms=$('#gs');
+ c.n=$('#gn').value.trim()||c.n;c.b=$('#gb').value.trim()||'Caaporã';c.e=$('#ge').value.trim();c.lat=lat===''?null:+lat;c.lng=lng===''?null:+lng;
+ await busy(b,async()=>{try{await salvarCong(st.fc,ms?{setor:ms.value}:{});if(ms)c.setor=+ms.value}catch(x){Object.assign(c,o);return erro(x)}after('Dados gerais salvos')})}
+function fDir(c){return '<div class="ph"><h2>Dirigente</h2><p>Dirigente, vice-dirigente e obreiros.</p></div><label for="gd">Dirigente</label><input id="gd" maxlength="60" value="'+esc(c.dirigente||'')+'"><label for="gv">Vice-dirigente</label><input id="gv" maxlength="60" value="'+esc(c.vice||'')+'"><label>Obreiros</label><div id="obList">'+(c.obreiros||[]).map(o=>obRow(o.nome,o.funcao)).join('')+'</div><button type="button" class="btn sm g" onclick="$(\'#obList\').insertAdjacentHTML(\'beforeend\',obRow())">+ Adicionar obreiro</button><div class="sv"><button class="btn" style="flex:1" onclick="salvarDir(this)">Salvar dirigente e obreiros</button></div>'}
+async function salvarDir(b){const c=C[st.fc],o={d:c.dirigente,v:c.vice};c.dirigente=$('#gd').value.trim();c.vice=$('#gv').value.trim();
+ const ob=$$('#obList .obr').map(r=>({nome:r.querySelector('.obn').value.trim(),funcao:r.querySelector('.obf').value})).filter(x=>x.nome);
+ await busy(b,async()=>{try{await salvarCong(st.fc);await rpc('salvar_obreiros',{p_cong:st.fc,p_senha:SENHA,p_lista:ob});c.obreiros=ob}catch(x){c.dirigente=o.d;c.vice=o.v;return erro(x)}after('Dirigente e obreiros salvos')})}
+function fFotos(c){const ph=c.photos||[],cv=c.cover||0;
+ return '<div class="ph"><h2>Gerenciar fotos</h2><p>Foto principal e álbum (até 10 fotos).</p></div><input id="pf" type="file" accept="image/*" multiple hidden onchange="processPhotos(this.files)">'
+ +(ph.length?'<label>Foto principal</label><img class="apv" style="max-height:220px" src="'+ph[cv]+'" alt="Foto principal"><label>Álbum ('+ph.length+')</label><div class="fgrid">'+ph.map((x,i)=>'<div class="fit'+(i===cv?' cv':'')+'"><img src="'+x+'" alt="Foto '+(i+1)+'" loading="lazy"><div class="fb"><button onclick="setCover('+i+')" aria-label="Definir como principal">'+(i===cv?'★':'☆')+'</button><button onclick="movePhoto('+i+',-1)" aria-label="Mover para trás">‹</button><button onclick="movePhoto('+i+',1)" aria-label="Mover para frente">›</button><button onclick="removePhoto('+i+')" aria-label="Excluir foto">✕</button></div></div>').join('')+'</div>'+(ph.length<10?'<button class="btn g" style="width:100%;margin-top:12px" onclick="$(\'#pf\').click()">+ Adicionar fotos</button>':'')
+  :'<button class="fadd" onclick="$(\'#pf\').click()">+ Adicionar fotos<br><small>A primeira será a foto principal</small></button>')}
+function fFixos(rl){const w=r=>r.q=='date'&&r.date?new Date(r.date+'T00:00').getDay():+r.w;
+ rl=rl.slice().sort((a,b)=>w(a)-w(b)||String(a.h).localeCompare(String(b.h)));
+ return '<div class="ph"><h2>Cultos fixos</h2><p>Programação que se repete. Eventos avulsos ficam na aba Cultos.</p></div><button class="btn sm" onclick="ruleForm()">+ Novo culto fixo</button><div style="margin-top:10px">'+(rl.map(r=>'<div class="ai" style="min-height:0;cursor:default"><span class="at"><b>'+esc(r.t)+'</b><small>'+DIA[w(r)]+' · '+fh(r.h||'')+(r.q&&r.q!='all'?' · '+esc(freqLabel(r.q,r.w)):'')+'</small></span><button class="btn sm g" onclick="ruleForm('+r.id+')">Editar</button><button class="btn sm r" onclick="delRule('+r.id+').then(admRender)">Excluir</button></div>').join('')||'<p class="am0">Nenhum culto fixo cadastrado.</p>')+'</div>'}
+function fSenhaProp(c){return '<div class="ph"><h2>Minha senha</h2><p>Senha de acesso desta congregação.</p></div><label for="gp">Nova senha</label><input id="gp" maxlength="40" value="'+esc(c.senha||'')+'"><div class="sv"><button class="btn" style="flex:1" onclick="salvarSenhaProp(this)">Salvar senha</button></div>'}
+async function salvarSenhaProp(b){const c=C[st.fc],n=$('#gp').value.trim();if(!n){toast('A senha não pode ficar vazia.');return}if(n===c.senha){adSub(null);return}
+ if(!confirm('Trocar a senha? A senha anterior deixará de funcionar.'))return;
+ await busy(b,async()=>{try{await rpc('definir_senha',{p_senha:SENHA,p_alvo:st.fc,p_nova:n})}catch(x){return erro(x)}c.senha=n;SENHA=n;toast('Senha alterada');adSub(null)})}
 /* Cultos */
 function admNovoCulto(){st.fc=ADM.fc!=='all'&&st.own<0?+ADM.fc:(st.own>=0?st.own:0);st.sel=new Date();eventoForm()}
-function admCult(){const own=st.own>=0;
- return '<h2>Cultos</h2><div class="afl"><input id="aq" type="search" placeholder="Buscar culto…" aria-label="Buscar culto" value="'+esc(ADM.q)+'" oninput="ADM.q=this.value;admList()">'+(own?'':'<select aria-label="Filtrar por congregação" onchange="ADM.fc=this.value;admList()"><option value="all">Todas as congregações</option>'+ordemCadastros().map(i=>'<option value="'+i+'"'+(String(ADM.fc)===String(i)?' selected':'')+'>'+esc(C[i].n)+'</option>').join('')+'</select>')+'</div><div id="adList">'+admCuL()+'</div>';
+function admCult(){const own=st.own>=0,fx=ADM.cs==='fix';
+ return '<div class="ph"><h2>Cultos</h2><p>Eventos e programação.</p></div><div class="seg" style="margin-bottom:12px"><button class="'+(fx?'':'on')+'" onclick="ADM.cs=\'ev\';admRender()">Cadastrados</button><button class="'+(fx?'on':'')+'" onclick="ADM.cs=\'fix\';admRender()">Fixos</button></div>'
+ +(fx?admFix():'<button class="btn" style="width:100%;margin-bottom:10px" onclick="admNovoCulto()">+ Novo culto</button><p class="am0">Cultos e eventos que você cadastrou, com ou sem repetição. A programação fixa de cada congregação fica na aba “Fixos”.</p><div class="afl"><input id="aq" type="search" placeholder="Buscar culto…" aria-label="Buscar culto" value="'+esc(ADM.q)+'" oninput="ADM.q=this.value;admList()">'+(own?'':'<select aria-label="Filtrar por congregação" onchange="ADM.fc=this.value;admList()"><option value="all">Todas as congregações</option>'+ordemCadastros().map(i=>'<option value="'+i+'"'+(String(ADM.fc)===String(i)?' selected':'')+'>'+esc(C[i].n)+'</option>').join('')+'</select>')+'</div><div id="adList">'+admCuL()+'</div>');
 }
-function admCuL(){
- const base=new Date();base.setHours(0,0,0,0);const q=norm(ADM.q).trim(),L=[];
- for(let k=0;k<45&&L.length<150;k++){const d=new Date(base);d.setDate(base.getDate()+k);
-  C.forEach((c,i)=>{if(st.own>=0&&i!==st.own)return;if(ADM.fc!=='all'&&st.own<0&&+ADM.fc!==i)return;
-   raw(d,i).forEach(e=>{if(q&&!norm(e.t+' '+e.tipo+' '+c.n).includes(q))return;L.push({e,d:new Date(d),i})})})}
- ADM.L=L;
- return L.length?L.map((o,k)=>'<button class="ai" onclick="admCulto('+k+')"><span class="ad" style="background:'+ecor(o.e)+'"></span><span class="at"><b'+(o.e.x?' style="text-decoration:line-through;opacity:.6"':'')+'>'+esc(o.e.t)+'</b><small>'+DIA[o.d.getDay()].slice(0,3)+' '+fmtDate(o.d)+' · '+fh(o.e.h)+' · '+esc(C[o.i].n)+(o.e.x?' · Cancelado':'')+'</small></span><span class="ar">⋯</span></button>').join(''):'<p class="am0">Nenhum culto nos próximos 45 dias.</p>';
+function admCuL(){const hj=key(new Date()),q=norm(ADM.q).trim();
+ const L=custom.filter(e=>C[e.c]&&!C[e.c].oculta&&(st.own<0||e.c===st.own)&&(ADM.fc==='all'||st.own>=0||+ADM.fc===e.c)&&(!q||norm(e.t+' '+(e.tipo||'')+' '+C[e.c].n).includes(q)));
+ const rep=e=>e.rep&&e.rep!=='once'&&!e.fim,end=e=>rep(e)?(e.ate||'9999'):(e.fim||e.data);
+ L.sort((a,b)=>String(a.data).localeCompare(b.data)||String(a.h).localeCompare(b.h));
+ const up=L.filter(e=>end(e)>=hj),pa=L.filter(e=>end(e)<hj).reverse();ADM.L=[...up,...pa];
+ const row=(e,k)=>{const p=e.data.split('-');return '<div class="ai" style="cursor:default;flex-wrap:wrap"><span class="ad" style="background:'+ecor(e)+'"></span><span class="at" style="flex:1 1 150px"><b>'+esc(e.t)+'</b><small>'+p[2]+'/'+p[1]+(e.fim?' a '+e.fim.split('-').reverse().slice(0,2).join('/'):'')+' · '+fh(e.h)+' · '+esc(C[e.c].n)+(rep(e)?' · Repete':'')+'</small></span><button class="btn sm g" onclick="admEv('+k+',\'e\')">Editar</button><button class="btn sm g" onclick="admEv('+k+',\'d\')">Duplicar</button><button class="btn sm r" onclick="admEv('+k+',\'x\')">Excluir</button></div>'};
+ return (up.length?up.map((e,k)=>row(e,k)).join(''):'<p class="am0">Nenhum culto cadastrado para os próximos dias. Toque em “Novo culto”.</p>')+(pa.length?'<details><summary>Já realizados ('+pa.length+')</summary><div class="ak">'+pa.map((e,k)=>row(e,up.length+k)).join('')+'</div></details>':'');
 }
-function admCulto(k){const o=ADM.L[k];if(!o)return;
- admSheet('<h3>'+esc(o.e.t)+'</h3><p class="am0">'+DIA[o.d.getDay()]+', '+fmtDate(o.d)+' · '+fh(o.e.h)+' · '+esc(C[o.i].n)+'</p><div class="sha"><button class="btn" onclick="admDo('+k+',\'e\')">Editar</button><button class="btn g" onclick="admDo('+k+',\'d\')">Duplicar culto</button><button class="btn r" onclick="admDo('+k+',\'x\')">Excluir</button><button class="btn g" onclick="admSheetClose()">Fechar</button></div>');
-}
-function admDo(k,a){const o=ADM.L[k],e=o.e;admSheetClose();st.fc=o.i;st.sel=o.d;
- if(a==='e'){e.id?eventoForm(e.id):e.substituida?subForm():ruleForm(e.rid)}
- else if(a==='d')eventoForm(0,key(o.d),e.id?e.id:{c:o.i,t:e.t,tipo:e.tipo,h:e.h,f:e.f||'',obs:'',rep:'once',fim:'',ate:''});
- else (e.id?del(e.id):delRule(e.rid)).then(admRender)}
+function admEv(k,a){const e=ADM.L[k];if(!e)return;st.fc=e.c;st.sel=new Date(e.data+'T00:00');
+ if(a==='e')eventoForm(e.id);else if(a==='d')eventoForm(0,e.data,e.id);else del(e.id).then(admRender)}
+function admFix(){const w=r=>r.q=='date'&&r.date?new Date(r.date+'T00:00').getDay():+r.w;
+ return '<p class="am0">Programação recorrente de cada congregação. Para editar, use “Gerenciar cultos fixos”: é o único lugar onde ela é alterada.</p>'+ordemCadastros().filter(i=>st.own<0||i===st.own).map(i=>{const rl=rules.filter(r=>r.c===i).sort((a,b)=>w(a)-w(b)||String(a.h).localeCompare(String(b.h)));
+  return '<details><summary>'+esc(C[i].n)+' ('+rl.length+')</summary><div class="ak">'+(rl.map(r=>'<p><b>'+DIA[w(r)].slice(0,3)+' '+fh(r.h||'')+'</b>'+esc(r.t)+'</p>').join('')||'<p>Nenhum culto fixo.</p>')+'<button class="btn sm" onclick="ADM.tab=\'cong\';ADM.cg='+i+';ADM.sub=\'fixos\';admRender()">Gerenciar cultos fixos</button></div></details>'}).join('')
+ +(st.own<0?'<h3 style="margin-top:22px">Semana A (cultos alternados)</h3><div class="sc"><div class="at"><small>Início da “Semana A” (uma quarta-feira)</small><input id="adRef" type="date" value="'+key(REF)+'"></div><button class="btn sm" onclick="admRef()">Salvar</button></div>':'')}
 /* Avisos */
 function noticeHtml(n){const f=n.formato||'texto',img=n.banner?'<img src="'+n.banner+'" alt="'+esc(n.titulo||'Aviso')+'" loading="lazy" decoding="async">':'';
  if(f==='banner'&&img)return '<article class="notice-card nb">'+img+'</article>';
@@ -1009,7 +1112,7 @@ function noticeHtml(n){const f=n.formato||'texto',img=n.banner?'<img src="'+n.ba
 function admAvis(){
  const rows=notices.map((n,i)=>{
   const thumb=n.banner?'<img class="ath" src="'+n.banner+'" alt="" loading="lazy">':'<span class="ath notice-thumb-empty" aria-hidden="true">Aa</span>';
-  const status=n.ativo===false?'Desativado':'Ativo';
+  const hk=key(new Date()),status=n.ativo===false?'Desativado':(n.ate&&n.ate<hk)?'Expirado':(n.data&&n.data>hk)?'Agendado':'Ativo';
   const end=n.ate?'Termina em '+fmtDate(new Date(n.ate+'T00:00')):'Sem término definido';
   return '<div class="notice-admin-item">'+thumb+
    '<button class="notice-admin-edit" type="button" onclick="admAviso('+i+')"><span class="at"><b>'+esc(n.titulo||'Sem título')+'</b><small>'+status+' · '+end+'</small></span><span class="ar">Editar ›</span></button>'+
@@ -1069,32 +1172,20 @@ async function admAvDel(){if(!confirm('Excluir este aviso?'))return;const L=noti
 }
 /* Senhas */
 const admPw=i=>i<0?MASTER:(C[i].senha||'');
-function admSenh(){
- const row=[[-1,'Administrador geral']].concat(ordemCadastros().map(i=>[i,C[i].n]));
- return '<h2>Senhas</h2><p class="am0">As senhas ficam ocultas. Ao mostrar, serão ocultadas automaticamente após 8 segundos. Use “Copiar acesso” para compartilhar pelo WhatsApp.</p>'
- +row.map(r=>{const v=admPw(r[0]),on=ADM.sh[r[0]];return '<div class="sc"><div class="at"><b>'+esc(r[1])+'</b><code>'+(!v?'Sem senha':on?esc(v):'••••••••')+'</code></div><div class="arow">'+(v?'<button class="btn sm g" onclick="admToggleSenha('+r[0]+')">'+(on?'Ocultar':'Mostrar')+'</button><button class="btn sm" onclick="admCopiaAcesso('+r[0]+')">Copiar acesso</button>':'')+'<button class="btn sm g" onclick="admGera('+r[0]+')">Gerar nova</button></div></div>'}).join('')
- +'<h3 style="margin-top:24px">Semana A (cultos alternados)</h3><div class="sc"><div class="at"><small>Início da “Semana A” (uma quarta-feira)</small><input id="adRef" type="date" value="'+key(REF)+'"></div><button class="btn sm" onclick="admRef()">Salvar</button></div>';
-}
-function admToggleSenha(i){
- const timer=ADM.hideTimers[i];if(timer)clearTimeout(timer);
- if(ADM.sh[i]){ADM.sh[i]=false;delete ADM.hideTimers[i];admRender();return}
- ADM.sh[i]=true;ADM.hideTimers[i]=setTimeout(()=>{ADM.sh[i]=false;delete ADM.hideTimers[i];if(document.body.classList.contains('ap')&&ADM.tab==='senh')admRender()},8000);admRender();
-}
-function admCopiaAcesso(i){
- const senha=admPw(i);if(!senha)return;
- const nome=i<0?'Administrador geral':C[i].n;
- const conteudo='Acesso: '+nome+'\\nSenha: '+senha;
- const ok=()=>toast('Acesso copiado. Agora é só colar no WhatsApp.');
- if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(conteudo).then(ok).catch(()=>toast('Não foi possível copiar o acesso.'));
- else{const ta=document.createElement('textarea');ta.value=conteudo;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok()}catch(e){toast('Não foi possível copiar o acesso.')}ta.remove()}
-}
-async function admGera(i){
- const nome=i<0?'o administrador geral':C[i].n;if(!confirm('Gerar uma nova senha para '+nome+'? A senha atual deixará de funcionar.'))return;
+function pwCard(i){const c=i<0?{n:'Administrador geral',b:''}:C[i],v=admPw(i),on=ADM.sh[i];
+ return '<div class="pw" id="pw'+(i<0?'g':i)+'"><div class="pt"><div><h3>'+(i>0?'Congregação ':'')+esc(c.n)+'</h3><p class="am0">'+(i<0?'Acesso a todo o painel':'Localidade: '+esc(c.b||'Caaporã'))+'</p></div><span class="chip '+(v?'ok':'off')+'">'+(v?'Ativa':'Sem senha')+'</span></div><small>SENHA DE ACESSO</small><code>'+(!v?'—':on?esc(v)+'<i></i>':'••••••••')+'</code><div class="arow">'+(v?'<button class="btn sm g" onclick="admToggleSenha('+i+')">'+(on?'Ocultar':'Mostrar')+'</button><button class="btn sm g" onclick="admCopia('+i+')">Copiar</button>':'')+'<button class="btn sm" onclick="admGera('+i+')">Gerar nova</button></div></div>'}
+function admSenh(){return '<div class="ph"><h2>Senhas</h2><p>Cada cartão mostra a congregação dona da senha. Ao mostrar, ela se oculta sozinha em 8 segundos.</p></div><div class="pwg">'+[-1,...ordemCadastros()].map(pwCard).join('')+'</div>'}
+function pwRefresh(i){const e=$('#pw'+(i<0?'g':i));if(e)e.outerHTML=pwCard(i)}
+function pwShow(i){clearTimeout(ADM.hideTimers[i]);ADM.sh[i]=true;pwRefresh(i);ADM.hideTimers[i]=setTimeout(()=>{ADM.sh[i]=false;pwRefresh(i)},8000)}
+function admToggleSenha(i){if(ADM.sh[i]){clearTimeout(ADM.hideTimers[i]);ADM.sh[i]=false;pwRefresh(i)}else pwShow(i)}
+function admCopia(i){const s=admPw(i);if(!s)return;const nome=i<0?'do administrador':C[i].n,ok=()=>toast('Senha copiada ('+nome+').'),no=()=>toast('Não foi possível copiar a senha.');
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(s).then(ok).catch(no);
+ else{const t=document.createElement('textarea');t.value=s;t.style.cssText='position:fixed;opacity:0';document.body.appendChild(t);t.select();try{document.execCommand('copy');ok()}catch(e){no()}t.remove()}}
+async function admGera(i){const nome=i<0?'o administrador geral':C[i].n;
+ if(!confirm('Gerar nova senha para '+nome+'?\n\nA senha anterior deixará de funcionar assim que a nova for salva.'))return;
  const al='ABCDEFGHJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789',r=crypto.getRandomValues(new Uint32Array(8)),n=[...r].map(x=>al[x%al.length]).join('');
  try{await rpc('definir_senha',{p_senha:SENHA,p_alvo:i,p_nova:n})}catch(x){return erro(x)}
- if(i<0){SENHA=n;MASTER=n}else C[i].senha=n;
- ADM.sh[i]=true;admRender();toast('Nova senha gerada.');
-}
+ if(i<0){SENHA=n;MASTER=n}else C[i].senha=n;pwShow(i);toast('Nova senha gerada para '+nome+'.')}
 async function admRef(){const r=$('#adRef').value;if(!r)return;try{await rpc('salvar_config',{p_senha:SENHA,p_chave:'semana_a',p_valor:r})}catch(x){return erro(x)}REF=new Date(r+'T00:00');draw();toast('Semana A salva.')}
 $('#dlg').addEventListener('close',()=>admRender());
 
