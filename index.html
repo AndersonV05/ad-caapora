@@ -476,6 +476,49 @@ dialog .dd .ac{position:sticky;bottom:0;background:var(--azul);padding:12px 0 4p
 .rota{display:flex;flex-direction:column;gap:10px;margin:0 0 26px;padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.04)}.rota[hidden]{display:none!important}
 .rota label{font-weight:700;font-size:.85rem;color:var(--mut)}.rota .ra{display:flex;gap:8px;flex-wrap:wrap}.rota .ra .btn{flex:1 1 180px}
 .rota .rr{display:flex;gap:8px;flex-wrap:wrap;color:var(--mut)}.rota .rs{padding:6px 12px;border-radius:999px;background:rgba(47,123,255,.16)}.rota .rs b{color:#fff;font-size:1.05rem;margin-right:4px}
+/* ===== AJUSTES v3 · cores, obreiros, avisos, senhas, calendário ===== */
+.btn.sm{color:#2a1d03;font-weight:700}
+.btn.g.sm{color:var(--tx)}.btn.r.sm{color:#fff}
+#adm .btn:not(.g):not(.r){color:#2a1d03!important;font-weight:700}
+#adm .btn.g{color:#f3f5fb;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.08)}
+#adm .btn.g:hover{border-color:var(--ouro)}
+#bAuth{color:#2a1d03!important;font-weight:700}
+.obr{display:flex;gap:8px;align-items:flex-start;padding:10px;margin:8px 0;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.04)}
+.obm{flex:1;min-width:0;display:grid;grid-template-columns:1fr;gap:6px}
+.obm .obn,.obm .obf{width:100%;min-width:0;margin:0}
+@media(min-width:700px){.obm{grid-template-columns:minmax(0,1fr) 170px}}
+.obr .obx{flex:none;min-width:44px;min-height:44px;padding:0;font-size:1.2rem}
+.obl{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column;gap:4px}
+.obl li{display:flex;justify-content:space-between;gap:10px;padding:6px 10px;border-radius:10px;background:rgba(0,0,0,.18);font-size:.88rem}
+.obl li b{font-weight:600;overflow-wrap:anywhere}.obl li span{flex:none;color:var(--ouro2);font-weight:700;font-size:.8rem}
+.bx p .obd{color:var(--tx)}
+#adMain .notice-switch,#adSheet .notice-switch{display:inline-flex;align-items:center;gap:10px;margin:0;position:relative;cursor:pointer;color:var(--tx);font-size:.85rem}
+.notice-switch span{display:inline-block;flex:none}
+.notice-switch small{display:inline;line-height:1.2}
+.notice-admin-item .notice-switch small{color:var(--mut)}
+.avh{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 6px}.avh h3{margin:0}
+.avx{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--vidro);color:var(--tx);font-size:1rem}
+.avs{padding:12px;margin:10px 0;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.04)}
+.avs h4{margin:0 0 8px;font:700 .78rem 'Nunito Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--ouro2)}
+.avs label:first-of-type{margin-top:0}
+.avup{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:110px;padding:12px;border:1.5px dashed var(--ouro);border-radius:14px;background:rgba(217,172,79,.07);color:var(--ouro2)!important;cursor:pointer;text-align:center}
+.avup img{width:100%;max-height:170px;object-fit:cover;border-radius:10px}.avup b{font-size:1.6rem;line-height:1}
+.avon{margin-top:12px!important;min-height:44px}
+.pwv{display:flex;gap:8px;align-items:stretch}.pwv code{flex:1;min-width:0}.pwv .pwc{flex:none;min-height:0}
+.acal{grid-column:1/-1;margin-top:10px}
+.ach{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.acn{display:flex;align-items:center;gap:8px}.acn b{min-width:130px;text-align:center;font:600 1rem 'Outfit',sans-serif}.acn .btn{margin:0!important;min-width:40px;padding:0}
+.acg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:6px}
+.acw{text-align:center;font-size:.72rem;font-weight:700;color:var(--mut);padding:2px 0}
+.acd{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;min-height:48px;padding:5px 2px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.04);color:var(--tx);font-weight:700;font-size:.88rem}
+.acd i{display:flex;gap:2px}.acd em{width:6px;height:6px;border-radius:50%}.acd em.x{opacity:.35}
+.acd.hj{border-color:var(--ouro2)}.acd.on{background:var(--ouro);color:#2a1d03;border-color:var(--ouro)}
+.acday{margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+.acdh{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:6px}.acdh .btn{margin:0!important}
+.ace{padding:10px 12px;margin:6px 0;border-left:4px solid var(--k);border-radius:10px;background:rgba(0,0,0,.18)}
+.ace.x .at b{text-decoration:line-through;opacity:.6}.ace .at b{white-space:normal}
+.ace .arow{margin:8px 0 0;gap:6px}.ace .arow .btn{margin:0!important}
+@media(min-width:700px){.acd{min-height:58px}}
 </style>
 </head>
 <body>
@@ -579,12 +622,13 @@ function defRules(){
  const r=[],a=(c,w,t,tipo,q)=>r.push({id:r.length+1,c,w,h:'19:00',f:'21:00',t,tipo,q:q||'all'});
  a(0,1,'Escola Bíblica','Escola Bíblica');a(0,3,'Culto de Quarta','Culto','a0');a(0,3,'Reunião dos Obreiros','Reunião','a1');
  a(0,5,'Culto de Doutrina','Culto','nf');a(0,5,'Santa Ceia','Santa Ceia','f1');
- const dom=[['Círculo de Oração das Irmãs','Reunião'],['Culto de Missões','Culto'],['Culto Infantil','Culto'],['Culto de Jovens','Culto'],['Culto de Homens','Culto']];dom.forEach((x,i)=>a(0,0,x[0],x[1],'n'+(i+1)));
+ const dom=[['Círculo de Oração das Irmãs','Reunião'],['Culto de Missões','Culto'],['Culto das Crianças','Culto'],['Culto de Jovens','Culto'],['Culto de Varão','Culto']];dom.forEach((x,i)=>a(0,0,x[0],x[1],'n'+(i+1)));
  for(let c=1;c<C.length;c++){a(c,2,'Culto de Doutrina','Culto');a(c,4,'Escola Bíblica','Escola Bíblica');dom.forEach((x,i)=>a(c,0,x[0],x[1],'n'+(i+1)))}
  return r;
 }
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const pad=n=>String(n).padStart(2,'0');
+const REN=t=>String(t||'').replace(/Culto\s+(de|dos)\s+Homem?n?s?\b/gi,'Culto de Varão').replace(/Culto\s+Infantil/gi,'Culto das Crianças');
 const key=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fh=h=>h.replace(':00','h');
@@ -621,6 +665,8 @@ async function carregar(){
   const sa=cf.find(x=>x.chave==='semana_a');if(sa&&sa.valor)REF=new Date(sa.valor+'T00:00');
   const ct=cf.find(x=>x.chave==='tipos_culto');if(ct&&ct.valor){try{const z=JSON.parse(ct.valor);if(Array.isArray(z)){savedTypes=z.map(x=>x.nome).filter(Boolean);typeColors={...TC};z.forEach(x=>{if(x.nome&&x.cor)typeColors[x.nome]=x.cor;});}}catch(_){}}
   const av=cf.find(x=>x.chave==='avisos');if(av&&av.valor){try{notices=JSON.parse(av.valor)||[];}catch(_){notices=[];}}
+  rules.forEach(r=>{r.t=REN(r.t);r.tipo=REN(r.tipo)});custom.forEach(e=>{e.t=REN(e.t);e.tipo=REN(e.tipo)});substituicoes.forEach(x=>{x.t=REN(x.t);x.tipo=REN(x.tipo)});
+  savedTypes=savedTypes.map(REN);Object.keys(typeColors).forEach(k=>{const n=REN(k);if(n!==k){typeColors[n]=typeColors[k]}});
   unificarSede();
   ultimaCarga=Date.now();
   if(st.admin&&st.own<0)await carregarSenhas();
@@ -871,7 +917,9 @@ async function processPhotos(files){const c=C[st.fc];c.photos=c.photos||[];for(c
 function setCover(i){C[st.fc].cover=i;if(save()){refreshPhotoList();titulos();congs();toast('Foto de capa atualizada.');}}
 function movePhoto(i,d){const c=C[st.fc],j=i+d;if(j<0||j>=c.photos.length)return;[c.photos[i],c.photos[j]]=[c.photos[j],c.photos[i]];if(c.cover===i)c.cover=j;else if(c.cover===j)c.cover=i;if(save()){refreshPhotoList();titulos();congs();}}
 function removePhoto(i){if(!confirm('Excluir esta foto?'))return;const c=C[st.fc];c.photos.splice(i,1);if(c.cover>=c.photos.length)c.cover=Math.max(0,c.photos.length-1);if(save()){refreshPhotoList();titulos();congs();toast('Foto removida.');}}
-function obRow(n,f){return '<div class="obr" style="display:flex;gap:6px;margin:6px 0"><input class="obn" maxlength="60" placeholder="Nome" value="'+esc(n||'')+'" style="flex:1;min-width:0"><select class="obf">'+FUNCS.map(x=>'<option'+(x===f?' selected':'')+'>'+x+'</option>').join('')+'</select><button type="button" class="btn sm r" onclick="this.parentNode.remove()">×</button></div>'}
+function obRow(n,f){return '<div class="obr"><div class="obm"><input class="obn" maxlength="60" placeholder="Nome completo do obreiro" aria-label="Nome do obreiro" value="'+esc(n||'')+'"><select class="obf" aria-label="Cargo">'+FUNCS.map(x=>'<option'+(x===f?' selected':'')+'>'+x+'</option>').join('')+'</select></div><button type="button" class="btn sm r obx" aria-label="Remover obreiro" onclick="this.closest(\'.obr\').remove()">×</button></div>'}
+function obLista(c){const l=(c.obreiros||[]).slice().sort((a,b)=>FUNCS.indexOf(a.funcao)-FUNCS.indexOf(b.funcao)||alpha(a.nome,b.nome));
+ return l.length?'<ul class="obl">'+l.map(o=>'<li><b>'+esc(o.nome)+'</b><span>'+esc(o.funcao||'')+'</span></li>').join('')+'</ul>':'<p>Nenhum obreiro cadastrado.</p>'}
 async function salvarInfo(e){
  e.preventDefault();if(!can(st.fc))return false;const c=C[st.fc];
  const ns=$('#isn')?$('#isn').value.trim():null;if(st.own>=0&&ns===''){toast('Sua senha não pode ficar vazia.');return false}
@@ -1053,9 +1101,10 @@ function admEditC(i){
  if(i===0&&st.own<0){const d=C.findIndex(x=>x&&x.oculta);if(d>0){const nr=rules.filter(r=>r.c===d).length,ne=custom.filter(e=>e.c===d).length;aviso='<p class="am0">“Central” aparece unificada ao Templo Sede.'+(nr+ne?' Há '+nr+' culto(s) fixo(s) e '+ne+' evento(s) no registro antigo que não aparecem no site. Revise antes de qualquer limpeza no banco.':'')+'</p>'}}
  return top+aviso+'<div class="ag">'
  +'<div class="bx"><h3>Dados gerais</h3><p>'+esc(c.e||'Endereço não informado')+'<br>'+(c.lat?'Coordenadas definidas':'Sem coordenadas')+'</p><button class="btn sm" onclick="adSub(\'geral\')">Editar dados gerais</button></div>'
- +'<div class="bx"><h3>Dirigente</h3><p>'+esc(c.dirigente||'Dirigente não informado')+' · '+ob+' obreiro'+(ob==1?'':'s')+'</p><button class="btn sm" onclick="adSub(\'dir\')">Editar dirigente e obreiros</button></div>'
+ +'<div class="bx"><h3>Dirigente</h3><p><b class="obd">'+esc(c.dirigente||'Dirigente não informado')+'</b>'+(c.vice?'<br>Vice: '+esc(c.vice):'')+'<br>'+ob+' obreiro'+(ob==1?'':'s')+'</p>'+obLista(c)+'<button class="btn sm" onclick="adSub(\'dir\')">Editar dirigente e obreiros</button></div>'
  +'<div class="bx"><h3>Gerenciar fotos</h3>'+(ph.length?'<div class="strip">'+ph.slice(0,5).map(x=>'<img src="'+x+'" alt="">').join('')+'</div>':'<p>Nenhuma foto ainda.</p>')+'<button class="btn sm" onclick="adSub(\'fotos\')">'+(ph.length?'Gerenciar fotos':'+ Adicionar fotos')+'</button></div>'
  +'<div class="bx"><h3>Cultos fixos</h3><p>'+rl.length+' cadastrado'+(rl.length==1?'':'s')+'</p><button class="btn sm" onclick="adSub(\'fixos\')">Gerenciar cultos fixos</button></div></div>'
+ +'<div class="bx acal" id="acal">'+admCal(i)+'</div>'
  +(st.own>=0?'<div class="arow"><button class="btn sm g" onclick="adSub(\'senha\')">Alterar minha senha</button></div>':'')
  +'<button class="btn g" style="margin-top:10px" onclick="admShow(false);openC('+i+')">Ver página pública</button>';
 }
@@ -1084,6 +1133,32 @@ function fSenhaProp(c){return '<div class="ph"><h2>Minha senha</h2><p>Senha de a
 async function salvarSenhaProp(b){const c=C[st.fc],n=$('#gp').value.trim();if(!n){toast('A senha não pode ficar vazia.');return}if(n===c.senha){adSub(null);return}
  if(!confirm('Trocar a senha? A senha anterior deixará de funcionar.'))return;
  await busy(b,async()=>{try{await rpc('definir_senha',{p_senha:SENHA,p_alvo:st.fc,p_nova:n})}catch(x){return erro(x)}c.senha=n;SENHA=n;toast('Senha alterada');adSub(null)})}
+/* Calendário da congregação (painel) */
+function admCal(i){
+ const n=new Date();if(!ADM.cm)ADM.cm=[n.getFullYear(),n.getMonth()];if(!ADM.cd)ADM.cd=key(n);
+ const [y,m]=ADM.cm,off=new Date(y,m,1).getDay(),nd=new Date(y,m+1,0).getDate();
+ let h='<div class="ach"><h3>Calendário</h3><div class="acn"><button type="button" class="btn sm g" aria-label="Mês anterior" onclick="admCalMes(-1)">‹</button><b>'+MES[m]+' '+y+'</b><button type="button" class="btn sm g" aria-label="Próximo mês" onclick="admCalMes(1)">›</button></div></div><p>Toque em um dia para ver, adicionar ou alterar atividades.</p><div class="acg">'+['D','S','T','Q','Q','S','S'].map(x=>'<span class="acw">'+x+'</span>').join('');
+ for(let k=0;k<off;k++)h+='<span></span>';
+ for(let d=1;d<=nd;d++){const dt=new Date(y,m,d),kk=key(dt),es=raw(dt,i);
+  h+='<button type="button" class="acd'+(kk===key(n)?' hj':'')+(kk===ADM.cd?' on':'')+'" onclick="ADM.cd=\''+kk+'\';admCalRender()" aria-label="Dia '+d+(es.length?', '+es.length+' atividade'+(es.length>1?'s':''):'')+'"><span>'+d+'</span><i>'+es.slice(0,3).map(e=>'<em class="'+(e.x?'x':'')+'" style="background:'+ecor(e)+'"></em>').join('')+'</i></button>'}
+ h+='</div>';
+ const sd=new Date(ADM.cd+'T00:00'),es=raw(sd,i),p=ADM.cd.split('-');
+ h+='<div class="acday"><div class="acdh"><b>'+DIA[sd.getDay()]+', '+p[2]+'/'+p[1]+'</b><button type="button" class="btn sm" onclick="admCalNovo()">+ Adicionar atividade</button></div>';
+ h+=es.length?es.map(e=>{const rot=e.rid&&String((rules.find(r=>r.id==e.rid)||{}).q||'').startsWith('n');
+  const b=e.substituida?'<button type="button" class="btn sm g" onclick="admCalSub()">Alterar este dia</button>'
+   :e.id?'<button type="button" class="btn sm g" onclick="admCalAt();eventoForm('+e.id+')">Editar</button><button type="button" class="btn sm r" onclick="admCalAt();del('+e.id+').then(admRender)">Excluir</button>'
+   :'<button type="button" class="btn sm g" onclick="admCalAt();ruleForm('+e.rid+')">Editar culto fixo</button>'+(rot&&sd.getDay()===0?'<button type="button" class="btn sm g" onclick="admCalSub()">Alterar só este dia</button>':'');
+  const cx=(e.rid||(e.id&&e.rep&&e.rep!=='once'))&&!e.substituida?'<button type="button" class="btn sm g" onclick="admCalTgl(\''+e.k+'\')">'+(e.x?'Restaurar este dia':'Cancelar este dia')+'</button>':'';
+  return '<div class="ace'+(e.x?' x':'')+'" style="--k:'+ecor(e)+'"><div class="at"><b>'+fh(e.h||'')+' · '+esc(e.t)+'</b><small>'+esc(e.tipo||'')+(e.x?' · Cancelado':'')+(e.substituida?' · Alterado':'')+(e.rid&&!e.substituida?' · Culto fixo':'')+'</small></div><div class="arow">'+b+cx+'</div></div>'}).join(''):'<p class="am0" style="margin:6px 0 0">Nenhuma atividade neste dia.</p>';
+ return h+'</div>';
+}
+function admCalRender(){const e=$('#acal');if(e)e.innerHTML=admCal(st.fc)}
+function admCalMes(d){let [y,m]=ADM.cm;m+=d;if(m<0){m=11;y--}if(m>11){m=0;y++}ADM.cm=[y,m];admCalRender()}
+function admCalAt(){st.sel=new Date(ADM.cd+'T00:00')}
+function admCalNovo(){admCalAt();eventoForm(0,ADM.cd)}
+function admCalSub(){admCalAt();subForm()}
+async function admCalTgl(k){if(!can(st.fc))return;const p=k.split('|');
+ try{const r=await rpc('alternar_cancelamento',{p_cong:+p[0],p_senha:SENHA,p_data:p[1],p_chave:p[2]});cancels=r?cancels.concat(k):cancels.filter(x=>x!=k);draw();renderHomeContent();admCalRender();toast(r?'Cancelado neste dia':'Restaurado')}catch(x){erro(x)}}
 /* Cultos */
 function admNovoCulto(){st.fc=ADM.fc!=='all'&&st.own<0?+ADM.fc:(st.own>=0?st.own:0);st.sel=new Date();eventoForm()}
 function admCult(){const own=st.own>=0,fx=ADM.cs==='fix';
@@ -1139,14 +1214,16 @@ function admAviso(i){const n=i>=0?{...notices[i]}:{id:Date.now(),formato:'banner
 function admAvRead(){const n=ADM.av,v=id=>$('#'+id);if(v('avT'))n.titulo=v('avT').value.trim();if(v('avX'))n.texto=v('avX').value.trim();if(v('avD'))n.data=v('avD').value;if(v('avE'))n.ate=v('avE').value;if(v('avA'))n.ativo=v('avA').checked}
 function admFmt(f){admAvRead();ADM.av.formato=f;admAvForm()}
 function admAvForm(){const n=ADM.av,f=n.formato,B=f!=='texto',T=f!=='banner';
- admSheet('<h3>'+(ADM.ai>=0?'Editar aviso':'Novo aviso')+'</h3><div class="seg" role="radiogroup" aria-label="Formato do aviso">'+[['banner_texto','Banner + texto'],['banner','Só banner'],['texto','Só texto']].map(x=>'<button type="button" role="radio" aria-checked="'+(f===x[0])+'" class="'+(f===x[0]?'on':'')+'" onclick="admFmt(\''+x[0]+'\')">'+x[1]+'</button>').join('')+'</div>'
- +'<label for="avT">Título'+(T?'':' (só para você identificar)')+'</label><input id="avT" maxlength="80" value="'+esc(n.titulo)+'" oninput="admAvPreview()">'
- +(T?'<label for="avX">Texto</label><textarea id="avX" rows="4" maxlength="500" oninput="admAvPreview()">'+esc(n.texto)+'</textarea>':'')
- +(B?'<label for="avF">Banner (JPG, PNG ou WebP)</label>'+(n.banner?'<img class="apv" src="'+n.banner+'" alt="Banner selecionado">':'')+'<input id="avF" type="file" accept="image/jpeg,image/png,image/webp" onchange="admBanner(this)">':'')
- +'<div class="row"><div><label for="avD">Publicação</label><input id="avD" type="date" value="'+(n.data||'')+'" oninput="admAvPreview()"></div><div><label for="avE">Exibir até</label><input id="avE" type="date" value="'+(n.ate||'')+'" oninput="admAvPreview()"></div></div>'
- +'<label class="chk"><input id="avA" type="checkbox"'+(n.ativo!==false?' checked':'')+' onchange="admAvPreview()"> Aviso ativo (visível no site)</label>'
- +'<h4 class="notice-preview-title">Pré-visualização no site</h4><div id="avPreview" class="notice-preview">'+noticeHtml(n)+'</div>'
- +'<div class="sv">'+(ADM.ai>=0?'<button type="button" class="btn r" onclick="admAvDel()">Excluir</button>':'<button type="button" class="btn g" onclick="admSheetClose()">Cancelar</button>')+'<button type="button" class="btn" style="flex:1" onclick="admAvSave()">Salvar</button></div>');
+ admSheet('<div class="avh"><h3>'+(ADM.ai>=0?'Editar aviso':'Novo aviso')+'</h3><button type="button" class="avx" aria-label="Fechar" onclick="admSheetClose()">✕</button></div>'
+ +'<section class="avs"><h4>1 · Formato</h4><div class="seg" role="radiogroup" aria-label="Formato do aviso">'+[['banner_texto','Banner + texto'],['banner','Só banner'],['texto','Só texto']].map(x=>'<button type="button" role="radio" aria-checked="'+(f===x[0])+'" class="'+(f===x[0]?'on':'')+'" onclick="admFmt(\''+x[0]+'\')">'+x[1]+'</button>').join('')+'</div></section>'
+ +'<section class="avs"><h4>2 · Conteúdo</h4><label for="avT">Título'+(T?'':' (só para você identificar)')+'</label><input id="avT" maxlength="80" placeholder="Ex.: Santa Ceia no domingo" value="'+esc(n.titulo)+'" oninput="admAvPreview()">'
+ +(T?'<label for="avX">Texto</label><textarea id="avX" rows="4" maxlength="500" placeholder="Escreva o aviso…" oninput="admAvPreview()">'+esc(n.texto)+'</textarea>':'')
+ +(B?'<label>Banner (JPG, PNG ou WebP)</label><label class="avup" for="avF">'+(n.banner?'<img src="'+n.banner+'" alt="Banner selecionado"><span>Trocar imagem</span>':'<b>＋</b><span>Escolher imagem do banner</span>')+'</label><input id="avF" type="file" accept="image/jpeg,image/png,image/webp" hidden onchange="admBanner(this)">':'')
+ +'</section>'
+ +'<section class="avs"><h4>3 · Exibição</h4><div class="row"><div><label for="avD">Publicação</label><input id="avD" type="date" value="'+(n.data||'')+'" oninput="admAvPreview()"></div><div><label for="avE">Exibir até (opcional)</label><input id="avE" type="date" value="'+(n.ate||'')+'" oninput="admAvPreview()"></div></div>'
+ +'<label class="avon notice-switch"><input id="avA" type="checkbox"'+(n.ativo!==false?' checked':'')+' onchange="admAvPreview();this.parentNode.querySelector(\'small\').textContent=this.checked?\'Aviso ativo (visível no site)\':\'Aviso desativado (oculto no site)\'"><span></span><small>'+(n.ativo!==false?'Aviso ativo (visível no site)':'Aviso desativado (oculto no site)')+'</small></label></section>'
+ +'<section class="avs"><h4>Pré-visualização no site</h4><div id="avPreview" class="notice-preview">'+noticeHtml(n)+'</div></section>'
+ +'<div class="sv">'+(ADM.ai>=0?'<button type="button" class="btn r" onclick="admAvDel()">Excluir</button>':'<button type="button" class="btn g" onclick="admSheetClose()">Cancelar</button>')+'<button type="button" class="btn" style="flex:1" onclick="admAvSave()">Salvar aviso</button></div>');
 }
 function admAvPreview(){admAvRead();const box=$('#avPreview');if(box)box.innerHTML=noticeHtml(ADM.av)}
 function admImg(file){return new Promise((ok,no)=>{
@@ -1173,8 +1250,17 @@ async function admAvDel(){if(!confirm('Excluir este aviso?'))return;const L=noti
 /* Senhas */
 const admPw=i=>i<0?MASTER:(C[i].senha||'');
 function pwCard(i){const c=i<0?{n:'Administrador geral',b:''}:C[i],v=admPw(i),on=ADM.sh[i];
- return '<div class="pw" id="pw'+(i<0?'g':i)+'"><div class="pt"><div><h3>'+(i>0?'Congregação ':'')+esc(c.n)+'</h3><p class="am0">'+(i<0?'Acesso a todo o painel':'Localidade: '+esc(c.b||'Caaporã'))+'</p></div><span class="chip '+(v?'ok':'off')+'">'+(v?'Ativa':'Sem senha')+'</span></div><small>SENHA DE ACESSO</small><code>'+(!v?'—':on?esc(v)+'<i></i>':'••••••••')+'</code><div class="arow">'+(v?'<button class="btn sm g" onclick="admToggleSenha('+i+')">'+(on?'Ocultar':'Mostrar')+'</button><button class="btn sm g" onclick="admCopia('+i+')">Copiar</button>':'')+'<button class="btn sm" onclick="admGera('+i+')">Gerar nova</button></div></div>'}
-function admSenh(){return '<div class="ph"><h2>Senhas</h2><p>Cada cartão mostra a congregação dona da senha. Ao mostrar, ela se oculta sozinha em 8 segundos.</p></div><div class="pwg">'+[-1,...ordemCadastros()].map(pwCard).join('')+'</div>'}
+ return '<div class="pw" id="pw'+(i<0?'g':i)+'"><div class="pt"><div><h3>'+(i>0?'Congregação ':'')+esc(c.n)+'</h3><p class="am0">'+(i<0?'Acesso a todo o painel':'Localidade: '+esc(c.b||'Caaporã'))+'</p></div><span class="chip '+(v?'ok':'off')+'">'+(v?'Ativa':'Sem senha')+'</span></div><small>SENHA DE ACESSO</small><div class="pwv"><code>'+(!v?'—':on?esc(v)+'<i></i>':'••••••••')+'</code>'+(v&&on?'<button class="btn sm g pwc" onclick="admCopia('+i+')">Copiar</button>':'')+'</div><div class="arow">'+(v?'<button class="btn sm g" onclick="admToggleSenha('+i+')">'+(on?'Ocultar':'Mostrar')+'</button>':'')+'<button class="btn sm g" onclick="admCria('+i+')">Criar senha</button><button class="btn sm" onclick="admGera('+i+')">Gerar nova</button></div></div>'}
+function admCria(i){const nome=i<0?'Administrador geral':C[i].n;
+ admSheet('<div class="avh"><h3>Criar senha</h3><button type="button" class="avx" aria-label="Fechar" onclick="admSheetClose()">✕</button></div><p class="am0">'+esc(nome)+'</p><label for="cpw">Nova senha</label><input id="cpw" maxlength="40" autocomplete="off" placeholder="Digite a senha (mínimo 4 caracteres)"><p class="am0" style="margin-top:8px">A senha anterior deixará de funcionar assim que a nova for salva.</p><div class="sv"><button type="button" class="btn g" onclick="admSheetClose()">Cancelar</button><button type="button" class="btn" style="flex:1" onclick="admCriaSalvar('+i+',this)">Salvar senha</button></div>');
+ setTimeout(()=>{const e=$('#cpw');if(e)e.focus()},50)}
+async function admCriaSalvar(i,b){const n=($('#cpw').value||'').trim(),nome=i<0?'o administrador geral':C[i].n;
+ if(n.length<4){toast('A senha precisa ter pelo menos 4 caracteres.');return}
+ if(n===admPw(i)){toast('Essa já é a senha atual.');return}
+ if(!confirm('Salvar a nova senha para '+nome+'?\n\nA senha anterior deixará de funcionar.'))return;
+ b.disabled=true;try{await rpc('definir_senha',{p_senha:SENHA,p_alvo:i,p_nova:n})}catch(x){b.disabled=false;return erro(x)}
+ if(i<0){SENHA=n;MASTER=n}else{C[i].senha=n;if(st.own===i)SENHA=n}admSheetClose();pwShow(i);toast('Senha criada para '+nome+'.')}
+function admSenh(){return '<div class="ph"><h2>Senhas</h2><p>Cada cartão mostra a congregação dona da senha. Ao tocar em Mostrar, aparece o botão Copiar e a senha se oculta sozinha em 8 segundos.</p></div><div class="pwg">'+[-1,...ordemCadastros()].map(pwCard).join('')+'</div>'}
 function pwRefresh(i){const e=$('#pw'+(i<0?'g':i));if(e)e.outerHTML=pwCard(i)}
 function pwShow(i){clearTimeout(ADM.hideTimers[i]);ADM.sh[i]=true;pwRefresh(i);ADM.hideTimers[i]=setTimeout(()=>{ADM.sh[i]=false;pwRefresh(i)},8000)}
 function admToggleSenha(i){if(ADM.sh[i]){clearTimeout(ADM.hideTimers[i]);ADM.sh[i]=false;pwRefresh(i)}else pwShow(i)}
