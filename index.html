@@ -519,6 +519,7 @@ dialog .dd .ac{position:sticky;bottom:0;background:var(--azul);padding:12px 0 4p
 .ace.x .at b{text-decoration:line-through;opacity:.6}.ace .at b{white-space:normal}
 .ace .arow{margin:8px 0 0;gap:6px}.ace .arow .btn{margin:0!important}
 @media(min-width:700px){.acd{min-height:58px}}
+.aerr{white-space:pre-wrap;word-break:break-word;font:.8rem ui-monospace,monospace;padding:12px;border:1px solid #a63a3a;border-radius:12px;background:rgba(166,58,58,.12);color:#ffd5d5;margin:0 0 12px}
 </style>
 </head>
 <body>
@@ -665,8 +666,8 @@ async function carregar(){
   const sa=cf.find(x=>x.chave==='semana_a');if(sa&&sa.valor)REF=new Date(sa.valor+'T00:00');
   const ct=cf.find(x=>x.chave==='tipos_culto');if(ct&&ct.valor){try{const z=JSON.parse(ct.valor);if(Array.isArray(z)){savedTypes=z.map(x=>x.nome).filter(Boolean);typeColors={...TC};z.forEach(x=>{if(x.nome&&x.cor)typeColors[x.nome]=x.cor;});}}catch(_){}}
   const av=cf.find(x=>x.chave==='avisos');if(av&&av.valor){try{notices=JSON.parse(av.valor)||[];}catch(_){notices=[];}}
-  rules.forEach(r=>{r.t=REN(r.t);r.tipo=REN(r.tipo)});custom.forEach(e=>{e.t=REN(e.t);e.tipo=REN(e.tipo)});substituicoes.forEach(x=>{x.t=REN(x.t);x.tipo=REN(x.tipo)});
-  savedTypes=savedTypes.map(REN);Object.keys(typeColors).forEach(k=>{const n=REN(k);if(n!==k){typeColors[n]=typeColors[k]}});
+  try{rules.forEach(r=>{r.t=REN(r.t);r.tipo=REN(r.tipo)});custom.forEach(e=>{e.t=REN(e.t);e.tipo=REN(e.tipo)});substituicoes.forEach(x=>{x.t=REN(x.t);x.tipo=REN(x.tipo)});
+  savedTypes=savedTypes.map(REN);Object.keys(typeColors).forEach(k=>{const n=REN(k);if(n!==k){typeColors[n]=typeColors[k]}})}catch(_){}
   unificarSede();
   ultimaCarga=Date.now();
   if(st.admin&&st.own<0)await carregarSenhas();
@@ -787,7 +788,7 @@ function semana(){
 
 /* congregações */
 function ordem(){
- const l=C.map((c,i)=>i).filter(i=>i>0&&!C[i].oculta);
+ const l=C.map((c,i)=>i).filter(i=>i>0&&C[i]&&!C[i].oculta);
  return l.sort((a,b)=>(Math.min(3,Math.max(1,Number(C[a].setor)||1))-Math.min(3,Math.max(1,Number(C[b].setor)||1)))||alpha(C[a].n,C[b].n));
 }
 const ccard=i=>{const c=C[i],photo=c.photos?.[c.cover||0];return '<button class="cc" style="--cc:'+c.cor+'" onclick="openC('+i+')"><div class="cf'+(photo?' photo':'')+'">'+(photo?'<img src="'+photo+'" alt="Fachada da congregação '+esc(c.n)+'" loading="lazy" decoding="async">':'<span class="ic" aria-hidden="true"></span>')+'</div><div class="cb"><h3>'+esc(c.n)+'</h3><p>Localidade: '+esc(c.b||'Caaporã')+'</p><span class="btn sm">'+(can(i)?'Gerenciar congregação':'Ver agenda')+'</span></div></button>'};
@@ -840,7 +841,7 @@ function zap(){
 
 /* formulários (admin) */
 function opts(l,sel,f){return l.map(x=>'<option value="'+x[0]+'"'+(x[0]==sel?' selected':'')+'>'+esc(x[1])+'</option>').join('')}
-const ordemCadastros=()=>[0,...ordem()];
+const ordemCadastros=()=>[0,...ordem()].filter(i=>C[i]);
 const optC=sel=>opts(ordemCadastros().map(i=>[i,C[i].n]).filter(x=>st.own<0||x[0]==st.own),sel);
 const REPS=['once','wk','alt','md','nth'];
 function repTxt(ds){
@@ -1069,7 +1070,8 @@ function admRender(){
  $('#adWho').textContent=own?C[st.own].n:'Administrador geral';
  const fab=$('#adFab');fab.hidden=!((ADM.tab==='cult'&&ADM.cs!=='fix')||ADM.tab==='avis');fab.onclick=ADM.tab==='avis'?()=>admAviso(-1):admNovoCulto;
  const m=$('#adMain'),y=m.scrollTop;
- m.innerHTML=ADM.tab==='cong'?admC():ADM.tab==='cult'?admCult():ADM.tab==='avis'?admAvis():admSenh();m.scrollTop=y;
+ let html;try{html=ADM.tab==='cong'?admC():ADM.tab==='cult'?admCult():ADM.tab==='avis'?admAvis():admSenh()}catch(x){console.error(x);html='<div class="ph"><h2>Algo deu errado nesta tela</h2><p>Mande esta mensagem para o suporte:</p></div><pre class="aerr">'+esc(String(x&&x.stack||x)).slice(0,600)+'</pre><button class="btn" onclick="ADM.cg=null;ADM.sub=null;ADM.cm=null;ADM.cd=null;admRender()">Tentar novamente</button>'}
+ m.innerHTML=html;m.scrollTop=y;
 }
 function admList(){$('#adList').innerHTML=ADM.tab==='cong'?admCL():admCuL()}
 function admSheet(h){const e=$('#adSheet');e.innerHTML='<div class="scr" onclick="admSheetClose()"></div><div class="shx" role="dialog" aria-modal="true">'+h+'</div>';e.classList.add('on')}
@@ -1079,14 +1081,14 @@ const adSub=s=>{ADM.sub=s;admRender();$('#adMain').scrollTop=0};
 function abrirAdm(s){ADM.tab='cong';ADM.cg=st.fc;ADM.sub=s||null;admShow(true)}
 async function busy(b,fn){const t=b.textContent;b.disabled=true;b.textContent='Salvando…';try{await fn()}finally{b.disabled=false;b.textContent=t}}
 const after=m=>{titulos();congs();draw();renderHomeContent();toast(m);adSub(null)};
-const nPh=c=>(c.photos||[]).length;
-const cthumb=c=>{const p=(c.photos||[])[c.cover||0];return p?'<img class="cth" src="'+p+'" alt="" loading="lazy">':'<span class="cth n" style="--cc:'+c.cor+'"></span>'};
+const nPh=c=>(Array.isArray(c.photos)?c.photos:[]).length;
+const cthumb=c=>{const p=(Array.isArray(c.photos)?c.photos:[])[c.cover||0]||(Array.isArray(c.photos)?c.photos[0]:'');return p?'<img class="cth" src="'+p+'" alt="" loading="lazy">':'<span class="cth n" style="--cc:'+c.cor+'"></span>'};
 function admC(){
  if(st.own>=0&&ADM.cg==null)ADM.cg=st.own;
  if(ADM.cg!=null)return admEditC(ADM.cg);
  return '<div class="ph"><h2>Congregações</h2><p>Dados, dirigentes e fotos.</p></div><input id="aq" type="search" placeholder="Buscar congregação…" aria-label="Buscar congregação" value="'+esc(ADM.q)+'" oninput="ADM.q=this.value;admList()"><div id="adList">'+admCL()+'</div>';
 }
-function admCL(){const q=norm(ADM.q).trim(),l=ordemCadastros().filter(i=>!q||norm(C[i].n+' '+(C[i].b||'')).includes(q));
+function admCL(){const q=norm(ADM.q).trim(),l=ordemCadastros().filter(i=>C[i]).filter(i=>!q||norm(C[i].n+' '+(C[i].b||'')).includes(q));
  return l.length?l.map(i=>{const c=C[i];return '<button class="ai" onclick="ADM.cg='+i+';ADM.sub=null;st.fc='+i+';admRender()">'+cthumb(c)+'<span class="at"><b>'+esc(c.n)+'</b><small>Localidade: '+esc(c.b||'Caaporã')+' · '+nPh(c)+' foto'+(nPh(c)==1?'':'s')+'</small></span><span class="ar">›</span></button>'}).join(''):'<p class="am0">Nenhuma congregação encontrada.</p>'}
 function admEditC(i){
  const c=C[i];st.fc=i;const s=ADM.sub,rl=rules.filter(r=>r.c===i);
