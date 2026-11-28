@@ -520,6 +520,53 @@ dialog .dd .ac{position:sticky;bottom:0;background:var(--azul);padding:12px 0 4p
 .ace .arow{margin:8px 0 0;gap:6px}.ace .arow .btn{margin:0!important}
 @media(min-width:700px){.acd{min-height:58px}}
 .aerr{white-space:pre-wrap;word-break:break-word;font:.8rem ui-monospace,monospace;padding:12px;border:1px solid #a63a3a;border-radius:12px;background:rgba(166,58,58,.12);color:#ffd5d5;margin:0 0 12px}
+/* ===== AJUSTES v4 · seletores, tipos de culto, imagens dos avisos ===== */
+select{appearance:none;-webkit-appearance:none;padding-right:38px;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23d9ac4f' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:12px 8px;text-overflow:ellipsis}
+select option,select optgroup{background:#101a38;color:#edf0f8}
+select optgroup{color:#f4dc9c;font-weight:700}
+#adm select,.dd select{min-height:42px;padding-top:8px;padding-bottom:8px}
+.cpick{display:flex;align-items:center;gap:10px;min-height:44px;padding:5px 14px 5px 10px;border:1.5px solid var(--line);border-radius:12px;background:rgba(255,255,255,.07);color:var(--tx);text-align:left;margin-bottom:10px;cursor:pointer}
+.cpick:hover{border-color:var(--ouro)}
+.cpd{flex:none;width:12px;height:12px;border-radius:50%}
+.cpt{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}.cpt small{font-size:.68rem;color:var(--mut);font-weight:700;letter-spacing:.04em;text-transform:uppercase}.cpt b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.92rem}
+.cpa{color:var(--ouro);font-size:.9rem}
+#pkq{margin:6px 0 10px}
+.pkg{margin:0 0 12px}.pkg[hidden]{display:none}
+.pkl{font:700 .72rem 'Nunito Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--ouro2);margin:0 0 6px}
+.pks{display:flex;flex-wrap:wrap;gap:6px}
+.pkc{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--vidro);color:var(--tx);font-size:.86rem;font-weight:600}
+.pkc[hidden]{display:none}.pkc i{width:9px;height:9px;border-radius:50%;flex:none}
+.pkc.on{background:var(--ouro);border-color:var(--ouro);color:#2a1d03}
+.tps{margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}
+.tpr{display:flex;align-items:center;gap:8px;padding:8px;margin:0 0 6px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.04)}
+.tpc{flex:none;position:relative;width:38px;height:38px;border-radius:50%;border:2px solid rgba(255,255,255,.35);cursor:pointer;margin:0!important;overflow:hidden}
+.tpc input{position:absolute;inset:0;opacity:0;width:100%;height:100%;min-height:0;cursor:pointer;padding:0;border:0}
+.tpn{flex:1;min-width:0;min-height:40px;margin:0}
+.tpu{flex:none;font-size:.75rem;color:var(--mut);white-space:nowrap}
+.tpx{flex:none;min-width:40px;min-height:40px;padding:0;font-size:1.1rem}
+@media(max-width:420px){.tpu{display:none}}
+@media(min-width:760px){#tpl{display:grid;grid-template-columns:1fr 1fr;gap:6px}#tpl .tpr{margin:0}}
+@media(min-width:701px){
+ #noticeList .notice-card.nb{grid-column:1/-1;justify-self:center;width:100%;max-width:760px}
+ #noticeList .notice-card.nb img{width:auto;max-width:100%;height:auto;max-height:400px;margin:0 auto;object-fit:contain;background:rgba(0,0,0,.18)}
+ #noticeList .notice-card.nb:not(:has(.nbt)) img{border-radius:18px}
+}
+/* ===== AJUSTES v5 · banner e convidados do dia ===== */
+.bdp{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:4px;font-size:.82rem;color:var(--mut)}.bdp b{color:var(--tx);font-weight:700}
+.dbn{display:block;width:100%;max-height:260px;object-fit:contain;border-radius:12px;margin:0 0 8px;background:rgba(0,0,0,.2)}
+.upcoming-card .upb{display:block;width:calc(100% + 24px);margin:-14px -12px 10px;aspect-ratio:16/9;object-fit:cover;border-radius:18px 18px 0 0;background:rgba(0,0,0,.2)}
+@media(min-width:701px){.upcoming-card .upb{width:calc(100% + 36px);margin:-18px -18px 12px}}
+.upcoming-card.hb{border-color:rgba(217,172,79,.55)}
+.upcoming-card .bdp{font-size:.76rem}
+#cDest{margin:18px 0 0}#cDest[hidden]{display:none}
+.cdt{margin:0 0 10px;font:700 1.25rem 'Outfit',sans-serif}
+.cdg{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:701px){.cdg{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}}
+.cdc{display:flex;flex-direction:column;text-align:left;width:100%;padding:0;overflow:hidden;border-radius:18px;border:1px solid rgba(217,172,79,.35);border-top:4px solid var(--k);background:linear-gradient(145deg,rgba(21,34,70,.92),rgba(12,20,43,.95));color:var(--tx);cursor:pointer}
+.cdc img{display:block;width:100%;max-height:360px;object-fit:contain;background:rgba(0,0,0,.25)}
+.cdi{display:flex;flex-direction:column;gap:3px;padding:12px 14px}.cdi small{color:var(--ouro);font-weight:800;font-size:.76rem}.cdi b{font:700 1.05rem 'Outfit',sans-serif;color:var(--ouro2)}
+.acb{display:block;width:100%;max-height:180px;object-fit:contain;border-radius:8px;margin:0 0 8px;background:rgba(0,0,0,.2)}
+.tpdb{margin:10px 0;padding:12px;border:1px solid rgba(217,172,79,.4);border-radius:14px;background:rgba(217,172,79,.08)}.tpdb p{margin:0 0 8px;font-size:.88rem}
 </style>
 </head>
 <body>
@@ -565,6 +612,7 @@ dialog .dd .ac{position:sticky;bottom:0;background:var(--azul);padding:12px 0 4p
  <h1 id="cNome"></h1><p id="cLoc"></p><div id="cPessoas"></div>
  <div class="foto" id="cFoto">Foto da fachada em breve</div>
  <div class="ac" style="margin:0"><a class="btn" id="cRota" target="_blank" rel="noopener">Como chegar</a><button class="btn g" onclick="verObreiros()">Ver obreiros</button><button class="btn g adm-b" id="bInfo" style="display:none" onclick="abrirAdm('geral')">Editar dados</button><button class="btn adm-b" id="bManage" style="display:none" onclick="$('#agenda').scrollIntoView({behavior:'smooth'});">Gerenciar cultos</button></div>
+ <div id="cDest" hidden></div>
  <section class="s cp-sec" id="semana"><div class="sh"><div><h2 id="wkTitle">Esta semana</h2><p id="wkSub">Próximos 7 dias.</p></div></div><div class="wk" id="wk"></div></section>
 </div></div>
 
@@ -630,6 +678,9 @@ function defRules(){
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const pad=n=>String(n).padStart(2,'0');
 const REN=t=>String(t||'').replace(/Culto\s+(de|dos)\s+Homem?n?s?\b/gi,'Culto de Varão').replace(/Culto\s+Infantil/gi,'Culto das Crianças');
+let TALIAS={},BD={};
+const bdPL=e=>{const b=e.bd;if(!b||!(b.p||b.l))return '';return '<span class="bdp">'+(b.p?'<span>Pregador: <b>'+esc(b.p)+'</b></span>':'')+(b.l?'<span>Louvor: <b>'+esc(b.l)+'</b></span>':'')+'</span>'};
+const tA=t=>{t=REN(t);let k=0;while(TALIAS[t]&&k++<10)t=TALIAS[t];return t};
 const key=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fh=h=>h.replace(':00','h');
@@ -655,7 +706,7 @@ const erro=e=>toast(e&&e.message?e.message:'Erro de conexão');
 const FUNCS=['Pastor','Presbítero','Evangelista','Diácono','Auxiliar'];
 async function carregar(){
  try{
-  const [cs,rg,ev,cn,ob,cf,su]=await Promise.all(['congregacoes?select=*&order=id','regras?select=*&order=id','eventos?select=*&order=data','cancelamentos?select=*','obreiros?select=*&order=id','config?select=*','substituicoes?select=*&order=data'].map(sbGet));
+  const [cs,rg,ev,cn,ob,cf,su]=await Promise.all(['congregacoes?select=*&order=id','regras?select=*&order=id','eventos?select=*&order=data','cancelamentos?select=*','obreiros?select=*&order=id','config?select=*&chave=not.like.bd:*','substituicoes?select=*&order=data'].map(sbGet));
   const sn=C.map(c=>c&&c.senha);
   cs.forEach(c=>{C[c.id]={n:c.nome,b:c.bairro,e:c.endereco||'',cor:c.cor,lat:c.lat,lng:c.lng,photos:c.fotos||[],cover:c.capa||0,dirigente:c.dirigente||'',vice:c.vice||'',setor:Math.min(3,Math.max(1,Number(c.setor)||1)),obreiros:[],senha:sn[c.id]}});
   rules=rg.map(r=>({id:r.id,c:r.cong_id,w:r.dia_semana,h:r.hora||'',f:r.fim||'',t:r.titulo,tipo:r.tipo||'',q:r.padrao,date:r.data||''}));
@@ -664,9 +715,11 @@ async function carregar(){
   substituicoes=su.map(x=>({c:x.cong_id,data:x.data,t:x.titulo,tipo:x.tipo||'Culto',h:x.hora||'19:00',f:x.fim||'21:00'}));
   ob.forEach(o=>{if(C[o.cong_id])C[o.cong_id].obreiros.push({nome:o.nome,funcao:o.funcao})});
   const sa=cf.find(x=>x.chave==='semana_a');if(sa&&sa.valor)REF=new Date(sa.valor+'T00:00');
-  const ct=cf.find(x=>x.chave==='tipos_culto');if(ct&&ct.valor){try{const z=JSON.parse(ct.valor);if(Array.isArray(z)){savedTypes=z.map(x=>x.nome).filter(Boolean);typeColors={...TC};z.forEach(x=>{if(x.nome&&x.cor)typeColors[x.nome]=x.cor;});}}catch(_){}}
+  const ct=cf.find(x=>x.chave==='tipos_culto');if(ct&&ct.valor){ADM.tz=ct.valor;try{const z=JSON.parse(ct.valor);if(Array.isArray(z)){savedTypes=z.map(x=>x.nome).filter(Boolean);typeColors={...TC};TALIAS={};z.forEach(x=>{if(x.nome&&x.cor)typeColors[x.nome]=x.cor;(x.antigos||[]).forEach(a=>{if(a&&a!==x.nome)TALIAS[a]=x.nome})});}}catch(_){}}
   const av=cf.find(x=>x.chave==='avisos');if(av&&av.valor){try{notices=JSON.parse(av.valor)||[];}catch(_){notices=[];}}
-  try{rules.forEach(r=>{r.t=REN(r.t);r.tipo=REN(r.tipo)});custom.forEach(e=>{e.t=REN(e.t);e.tipo=REN(e.tipo)});substituicoes.forEach(x=>{x.t=REN(x.t);x.tipo=REN(x.tipo)});
+  try{const de=key(new Date(Date.now()-30*864e5)),bl=await sbGet('config?select=chave,valor&chave=gte.'+encodeURIComponent('bd:'+de)+'&chave=lt.'+encodeURIComponent('bd;'));const nb={};(bl||[]).forEach(x=>{if(!x.valor)return;try{const v=JSON.parse(x.valor),k=String(x.chave).split('#')[1];if(k&&(v.b||v.p||v.l))nb[k]=v}catch(_){}});BD=nb}catch(_){}
+  rules.forEach(r=>{r._o=r.t+'\u0001'+r.tipo});custom.forEach(e=>{e._o=e.t+'\u0001'+e.tipo});
+  try{rules.forEach(r=>{r.t=REN(r.t);r.tipo=tA(r.tipo)});custom.forEach(e=>{e.t=REN(e.t);e.tipo=tA(e.tipo)});substituicoes.forEach(x=>{x.t=REN(x.t);x.tipo=tA(x.tipo)});
   savedTypes=savedTypes.map(REN);Object.keys(typeColors).forEach(k=>{const n=REN(k);if(n!==k){typeColors[n]=typeColors[k]}})}catch(_){}
   unificarSede();
   ultimaCarga=Date.now();
@@ -702,7 +755,7 @@ function raw(d,c){
  custom.forEach(e=>{if(e.c==c&&occ(e,d))o.push({c,h:e.h,f:e.f,t:e.t,tipo:e.tipo,obs:e.obs,id:e.id,rep:e.rep,data:e.data,fim:e.fim})});
  const sub=substituicoes.find(x=>x.c==c&&x.data===k);
  if(sub){for(let i=o.length-1;i>=0;i--)if(o[i].rid&&String(rules.find(r=>r.id==o[i].rid)?.q||'').startsWith('n'))o.splice(i,1);o.push({c,h:sub.h,f:sub.f,t:sub.t,tipo:sub.tipo,substituida:true});}
- o.forEach(e=>{e.k=c+'|'+k+'|'+(e.rid?'r'+e.rid:'e'+e.id);e.x=cancels.includes(e.k)});
+ o.forEach(e=>{e.k=c+'|'+k+'|'+(e.rid?'r'+e.rid:'e'+e.id);e.x=cancels.includes(e.k);e.bd=BD[e.k]||null});
  return o.sort((a,b)=>a.h.localeCompare(b.h));
 }
 const norm=x=>String(x||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
@@ -741,7 +794,7 @@ function day(){
  $('#dl').innerHTML=es.length?'<ol class="tl">'+es.map(e=>{
   rows.push(e);const i=rows.length-1;
   const b=!can(st.fc)?'':e.substituida?'<button class="m" onclick="subForm()">Alterar este dia</button><button class="m" onclick="voltarPadrao()">Voltar ao padrão</button>':e.rid&&String(rules.find(r=>r.id==e.rid)?.q||'').startsWith('n')?'<button class="m" onclick="ruleForm('+e.rid+')">Editar regra</button><button class="m" onclick="subForm()">Alterar só este dia</button>'+cx(i):e.id?'<button class="m" onclick="eventoForm('+e.id+')">Editar</button><button class="m" onclick="del('+e.id+')">Excluir</button>'+(e.rep&&e.rep!='once'?cx(i):''):'<button class="m" onclick="ruleForm('+e.rid+')">Editar culto fixo</button>'+cx(i);
-  return '<li class="'+(e.x?'x':'')+'" style="--c:'+ecor(e)+'"><time>'+fh(e.h)+'<small>às '+fh(e.f||'21:00')+'</small></time><h4>'+esc(e.t)+'</h4><p class="sub">'+(e.tipo?'<span class="tag tg" style="--k:'+ecor(e)+'"><i></i>'+esc(e.tipo)+'</span> ':'')+(e.x?'<span class="tag cx">Cancelado</span> ':'')+(e.substituida?'<span class="tag">Alterado</span> ':'')+(e.rep&&e.rep!='once'?'<span class="tag">Repete</span> ':'')+(e.fim?'<span class="tag">Dia '+(Math.round((d0(e.data,d)-0)/86400000)+1)+' de '+(Math.round((d0(e.data,new Date(e.fim+'T00:00'))-0)/86400000)+1)+'</span> ':'')+esc(e.obs||'')+'</p><div class="ac">'+b+'</div></li>';
+  return '<li class="'+(e.x?'x':'')+'" style="--c:'+ecor(e)+'">'+(e.bd&&e.bd.b?'<img class="dbn" src="'+e.bd.b+'" alt="Banner: '+esc(e.t)+'" loading="lazy">':'')+'<time>'+fh(e.h)+'<small>às '+fh(e.f||'21:00')+'</small></time><h4>'+esc(e.t)+'</h4>'+bdPL(e)+'<p class="sub">'+(e.tipo?'<span class="tag tg" style="--k:'+ecor(e)+'"><i></i>'+esc(e.tipo)+'</span> ':'')+(e.x?'<span class="tag cx">Cancelado</span> ':'')+(e.substituida?'<span class="tag">Alterado</span> ':'')+(e.rep&&e.rep!='once'?'<span class="tag">Repete</span> ':'')+(e.fim?'<span class="tag">Dia '+(Math.round((d0(e.data,d)-0)/86400000)+1)+' de '+(Math.round((d0(e.data,new Date(e.fim+'T00:00'))-0)/86400000)+1)+'</span> ':'')+esc(e.obs||'')+'</p><div class="ac">'+b+'</div></li>';
  }).join('')+'</ol>':'<div class="vz">Nenhuma programação neste dia.'+(can(st.fc)?'<br>Use “Adicionar neste dia” para criar.':'')+'</div>';
  const sd=$('#dia');if(sd.animate)sd.animate([{opacity:.4,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:260,easing:'ease-out'});
 }
@@ -784,7 +837,12 @@ function semana(){
   const rot=i==0?'Hoje':i==1?'Amanhã':DIA[d.getDay()].slice(0,3);
   return '<button type="button" class="wd'+(i==0?' h':'')+'" onclick="goTo(new Date('+d.getFullYear()+','+d.getMonth()+','+d.getDate()+'))" aria-label="'+rot+', '+d.getDate()+' de '+MES[d.getMonth()]+': '+es.length+(es.length>1?' cultos':' culto')+'"><span class="wdd"><small>'+rot+'</small><b>'+d.getDate()+'</b><small>'+MES[d.getMonth()].slice(0,3).toLowerCase()+'</small></span><span class="wde">'+es.map(e=>'<span><b>'+fh(e.h)+'</b>'+esc(e.t)+'</span>').join('')+'</span><span class="wdc" aria-hidden="true">›</span></button>';
  }).join(''):'<p class="wk-vazio">Sem cultos programados esta semana.</p>';
+ cDest();
 }
+function cDest(){const box=$('#cDest');if(!box)return;const now=new Date(),hm=pad(now.getHours())+':'+pad(now.getMinutes()),l=[];
+ for(let i=0;i<8;i++){const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+i);raw(d,st.fc).filter(e=>!e.x&&e.bd&&(i>0||(e.f||'21:00')>=hm)&&(i<7||false)).forEach(e=>l.push({e,d}))}
+ l.sort((a,b)=>(a.e.bd.b?0:1)-(b.e.bd.b?0:1)||a.d-b.d);
+ box.hidden=!l.length;box.innerHTML=l.length?'<h2 class="cdt">Em destaque</h2><div class="cdg">'+l.map(({e,d})=>'<button type="button" class="cdc'+(e.bd.b?'':' nb')+'" style="--k:'+ecor(e)+'" onclick="goTo(new Date('+d.getFullYear()+','+d.getMonth()+','+d.getDate()+'))">'+(e.bd.b?'<img src="'+e.bd.b+'" alt="Banner: '+esc(e.t)+'" loading="lazy">':'')+'<span class="cdi"><small>'+DIA[d.getDay()]+' · '+fmtDate(d)+' · '+fh(e.h)+'</small><b>'+esc(e.t)+'</b>'+bdPL(e)+'</span></button>').join('')+'</div>':''}
 
 /* congregações */
 function ordem(){
@@ -842,7 +900,8 @@ function zap(){
 /* formulários (admin) */
 function opts(l,sel,f){return l.map(x=>'<option value="'+x[0]+'"'+(x[0]==sel?' selected':'')+'>'+esc(x[1])+'</option>').join('')}
 const ordemCadastros=()=>[0,...ordem()].filter(i=>C[i]);
-const optC=sel=>opts(ordemCadastros().map(i=>[i,C[i].n]).filter(x=>st.own<0||x[0]==st.own),sel);
+const optC=sel=>{if(st.own>=0)return opts([[st.own,C[st.own].n]],sel);const o=i=>'<option value="'+i+'"'+(i==sel?' selected':'')+'>'+esc(C[i].n)+'</option>',l=ordem();
+ return o(0)+[1,2,3].map(n=>{const g=l.filter(i=>Math.min(3,Math.max(1,Number(C[i].setor)||1))===n);return g.length?'<optgroup label="Setor '+n+'">'+g.map(o).join('')+'</optgroup>':''}).join('')};
 const REPS=['once','wk','alt','md','nth'];
 function repTxt(ds){
  const d=new Date(ds+'T00:00');if(isNaN(d))return;
@@ -1042,7 +1101,7 @@ function fmtDate(d){return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'sh
 function renderHomeContent(){
  const nl=$('#noticeList'),ul=$('#upcomingList');
  if(nl){const now=key(new Date());const active=(notices||[]).filter(n=>n.ativo!==false&&(!n.data||n.data<=now)&&(!n.ate||n.ate>=now));nl.innerHTML=active.length?active.map(noticeHtml).join(''):'<div class="vz">Nenhum aviso publicado no momento.</div>';}
- if(ul){const base=new Date(),hm=pad(base.getHours())+':'+pad(base.getMinutes());base.setHours(0,0,0,0);const list=[];for(let k=0;k<35&&list.length<8;k++){const d=new Date(base);d.setDate(base.getDate()+k);C.forEach((c,i)=>c.oculta||raw(d,i).filter(e=>!e.x&&(k>0||(e.f||'21:00')>=hm)).forEach(e=>list.push({...e,date:new Date(d),cong:i})));}list.sort((a,b)=>a.date-b.date||a.h.localeCompare(b.h));const chosen=list.slice(0,6);ul.innerHTML=chosen.length?chosen.map(e=>'<button class="upcoming-card" role="listitem" onclick="openUpcoming('+e.cong+',\''+key(e.date)+'\')" style="--event-color:'+ecor(e)+'"><span class="up-tag">'+esc(e.tipo)+'</span><h3>'+esc(e.t)+'</h3><p>'+esc(C[e.cong].n)+'</p><span class="up-meta">'+DIA[e.date.getDay()]+' · '+fmtDate(e.date)+' · '+fh(e.h)+'</span></button>').join(''):'<div class="vz">Não há cultos futuros cadastrados.</div>';upUpdate();}
+ if(ul){const base=new Date(),hm=pad(base.getHours())+':'+pad(base.getMinutes());base.setHours(0,0,0,0);const list=[];for(let k=0;k<35&&(k<7||list.length<8);k++){const d=new Date(base);d.setDate(base.getDate()+k);C.forEach((c,i)=>c.oculta||raw(d,i).filter(e=>!e.x&&(k>0||(e.f||'21:00')>=hm)).forEach(e=>list.push({...e,date:new Date(d),cong:i})));}const w7=new Date(base);w7.setDate(base.getDate()+7);const sc=e=>e.date<w7&&e.bd?(e.bd.b?0:1):2;list.sort((a,b)=>sc(a)-sc(b)||a.date-b.date||a.h.localeCompare(b.h));const chosen=list.slice(0,8);ul.innerHTML=chosen.length?chosen.map(e=>'<button class="upcoming-card'+(e.bd&&e.bd.b?' hb':'')+'" role="listitem" onclick="openUpcoming('+e.cong+',\''+key(e.date)+'\')" style="--event-color:'+ecor(e)+'">'+(e.bd&&e.bd.b?'<img class="upb" src="'+e.bd.b+'" alt="Banner: '+esc(e.t)+'" loading="lazy">':'')+'<span class="up-tag">'+esc(e.tipo)+'</span><h3>'+esc(e.t)+'</h3><p>'+esc(C[e.cong].n)+'</p>'+bdPL(e)+'<span class="up-meta">'+DIA[e.date.getDay()]+' · '+fmtDate(e.date)+' · '+fh(e.h)+'</span></button>').join(''):'<div class="vz">Não há cultos futuros cadastrados.</div>';upUpdate();}
 }
 function upScroll(dir){const g=$('#upcomingList');if(g)g.scrollBy({left:dir*g.clientWidth*.8,behavior:'smooth'})}
 function upUpdate(){
@@ -1135,6 +1194,58 @@ function fSenhaProp(c){return '<div class="ph"><h2>Minha senha</h2><p>Senha de a
 async function salvarSenhaProp(b){const c=C[st.fc],n=$('#gp').value.trim();if(!n){toast('A senha não pode ficar vazia.');return}if(n===c.senha){adSub(null);return}
  if(!confirm('Trocar a senha? A senha anterior deixará de funcionar.'))return;
  await busy(b,async()=>{try{await rpc('definir_senha',{p_senha:SENHA,p_alvo:st.fc,p_nova:n})}catch(x){return erro(x)}c.senha=n;SENHA=n;toast('Senha alterada');adSub(null)})}
+/* Seletor compacto de congregação */
+function admPickC(){const l=ordem(),cur=String(ADM.fc);
+ const ch=(v,n,cor)=>'<button type="button" class="pkc'+(cur===String(v)?' on':'')+'" data-n="'+esc(norm(n))+'" onclick="ADM.fc=\''+v+'\';admSheetClose();admRender()"><i style="background:'+cor+'"></i>'+esc(n)+'</button>';
+ let h='<div class="avh"><h3>Escolher congregação</h3><button type="button" class="avx" aria-label="Fechar" onclick="admSheetClose()">✕</button></div><input id="pkq" type="search" placeholder="Buscar…" aria-label="Buscar congregação" oninput="admPickF(this.value)"><div class="pkw">'
+  +'<div class="pkg"><div class="pkl">Geral</div><div class="pks">'+ch('all','Todas as congregações','var(--ouro)')+ch(0,C[0].n,C[0].cor||'#888')+'</div></div>';
+ [1,2,3].forEach(n=>{const g=l.filter(i=>Math.min(3,Math.max(1,Number(C[i].setor)||1))===n);if(g.length)h+='<div class="pkg"><div class="pkl">Setor '+n+'</div><div class="pks">'+g.map(i=>ch(i,C[i].n,C[i].cor||'#888')).join('')+'</div></div>'});
+ admSheet(h+'</div><div style="height:18px"></div>');}
+function admPickF(q){q=norm(q).trim();$$('#adSheet .pkc').forEach(b=>b.hidden=!!q&&!b.dataset.n.includes(q));$$('#adSheet .pkg').forEach(g=>g.hidden=![...g.querySelectorAll('.pkc')].some(b=>!b.hidden))}
+/* Banner e convidados do dia */
+function admBD(k){const v=BD[k]||{};ADM.bd={k,b:v.b||'',p:v.p||'',l:v.l||'',ex:!!BD[k]};admBDForm()}
+function admBDRead(){const p=$('#bdP'),l=$('#bdL');if(p)ADM.bd.p=p.value.trim();if(l)ADM.bd.l=l.value.trim()}
+function admBDForm(){const o=ADM.bd,[c,dt,s]=o.k.split('|'),d=new Date(dt+'T00:00'),e=raw(d,+c).find(x=>x.k===o.k)||{t:'Culto',h:''};
+ admSheet('<div class="avh"><h3>Banner e convidados</h3><button type="button" class="avx" aria-label="Fechar" onclick="admSheetClose()">✕</button></div><p class="am0"><b>'+esc(e.t)+'</b> · '+DIA[d.getDay()]+', '+fmtDate(d)+(e.h?' · '+fh(e.h):'')+' · '+esc(C[+c].n)+'</p>'
+ +'<section class="avs"><h4>Banner deste dia</h4><label class="avup" for="bdF">'+(o.b?'<img src="'+o.b+'" alt="Banner selecionado"><span>Trocar imagem</span>':'<b>＋</b><span>Escolher imagem do banner</span>')+'</label><input id="bdF" type="file" accept="image/jpeg,image/png,image/webp" hidden onchange="admBDFile(this)">'+(o.b?'<button type="button" class="btn sm g" style="margin-top:8px" onclick="admBDRead();ADM.bd.b=\'\';admBDForm()">Remover banner</button>':'')+'</section>'
+ +'<section class="avs"><h4>Convidados</h4><label for="bdP">Pregador</label><input id="bdP" maxlength="60" placeholder="Ex.: Pr. João Silva" value="'+esc(o.p)+'"><label for="bdL">Cantor / louvor</label><input id="bdL" maxlength="60" placeholder="Ex.: Irmã Maria" value="'+esc(o.l)+'"></section>'
+ +'<p class="am0">Vale só para este dia. Aparece no site 7 dias antes do culto e sai sozinho no dia seguinte. No calendário, aparece ao tocar no dia.</p>'
+ +'<div class="sv">'+(o.ex?'<button type="button" class="btn r" onclick="admBDSave(this,true)">Apagar tudo</button>':'<button type="button" class="btn g" onclick="admSheetClose()">Cancelar</button>')+'<button type="button" class="btn" style="flex:1" onclick="admBDSave(this)">Salvar</button></div>')}
+async function admBDFile(inp){const f=inp.files&&inp.files[0];if(!f)return;admBDRead();try{ADM.bd.b=await admImg(f,1280,.82);admBDForm()}catch(x){toast(x.message)}}
+async function admBDSave(btn,apagar){admBDRead();const o=ADM.bd,[c,dt]=o.k.split('|');if(!can(+c))return;
+ if(apagar&&!confirm('Apagar banner, pregador e louvor deste dia?'))return;
+ const v=apagar?{}:{b:o.b,p:o.p,l:o.l},tem=v.b||v.p||v.l;
+ if(!tem&&!o.ex){toast('Escolha um banner ou preencha pregador/louvor.');return}
+ btn.disabled=true;try{await saveConfig('bd:'+dt+'#'+o.k,tem?JSON.stringify(v):'')}catch(x){btn.disabled=false;return erro(x)}
+ if(tem)BD[o.k]=v;else delete BD[o.k];admSheetClose();draw();semana();renderHomeContent();admCalRender();toast(tem?'Salvo para este dia.':'Apagado.')}
+/* Gravar nomes atualizados no banco */
+const nomePend=()=>[...rules.filter(r=>r._o!=null&&r._o!==r.t+'\u0001'+r.tipo).map(r=>['r',r]),...custom.filter(e=>e._o!=null&&e._o!==e.t+'\u0001'+e.tipo).map(e=>['e',e])];
+async function admGravarNomes(b){const l=nomePend();if(!l.length)return;if(!confirm('Gravar no banco os nomes atualizados de '+l.length+' culto(s)?\n\nOs cultos continuam iguais; só o nome e o tipo gravados passam a ser os novos.'))return;
+ b.disabled=true;let ok=0,er=null;
+ for(const [t,x] of l){try{if(t==='r'){const {_o,...r}=x;await rpc('salvar_regra',{p_senha:SENHA,p_r:{id:r.id,c:r.c,w:r.w,h:r.h,f:r.f||'',t:r.t,tipo:r.tipo,q:r.q,date:r.date||''}})}else{const {_o,bd,k,x:_x,...e}=x;await rpc('salvar_evento',{p_senha:SENHA,p_ev:e})}x._o=x.t+'\u0001'+x.tipo;ok++;b.textContent='Gravando… '+ok+'/'+l.length}catch(z){er=z;break}}
+ admRender();if(er){erro(er);toast('Gravados '+ok+' de '+l.length+'. Tente de novo para o restante.')}else toast('Nomes gravados no banco ('+ok+').')}
+/* Tipos de culto */
+const TPAL=['#3f62c9','#2f8f6b','#7a5ac8','#a8335a','#c76a2b','#d1478f','#d9ac4f','#2a8fa8','#6d7aa5','#5a6788','#b8402f','#4f9d2f'];
+const hex=c=>{c=String(c||'');if(/^#[0-9a-f]{6}$/i.test(c))return c;const d=document.createElement('canvas').getContext('2d');d.fillStyle=c;return /^#[0-9a-f]{6}$/i.test(d.fillStyle)?d.fillStyle:'#5a6788'};
+function tUso(n){return rules.filter(r=>r.tipo===n).length+custom.filter(e=>e.tipo===n).length}
+function admTiposInit(){if(ADM.tipos)return;let ant={};try{const z=JSON.parse(ADM.tz||'[]');z.forEach(x=>ant[x.nome]=x.antigos||[])}catch(_){}
+ ADM.tipos=allTypes().map(n=>({nome:n,cor:hex(typeColor(n)),orig:n,antigos:ant[n]||[]}));ADM.tdirty=false}
+function admTiposHtml(){admTiposInit();const T=ADM.tipos;
+ return '<section class="tps" id="tps"><div class="ph"><h2>Tipos de culto</h2><p>Nomes e cores usados nos formulários e no calendário. Ao renomear, os cultos antigos passam para o novo nome; ao mudar a cor, ela muda em todo o site.</p></div><div id="tpl">'
+ +T.map((t,k)=>'<div class="tpr"><label class="tpc" style="background:'+t.cor+'" title="Escolher cor"><input type="color" value="'+t.cor+'" aria-label="Cor de '+esc(t.nome)+'" oninput="admTpSet('+k+',\'cor\',this.value);this.parentNode.style.background=this.value"></label><input class="tpn" maxlength="40" value="'+esc(t.nome)+'" aria-label="Nome do tipo" oninput="admTpSet('+k+',\'nome\',this.value)"><span class="tpu">'+(t.orig?tUso(t.orig)+' culto'+(tUso(t.orig)==1?'':'s'):'novo')+'</span><button type="button" class="btn sm r tpx" aria-label="Remover tipo" onclick="admTpDel('+k+')">×</button></div>').join('')
+ +'</div>'+(()=>{const n=nomePend().length;return n?'<div class="tpdb"><p><b>'+n+' culto'+(n==1?'':'s')+'</b> ainda '+(n==1?'está gravado':'estão gravados')+' no banco com nome ou tipo antigo (ex.: “Culto de Homens”). No site já '+(n==1?'aparece':'aparecem')+' com o nome novo.</p><button type="button" class="btn sm" onclick="admGravarNomes(this)">Gravar nomes novos no banco</button></div>':''})()+'<div class="arow"><button type="button" class="btn sm g" onclick="admTpAdd()">+ Novo tipo</button><button type="button" class="btn sm" id="tpSave" onclick="admTpSave(this)">Salvar tipos de culto</button><button type="button" class="btn sm g" onclick="ADM.tipos=null;admRender()">Desfazer</button></div></section>'}
+function admTpSet(k,f,v){ADM.tipos[k][f]=f==='nome'?v:v;ADM.tdirty=true}
+function admTpAdd(){const u=new Set(ADM.tipos.map(t=>t.cor));ADM.tipos.push({nome:'',cor:TPAL.find(c=>!u.has(c))||TPAL[ADM.tipos.length%TPAL.length],orig:null,antigos:[]});ADM.tdirty=true;admRender();const l=$$('#tpl .tpn');if(l.length)l[l.length-1].focus()}
+function admTpDel(k){const t=ADM.tipos[k],u=t.orig?tUso(t.orig):0;if(u){toast('“'+t.orig+'” está em uso por '+u+' culto(s). Renomeie em vez de remover, ou troque o tipo desses cultos antes.');return}ADM.tipos.splice(k,1);ADM.tdirty=true;admRender()}
+async function admTpSave(b){const T=ADM.tipos.map(t=>({...t,nome:t.nome.trim()}));
+ if(T.some(t=>!t.nome)){toast('Dê um nome a todos os tipos (ou remova os vazios).');return}
+ const nm=T.map(t=>norm(t.nome));if(nm.some((n,i)=>nm.indexOf(n)!==i)){toast('Há dois tipos com o mesmo nome.');return}
+ const ren={};T.forEach(t=>{if(t.orig&&t.orig!==t.nome)ren[t.orig]=t.nome});
+ const z=T.map(t=>({nome:t.nome,cor:t.cor,antigos:[...new Set([...(t.antigos||[]),...(t.orig&&t.orig!==t.nome?[t.orig]:[])])].filter(a=>a!==t.nome)}));
+ b.disabled=true;try{await saveConfig('tipos_culto',JSON.stringify(z))}catch(x){b.disabled=false;return erro(x)}
+ ADM.tz=JSON.stringify(z);savedTypes=z.map(x=>x.nome);typeColors={...TC};TALIAS={};z.forEach(x=>{typeColors[x.nome]=x.cor;x.antigos.forEach(a=>TALIAS[a]=x.nome)});
+ const mv=o=>{if(ren[o.tipo])o.tipo=ren[o.tipo]};rules.forEach(mv);custom.forEach(mv);substituicoes.forEach(mv);
+ ADM.tipos=null;draw();semana();renderHomeContent();admRender();toast('Tipos de culto salvos.')}
 /* Calendário da congregação (painel) */
 function admCal(i){
  const n=new Date();if(!ADM.cm)ADM.cm=[n.getFullYear(),n.getMonth()];if(!ADM.cd)ADM.cd=key(n);
@@ -1151,7 +1262,8 @@ function admCal(i){
    :e.id?'<button type="button" class="btn sm g" onclick="admCalAt();eventoForm('+e.id+')">Editar</button><button type="button" class="btn sm r" onclick="admCalAt();del('+e.id+').then(admRender)">Excluir</button>'
    :'<button type="button" class="btn sm g" onclick="admCalAt();ruleForm('+e.rid+')">Editar culto fixo</button>'+(rot&&sd.getDay()===0?'<button type="button" class="btn sm g" onclick="admCalSub()">Alterar só este dia</button>':'');
   const cx=(e.rid||(e.id&&e.rep&&e.rep!=='once'))&&!e.substituida?'<button type="button" class="btn sm g" onclick="admCalTgl(\''+e.k+'\')">'+(e.x?'Restaurar este dia':'Cancelar este dia')+'</button>':'';
-  return '<div class="ace'+(e.x?' x':'')+'" style="--k:'+ecor(e)+'"><div class="at"><b>'+fh(e.h||'')+' · '+esc(e.t)+'</b><small>'+esc(e.tipo||'')+(e.x?' · Cancelado':'')+(e.substituida?' · Alterado':'')+(e.rid&&!e.substituida?' · Culto fixo':'')+'</small></div><div class="arow">'+b+cx+'</div></div>'}).join(''):'<p class="am0" style="margin:6px 0 0">Nenhuma atividade neste dia.</p>';
+  const bb='<button type="button" class="btn sm" onclick="admBD(\''+e.k+'\')">'+(e.bd?'Banner e convidados':'+ Banner e convidados')+'</button>';
+  return '<div class="ace'+(e.x?' x':'')+'" style="--k:'+ecor(e)+'">'+(e.bd&&e.bd.b?'<img class="acb" src="'+e.bd.b+'" alt="Banner do dia">':'')+'<div class="at"><b>'+fh(e.h||'')+' · '+esc(e.t)+'</b><small>'+esc(e.tipo||'')+(e.x?' · Cancelado':'')+(e.substituida?' · Alterado':'')+(e.rid&&!e.substituida?' · Culto fixo':'')+'</small>'+bdPL(e)+'</div><div class="arow">'+(e.x?'':bb)+b+cx+'</div></div>'}).join(''):'<p class="am0" style="margin:6px 0 0">Nenhuma atividade neste dia.</p>';
  return h+'</div>';
 }
 function admCalRender(){const e=$('#acal');if(e)e.innerHTML=admCal(st.fc)}
@@ -1163,9 +1275,10 @@ async function admCalTgl(k){if(!can(st.fc))return;const p=k.split('|');
  try{const r=await rpc('alternar_cancelamento',{p_cong:+p[0],p_senha:SENHA,p_data:p[1],p_chave:p[2]});cancels=r?cancels.concat(k):cancels.filter(x=>x!=k);draw();renderHomeContent();admCalRender();toast(r?'Cancelado neste dia':'Restaurado')}catch(x){erro(x)}}
 /* Cultos */
 function admNovoCulto(){st.fc=ADM.fc!=='all'&&st.own<0?+ADM.fc:(st.own>=0?st.own:0);st.sel=new Date();eventoForm()}
-function admCult(){const own=st.own>=0,fx=ADM.cs==='fix';
+function admCult(){return admCultMain()+(st.own<0?admTiposHtml():'')}
+function admCultMain(){const own=st.own>=0,fx=ADM.cs==='fix';
  return '<div class="ph"><h2>Cultos</h2><p>Eventos e programação.</p></div><div class="seg" style="margin-bottom:12px"><button class="'+(fx?'':'on')+'" onclick="ADM.cs=\'ev\';admRender()">Cadastrados</button><button class="'+(fx?'on':'')+'" onclick="ADM.cs=\'fix\';admRender()">Fixos</button></div>'
- +(fx?admFix():'<button class="btn" style="width:100%;margin-bottom:10px" onclick="admNovoCulto()">+ Novo culto</button><p class="am0">Cultos e eventos que você cadastrou, com ou sem repetição. A programação fixa de cada congregação fica na aba “Fixos”.</p><div class="afl"><input id="aq" type="search" placeholder="Buscar culto…" aria-label="Buscar culto" value="'+esc(ADM.q)+'" oninput="ADM.q=this.value;admList()">'+(own?'':'<select aria-label="Filtrar por congregação" onchange="ADM.fc=this.value;admList()"><option value="all">Todas as congregações</option>'+ordemCadastros().map(i=>'<option value="'+i+'"'+(String(ADM.fc)===String(i)?' selected':'')+'>'+esc(C[i].n)+'</option>').join('')+'</select>')+'</div><div id="adList">'+admCuL()+'</div>');
+ +(fx?admFix():'<button class="btn" style="width:100%;margin-bottom:10px" onclick="admNovoCulto()">+ Novo culto</button><p class="am0">Cultos e eventos que você cadastrou, com ou sem repetição. A programação fixa de cada congregação fica na aba “Fixos”.</p><div class="afl"><input id="aq" type="search" placeholder="Buscar culto…" aria-label="Buscar culto" value="'+esc(ADM.q)+'" oninput="ADM.q=this.value;admList()">'+(own?'':'<button type="button" class="cpick" onclick="admPickC()" aria-label="Escolher congregação"><span class="cpd" style="background:'+(ADM.fc==='all'?'var(--ouro)':(C[+ADM.fc]||{}).cor||'var(--ouro)')+'"></span><span class="cpt"><small>Congregação</small><b>'+(ADM.fc==='all'||!C[+ADM.fc]?'Todas as congregações':esc(C[+ADM.fc].n))+'</b></span><span class="cpa">▾</span></button>')+'</div><div id="adList">'+admCuL()+'</div>');
 }
 function admCuL(){const hj=key(new Date()),q=norm(ADM.q).trim();
  const L=custom.filter(e=>C[e.c]&&!C[e.c].oculta&&(st.own<0||e.c===st.own)&&(ADM.fc==='all'||st.own>=0||+ADM.fc===e.c)&&(!q||norm(e.t+' '+(e.tipo||'')+' '+C[e.c].n).includes(q)));
@@ -1228,11 +1341,11 @@ function admAvForm(){const n=ADM.av,f=n.formato,B=f!=='texto',T=f!=='banner';
  +'<div class="sv">'+(ADM.ai>=0?'<button type="button" class="btn r" onclick="admAvDel()">Excluir</button>':'<button type="button" class="btn g" onclick="admSheetClose()">Cancelar</button>')+'<button type="button" class="btn" style="flex:1" onclick="admAvSave()">Salvar aviso</button></div>');
 }
 function admAvPreview(){admAvRead();const box=$('#avPreview');if(box)box.innerHTML=noticeHtml(ADM.av)}
-function admImg(file){return new Promise((ok,no)=>{
+function admImg(file,mx,qq){mx=mx||1600;qq=qq||.86;return new Promise((ok,no)=>{
  if(!/^image\/(jpeg|png|webp)$/.test(file.type))return no(new Error('Use uma imagem JPG, PNG ou WebP.'));
  if(file.size>12e6)return no(new Error('Imagem muito grande (máximo 12 MB).'));
  const im=new Image(),u=URL.createObjectURL(file);
- im.onload=()=>{const s=Math.min(1,1200/im.width),c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);ok(c.toDataURL('image/jpeg',.78))};
+ im.onload=()=>{const s=Math.min(1,mx/im.width),c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);ok(c.toDataURL('image/jpeg',qq))};
  im.onerror=()=>no(new Error('Não foi possível ler a imagem.'));im.src=u})}
 async function admBanner(inp){const f=inp.files&&inp.files[0];if(!f)return;admAvRead();try{ADM.av.banner=await admImg(f);admAvForm()}catch(x){toast(x.message)}}
 async function admAvSave(){admAvRead();const n=ADM.av,f=n.formato,B=f!=='texto',T=f!=='banner';
